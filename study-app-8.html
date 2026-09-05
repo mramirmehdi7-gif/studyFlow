@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#EFEAE2">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="StudyFlow">
+<title>StudyFlow</title>
+<style>
+  :root{
+    --paper:#EFEAE2;
+    --paper-raised:#F7F4EE;
+    --ink:#242019;
+    --ink-soft:#5C574C;
+    --ink-faint:#9A9384;
+    --line:#DCD5C7;
+    --accent:#5B6B4F;
+    --accent-soft:#E4E8DD;
+    --danger:#A5493A;
+    --clay:#B5654A;
+    --ochre:#C79A3E;
+    --teal:#3D7A73;
+    --plum:#7A5478;
+    --slate:#516075;
+    --rose:#A15C6B;
+    --sky:#4C7A94;
+    --indigo:#5A5A9C;
+    --forestgreen:#3F6B4A;
+    --wine:#7A3B4A;
+    --denim:#3E5C82;
+    --mustard:#B98B2A;
+    --sand:#A98358;
+    --lilac:#8672A0;
+    --steel:#5C6B73;
+    --radius:14px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Vazirmatn,Tahoma,sans-serif;
+    overscroll-behavior:none;
+    user-select:none;
+    -webkit-user-select:none;
+  }
+  input, textarea{ user-select:text; -webkit-user-select:text; }
+  #app{
+    max-width:480px;
+    margin:0 auto;
+    min-height:100dvh;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+  }
+  .screen{
+    flex:1;
+    padding:20px 18px 100px;
+    overflow-y:auto;
+    display:none;
+    animation:fadeIn .18s ease;
+  }
+  .screen.active{display:block;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+  h1.page-title{
+    font-size:20px;
+    font-weight:700;
+    color:var(--ink);
+    margin:0 0 4px;
+    letter-spacing:0.01em;
+    font-family:Georgia,serif;
+  }
+  .page-sub{
+    font-size:12px;
+    color:var(--ink-faint);
+    margin:0 0 18px;
+  }
+
+  /* ===== Tab bar ===== */
+  #tabbar{
+    position:sticky;
+    bottom:0;
+    display:flex;
+    background:var(--paper-raised);
+    border-top:1px solid var(--line);
+    padding:6px 2px calc(env(safe-area-inset-bottom,0px) + 6px);
+    z-index:50;
+  }
+  .tab{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2px;
+    padding:7px 0 4px;
+    background:none;
+    border:none;
+    color:var(--ink-faint);
+    font-family:inherit;
+    font-size:9.5px;
+    cursor:pointer;
+    border-radius:10px;
+    transition:color .15s;
+  }
+  .tab svg{width:19px;height:19px;stroke:var(--ink-faint);fill:none;stroke-width:1.6;}
+  .tab.active{color:var(--ink);}
+  .tab.active svg{stroke:var(--accent);}
+
+  /* ===== Motivation quote ===== */
+  .quote-bar{
+    background:var(--accent-soft);
+    border-radius:12px;
+    padding:11px 14px;
+    margin-bottom:18px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.8;
+    text-align:center;
+  }
+
+  /* ===== Today card ===== */
+  .today-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px;
+    margin-bottom:18px;
+  }
+  .today-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
+  .today-top .today-label{font-size:12.5px; color:var(--ink-soft); font-weight:600;}
+  .today-edit-goal{background:none;border:none;color:var(--ink-faint);font-size:11.5px;text-decoration:underline;font-family:inherit;cursor:pointer;}
+  .today-numbers{display:flex; align-items:baseline; gap:6px; margin-bottom:8px;}
+  .today-numbers .big{font-family:Georgia,serif; font-size:26px;}
+  .today-numbers .slash{font-size:16px; color:var(--ink-faint);}
+  .today-numbers .goal{font-size:16px; color:var(--ink-faint);}
+  .today-bar-track{height:8px; background:var(--line); border-radius:4px; overflow:hidden; margin-bottom:10px;}
+  .today-bar-fill{height:100%; border-radius:4px; background:var(--accent); transition:width .3s;}
+  .today-feedback{font-size:12.5px; color:var(--ink-soft); margin-bottom:10px;}
+  .today-actions{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;}
+  .today-actions button{background:none;border:none;color:var(--accent);font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;}
+  .today-sleep-row{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:12px; color:var(--ink-soft);
+    border-top:1px solid var(--line);
+    margin-top:12px; padding-top:10px;
+  }
+  .today-sleep-row button{background:none;border:none;color:var(--ink-faint);font-size:11px;text-decoration:underline;font-family:inherit;cursor:pointer;}
+
+  /* ===== Mode switch (shared) ===== */
+  .mode-switch{
+    display:flex;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:3px;
+    margin-bottom:24px;
+  }
+  .mode-btn{
+    flex:1;
+    padding:9px 4px;
+    text-align:center;
+    border:none;
+    background:none;
+    font-family:inherit;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    border-radius:9px;
+    cursor:pointer;
+    transition:background .15s, color .15s;
+  }
+  .mode-btn.active{background:var(--ink); color:var(--paper);}
+
+  .subject-row{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:4px;
+    margin-bottom:24px;
+    scrollbar-width:none;
+  }
+  .subject-row::-webkit-scrollbar{display:none;}
+  .subject-chip{
+    flex:0 0 auto;
+    padding:8px 16px;
+    border-radius:20px;
+    border:1.5px solid var(--line);
+    background:var(--paper-raised);
+    font-family:inherit;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition:border-color .15s;
+  }
+  .subject-chip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+  .subject-chip.selected{border-color:var(--ink); color:var(--ink); font-weight:600;}
+  .subject-chip.add-new{color:var(--ink-faint); border-style:dashed;}
+
+  .timer-display-wrap{
+    text-align:center;
+    padding:30px 0 24px;
+  }
+  .timer-display{
+    font-family:Georgia,"Times New Roman",serif;
+    font-variant-numeric:tabular-nums;
+    font-size:60px;
+    letter-spacing:0.01em;
+    line-height:1;
+    color:var(--ink);
+  }
+  .timer-sub{
+    margin-top:10px;
+    font-size:13px;
+    color:var(--ink-faint);
+  }
+  .countdown-setup{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin-bottom:22px;
+  }
+  .cd-field{ text-align:center; }
+  .cd-field label{ display:block; font-size:11px; color:var(--ink-faint); margin-bottom:6px;}
+  .cd-field input{
+    width:74px;
+    text-align:center;
+    font-family:Georgia,serif;
+    font-size:26px;
+    padding:8px 4px;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    background:var(--paper-raised);
+    color:var(--ink);
+  }
+  .cd-field input:focus{outline:none; border-color:var(--accent);}
+
+  .pomo-config{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:22px;
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+  .pomo-config .cd-field input{width:58px; font-size:20px; padding:6px 4px;}
+  .pomo-phase-label{
+    text-align:center;
+    font-size:13px;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:4px;
+  }
+
+  .timer-controls{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-top:12px;
+  }
+  .btn{
+    font-family:inherit;
+    border:none;
+    border-radius:12px;
+    padding:15px 30px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:transform .1s, background .15s;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--ink); color:var(--paper); min-width:150px;}
+  .btn-primary.running{background:var(--danger);}
+  .btn-secondary{background:var(--paper-raised); color:var(--ink-soft); border:1.5px solid var(--line);}
+  .btn-ghost{background:none; color:var(--ink-faint); text-decoration:underline; padding:10px;}
+  .btn-full{width:100%;}
+
+  .manual-link{
+    text-align:center;
+    margin-top:24px;
+  }
+  .manual-link button{
+    background:none;
+    border:none;
+    color:var(--ink-soft);
+    font-family:inherit;
+    font-size:13px;
+    text-decoration:underline;
+    cursor:pointer;
+  }
+
+  /* ===== Sheet overlay (shared) ===== */
+  .sheet-overlay{
+    position:fixed; inset:0;
+    background:rgba(36,32,25,0.4);
+    display:none;
+    align-items:flex-end;
+    z-index:100;
+  }
+  .sheet-overlay.active{display:flex;}
+  .sheet{
+    background:var(--paper);
+    width:100%;
+    max-width:480px;
+    margin:0 auto;
+    border-radius:20px 20px 0 0;
+    padding:22px 20px calc(env(safe-area-inset-bottom,0px) + 22px);
+    max-height:85vh;
+    overflow-y:auto;
+    animation:slideUp .2s ease;
+  }
+  @keyframes slideUp{from{transform:translateY(30px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+  .sheet h2{font-size:16px; margin:0 0 18px;}
+  .field-label{font-size:12px; color:var(--ink-faint); margin:14px 0 6px;}
+  .sheet input[type=date], .sheet input[type=time], .sheet input[type=text], .sheet input[type=number], .sheet textarea{
+    width:100%;
+    padding:11px 12px;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    background:var(--paper-raised);
+    font-family:inherit;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .duration-inputs{display:flex; gap:10px;}
+  .duration-inputs .cd-field input{width:100%;}
+  .sheet-actions{display:flex; gap:10px; margin-top:22px;}
+  .sheet-actions .btn{flex:1;}
+  .two-col{display:flex; gap:10px;}
+  .two-col > div{flex:1;}
+
+  /* ===== Log screen ===== */
+  .log-tabs{display:flex; gap:8px; margin-bottom:18px;}
+  .log-tab-btn{
+    flex:1; padding:8px; border:1.5px solid var(--line); background:var(--paper-raised);
+    border-radius:10px; font-family:inherit; font-size:12.5px; color:var(--ink-soft); cursor:pointer;
+  }
+  .log-tab-btn.active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .log-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .log-dot{width:10px;height:10px;border-radius:50%; flex-shrink:0;}
+  .log-main{flex:1; min-width:0;}
+  .log-subject{font-size:14.5px; font-weight:600;}
+  .log-date{font-size:12px; color:var(--ink-faint); margin-top:2px;}
+  .log-dur{font-family:Georgia,serif; font-size:15px; color:var(--ink-soft); flex-shrink:0; text-align:left;}
+  .log-del{
+    background:none; border:none; color:var(--ink-faint); font-size:18px; padding:4px 6px; cursor:pointer;
+  }
+  .empty-state{
+    text-align:center;
+    padding:50px 20px;
+    color:var(--ink-faint);
+    font-size:14px;
+    line-height:1.9;
+  }
+
+  /* ===== Stats screen ===== */
+  .range-switch{
+    display:flex;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .range-btn{
+    flex:1;
+    padding:8px;
+    border:1.5px solid var(--line);
+    background:var(--paper-raised);
+    border-radius:10px;
+    font-family:inherit;
+    font-size:13px;
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .range-btn.active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+
+  .stat-summary{
+    display:flex;
+    gap:10px;
+    margin-bottom:22px;
+    flex-wrap:wrap;
+  }
+  .stat-box{
+    flex:1;
+    min-width:90px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px 10px;
+    text-align:center;
+  }
+  .stat-box .num{font-family:Georgia,serif; font-size:20px; color:var(--ink);}
+  .stat-box .lbl{font-size:10.5px; color:var(--ink-faint); margin-top:4px;}
+
+  .chart-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 14px 10px;
+    margin-bottom:20px;
+  }
+  .chart-card h3{font-size:13px; color:var(--ink-soft); margin:0 0 12px; font-weight:600;}
+
+  .subject-bar-row{margin-bottom:12px;}
+  .subject-bar-top{display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:5px;}
+  .subject-bar-track{height:7px; background:var(--line); border-radius:4px; overflow:hidden;}
+  .subject-bar-fill{height:100%; border-radius:4px;}
+
+  /* weekly calendar */
+  .week-cal{display:flex; gap:5px; justify-content:space-between;}
+  .week-day{
+    flex:1; text-align:center; border-radius:10px; padding:8px 2px;
+    background:var(--paper); border:1px solid var(--line);
+  }
+  .week-day.holiday{background:#F3E6E2; border-color:#E0C6BE;}
+  .week-day.today{border-color:var(--accent); border-width:2px;}
+  .week-day .wd-name{font-size:9.5px; color:var(--ink-faint); margin-bottom:4px;}
+  .week-day .wd-num{font-size:11px; color:var(--ink-soft); margin-bottom:5px;}
+  .week-day .wd-hrs{font-family:Georgia,serif; font-size:13px; color:var(--ink);}
+
+  .reflection-history-item{padding:10px 0; border-bottom:1px solid var(--line);}
+  .reflection-history-item:last-child{border-bottom:none;}
+  .reflection-history-top{display:flex; justify-content:space-between; font-size:12.5px; gap:8px;}
+  .reflection-history-top .rh-date{color:var(--ink-soft); flex-shrink:0;}
+  .reflection-history-scores{font-size:11.5px; color:var(--ink-faint); text-align:left;}
+  .reflection-history-note{font-size:12.5px; color:var(--ink); margin-top:4px; line-height:1.7;}
+
+  /* ===== Sounds screen ===== */
+  .sound-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 4px;
+    border-bottom:1px solid var(--line);
+  }
+  .sound-name{font-size:14.5px; font-weight:600;}
+  .sound-desc{font-size:12px; color:var(--ink-faint); margin-top:2px;}
+  .toggle{
+    width:46px; height:27px;
+    background:var(--line);
+    border-radius:14px;
+    position:relative;
+    border:none;
+    cursor:pointer;
+    flex-shrink:0;
+    transition:background .15s;
+  }
+  .toggle.on{background:var(--accent);}
+  .toggle::after{
+    content:"";
+    position:absolute;
+    top:3px; right:3px;
+    width:21px; height:21px;
+    background:#fff;
+    border-radius:50%;
+    transition:transform .18s;
+  }
+  .toggle.on::after{transform:translateX(-19px);}
+  .vol-row{display:flex; align-items:center; gap:10px; margin-top:8px;}
+  .vol-row input[type=range]{flex:1; accent-color:var(--accent);}
+
+  .rating-row{display:flex; gap:8px; margin-bottom:4px;}
+  .rating-btn{
+    flex:1;
+    padding:10px 0;
+    text-align:center;
+    border:1.5px solid var(--line);
+    background:var(--paper-raised);
+    border-radius:10px;
+    font-family:Georgia,serif;
+    font-size:16px;
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .rating-btn.selected{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .rating-caption{display:flex; justify-content:space-between; font-size:10.5px; color:var(--ink-faint); margin-bottom:16px;}
+
+  .toast{
+    position:fixed;
+    top:16px; left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:var(--paper);
+    padding:10px 18px;
+    border-radius:10px;
+    font-size:13px;
+    z-index:300;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s, transform .2s;
+    max-width:88%;
+    text-align:center;
+  }
+  .toast.show{opacity:1;}
+  .toast.celebrate{
+    background:var(--accent);
+    font-size:14.5px;
+    font-weight:700;
+    padding:14px 22px;
+  }
+
+  /* ===== Welcome screen ===== */
+  #welcomeOverlay{
+    position:fixed; inset:0; z-index:500;
+    background:linear-gradient(160deg, #1B1914, #242019 60%, #1B1914);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:30px;
+    text-align:center;
+  }
+  .brand-logo-card{
+    background:#111008;
+    border-radius:18px;
+    padding:22px 30px;
+    margin-bottom:26px;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.4);
+  }
+  .brand-logo-card .wordmark{
+    font-family:Georgia,serif;
+    letter-spacing:0.28em;
+    font-size:20px;
+    color:#DCD8CC;
+    font-weight:600;
+    padding-right:0.28em;
+  }
+  .welcome-title{
+    font-size:22px;
+    font-weight:700;
+    color:var(--paper);
+    margin-bottom:8px;
+    font-family:Georgia,serif;
+  }
+  .welcome-sub{
+    font-size:13px;
+    color:#B7B2A4;
+    margin-bottom:24px;
+    line-height:1.9;
+  }
+  .sticker-row{
+    display:flex;
+    gap:14px;
+    font-size:30px;
+    margin-bottom:34px;
+  }
+  #welcomeStartBtn{
+    background:var(--paper);
+    color:var(--ink);
+    border:none;
+    padding:15px 42px;
+    border-radius:14px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+<div id="welcomeOverlay">
+  <div class="brand-logo-card">
+    <div class="wordmark">AMIRMEHDI</div>
+  </div>
+  <div class="welcome-title">خوش اومدی 👋</div>
+  <div class="welcome-sub">وقت مطالعه‌ست.<br>یه قدم دیگه به هدفت نزدیک‌تر شو.</div>
+  <div class="sticker-row">
+    <span>🏆</span><span>🔥</span><span>⚡</span><span>💪</span><span>🚀</span>
+  </div>
+  <button id="welcomeStartBtn">بزن بریم</button>
+</div>
+
+<div id="app">
+
+  <!-- ============ TIMER SCREEN ============ -->
+  <section class="screen active" id="screen-timer">
+    <h1 class="page-title">StudyFlow</h1>
+    <p class="page-sub">همراه روزانه‌ی مطالعه‌ات</p>
+
+    <div class="quote-bar" id="quoteBar"></div>
+
+    <div class="today-card" id="todayCard"></div>
+
+    <div class="mode-switch">
+      <button class="mode-btn active" data-timer-mode="stopwatch">کرنومتر</button>
+      <button class="mode-btn" data-timer-mode="countdown">شمارش معکوس</button>
+      <button class="mode-btn" data-timer-mode="pomodoro">پومودورو</button>
+    </div>
+
+    <div class="subject-row" id="subjectRow"></div>
+
+    <div id="countdownSetup" class="countdown-setup" style="display:none;">
+      <div class="cd-field">
+        <label>ساعت</label>
+        <input type="number" id="cdHours" min="0" max="23" value="1" inputmode="numeric">
+      </div>
+      <div class="cd-field">
+        <label>دقیقه</label>
+        <input type="number" id="cdMinutes" min="0" max="59" value="0" inputmode="numeric">
+      </div>
+    </div>
+
+    <div id="pomoSetup" class="pomo-config" style="display:none;">
+      <div class="cd-field"><label>تمرکز (دقیقه)</label><input type="number" id="pomoFocus" min="1" max="180" value="25"></div>
+      <div class="cd-field"><label>استراحت کوتاه</label><input type="number" id="pomoBreak" min="1" max="60" value="5"></div>
+      <div class="cd-field"><label>استراحت بلند</label><input type="number" id="pomoLongBreak" min="1" max="60" value="15"></div>
+    </div>
+    <div id="pomoPhaseLabel" class="pomo-phase-label" style="display:none;"></div>
+
+    <div class="timer-display-wrap">
+      <div class="timer-display" id="timerDisplay">00:00:00</div>
+      <div class="timer-sub" id="timerSub">آماده برای شروع</div>
+    </div>
+
+    <div class="timer-controls">
+      <button class="btn btn-secondary" id="resetBtn" style="display:none;">بازنشانی</button>
+      <button class="btn btn-primary" id="startStopBtn">شروع</button>
+    </div>
+
+    <div class="manual-link">
+      <button id="openManualBtn">به‌جای تایمر، زمان را دستی ثبت کن</button>
+    </div>
+  </section>
+
+  <!-- ============ PRACTICE SCREEN (tests + books) ============ -->
+  <section class="screen" id="screen-practice">
+    <h1 class="page-title">تمرین</h1>
+    <p class="page-sub">تست‌ها و کتاب‌هایی که می‌خونی</p>
+
+    <div class="mode-switch">
+      <button class="mode-btn active" data-practice-mode="test">تست</button>
+      <button class="mode-btn" data-practice-mode="book">کتاب</button>
+    </div>
+
+    <!-- TEST PANEL -->
+    <div id="testPanel">
+      <div class="today-card" id="testTodayCard"></div>
+
+      <div class="field-label">درس</div>
+      <div class="subject-row" id="testSubjectRow"></div>
+
+      <div class="field-label">تعداد سوال‌ها</div>
+      <div class="two-col" style="margin-bottom:10px;">
+        <div>
+          <label style="font-size:11px;color:var(--ink-faint);">درست</label>
+          <input type="number" id="testCorrect" min="0" value="0">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--ink-faint);">غلط</label>
+          <input type="number" id="testWrong" min="0" value="0">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--ink-faint);">نزده</label>
+          <input type="number" id="testUnanswered" min="0" value="0">
+        </div>
+      </div>
+      <div class="field-label">تاریخ</div>
+      <input type="date" id="testDate">
+      <button class="btn btn-primary btn-full" id="saveTestBtn" style="margin-top:18px;">ثبت تست</button>
+    </div>
+
+    <!-- BOOK PANEL -->
+    <div id="bookPanel" style="display:none;">
+      <div class="field-label">نام کتاب</div>
+      <input type="text" id="bookTitle" placeholder="مثلاً هزار و یک شب">
+      <div class="field-label">تعداد صفحه‌ی خونده‌شده</div>
+      <input type="number" id="bookPages" min="1" value="10">
+      <div class="field-label">تاریخ</div>
+      <input type="date" id="bookDate">
+      <button class="btn btn-primary btn-full" id="saveBookBtn" style="margin-top:18px;">ثبت مطالعه‌ی کتاب</button>
+
+      <div class="chart-card" style="margin-top:22px;">
+        <h3>کتاب‌های اخیر</h3>
+        <div id="bookList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LOG SCREEN ============ -->
+  <section class="screen" id="screen-log">
+    <h1 class="page-title">تاریخچه</h1>
+    <p class="page-sub">همه‌ی چیزهایی که ثبت کردی</p>
+    <div class="log-tabs">
+      <button class="log-tab-btn active" data-logtab="study">مطالعه</button>
+      <button class="log-tab-btn" data-logtab="test">تست‌ها</button>
+      <button class="log-tab-btn" data-logtab="book">کتاب‌ها</button>
+    </div>
+    <div id="logList"></div>
+  </section>
+
+  <!-- ============ STATS SCREEN ============ -->
+  <section class="screen" id="screen-stats">
+    <h1 class="page-title">آمار</h1>
+    <p class="page-sub">روند و پیشرفتت</p>
+    <div class="range-switch">
+      <button class="range-btn active" data-range="week">هفتگی</button>
+      <button class="range-btn" data-range="month">ماهانه</button>
+      <button class="range-btn" data-range="all">کل</button>
+    </div>
+    <div class="stat-summary">
+      <div class="stat-box"><div class="num" id="statTotal">۰</div><div class="lbl">مجموع ساعت</div></div>
+      <div class="stat-box"><div class="num" id="statAvg">۰</div><div class="lbl">میانگین روزانه</div></div>
+      <div class="stat-box"><div class="num" id="statSessions">۰</div><div class="lbl">تعداد جلسات</div></div>
+    </div>
+
+    <div class="chart-card">
+      <h3>تقویم هفتگی</h3>
+      <div class="week-cal" id="weekCal"></div>
+    </div>
+
+    <div class="chart-card">
+      <h3>روند مطالعه (ساعت در روز)</h3>
+      <svg id="lineChart" viewBox="0 0 320 140" style="width:100%; height:140px;"></svg>
+    </div>
+    <div class="chart-card">
+      <h3>تفکیک بر اساس درس</h3>
+      <div id="subjectBars"></div>
+    </div>
+
+    <div class="chart-card">
+      <h3>تعداد تست‌ها</h3>
+      <svg id="testChart" viewBox="0 0 320 140" style="width:100%; height:140px;"></svg>
+      <div class="stat-summary" style="margin-top:14px;">
+        <div class="stat-box"><div class="num" id="statTestTotal">۰</div><div class="lbl">کل سوال</div></div>
+        <div class="stat-box"><div class="num" id="statTestCorrectPct">۰٪</div><div class="lbl">درصد درست</div></div>
+        <div class="stat-box"><div class="num" id="statTestUnansweredPct">۰٪</div><div class="lbl">درصد بی‌پاسخ</div></div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>بازخورد روزانه اخیر</h3>
+      <div id="reflectionHistory"></div>
+    </div>
+  </section>
+
+  <!-- ============ SOUNDS SCREEN ============ -->
+  <section class="screen" id="screen-sounds">
+    <h1 class="page-title">صداها</h1>
+    <p class="page-sub">فضای آروم برای تمرکز</p>
+    <div id="soundList"></div>
+  </section>
+
+  <!-- ============ TAB BAR ============ -->
+  <nav id="tabbar">
+    <button class="tab active" data-screen="timer">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      تایمر
+    </button>
+    <button class="tab" data-screen="practice">
+      <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      تمرین
+    </button>
+    <button class="tab" data-screen="log">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      تاریخچه
+    </button>
+    <button class="tab" data-screen="stats">
+      <svg viewBox="0 0 24 24"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+      آمار
+    </button>
+    <button class="tab" data-screen="sounds">
+      <svg viewBox="0 0 24 24"><path d="M3 10v4h4l5 5V5l-5 5H3z"/><path d="M16 8a5 5 0 010 8"/></svg>
+      صداها
+    </button>
+  </nav>
+</div>
+
+<!-- ============ MANUAL ENTRY SHEET ============ -->
+<div class="sheet-overlay" id="manualOverlay">
+  <div class="sheet">
+    <h2>ثبت دستی زمان مطالعه</h2>
+    <div class="field-label">درس</div>
+    <div class="subject-row" id="manualSubjectRow"></div>
+    <div class="field-label">مدت زمان</div>
+    <div class="duration-inputs">
+      <div class="cd-field"><label>ساعت</label><input type="number" id="manualHours" min="0" max="23" value="1"></div>
+      <div class="cd-field"><label>دقیقه</label><input type="number" id="manualMinutes" min="0" max="59" value="0"></div>
+    </div>
+    <div class="field-label">ساعت شروع و پایان (اختیاری)</div>
+    <div class="two-col">
+      <div><input type="time" id="manualStartTime"></div>
+      <div><input type="time" id="manualEndTime"></div>
+    </div>
+    <div class="field-label">تاریخ</div>
+    <input type="date" id="manualDate">
+    <div class="sheet-actions">
+      <button class="btn btn-secondary" id="manualCancel">انصراف</button>
+      <button class="btn btn-primary" id="manualSave">ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ NEW SUBJECT SHEET ============ -->
+<div class="sheet-overlay" id="newSubjectOverlay">
+  <div class="sheet">
+    <h2>افزودن درس جدید</h2>
+    <div class="field-label">نام درس</div>
+    <input type="text" id="newSubjectName" placeholder="مثلاً شیمی">
+    <div class="field-label">رنگ</div>
+    <div class="subject-row" id="colorPicker"></div>
+    <div class="sheet-actions">
+      <button class="btn btn-secondary" id="newSubjectCancel">انصراف</button>
+      <button class="btn btn-primary" id="newSubjectSave">افزودن</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DAILY GOAL SHEET ============ -->
+<div class="sheet-overlay" id="goalOverlay">
+  <div class="sheet">
+    <h2>هدف روزانه مطالعه</h2>
+    <div class="field-label">مدت هدف</div>
+    <div class="duration-inputs">
+      <div class="cd-field"><label>ساعت</label><input type="number" id="goalHours" min="0" max="23" value="4"></div>
+      <div class="cd-field"><label>دقیقه</label><input type="number" id="goalMinutes" min="0" max="59" value="0"></div>
+    </div>
+    <div class="sheet-actions">
+      <button class="btn btn-secondary" id="goalCancel">انصراف</button>
+      <button class="btn btn-primary" id="goalSave">ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TEST GOAL SHEET ============ -->
+<div class="sheet-overlay" id="testGoalOverlay">
+  <div class="sheet">
+    <h2>هدف روزانه تست</h2>
+    <div class="field-label">تعداد سوال هدف</div>
+    <input type="number" id="testGoalCount" min="1" value="50">
+    <div class="sheet-actions">
+      <button class="btn btn-secondary" id="testGoalCancel">انصراف</button>
+      <button class="btn btn-primary" id="testGoalSave">ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SLEEP SHEET ============ -->
+<div class="sheet-overlay" id="sleepOverlay">
+  <div class="sheet">
+    <h2>خواب و بیداری امروز</h2>
+    <div class="field-label">ساعت خواب دیشب</div>
+    <input type="time" id="sleepTimeInput">
+    <div class="field-label">ساعت بیداری امروز</div>
+    <input type="time" id="wakeTimeInput">
+    <div class="sheet-actions">
+      <button class="btn btn-secondary" id="sleepCancel">انصراف</button>
+      <button class="btn btn-primary" id="sleepSave">ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ REFLECTION SHEET ============ -->
+<div class="sheet-overlay" id="reflectionOverlay">
+  <div class="sheet">
+    <h2>امروز چطور گذشت؟</h2>
+    <div class="field-label">چقدر از امروز راضی بودی؟</div>
+    <div class="rating-row" id="satisfactionRow"></div>
+    <div class="rating-caption"><span>خیلی کم</span><span>خیلی زیاد</span></div>
+    <div class="field-label">چقدر مفید بودی؟</div>
+    <div class="rating-row" id="productivityRow"></div>
+    <div class="rating-caption"><span>خیلی کم</span><span>خیلی زیاد</span></div>
+    <div class="field-label">یادداشت (اختیاری)</div>
+    <textarea id="reflectionNote" rows="2" placeholder="مثلاً حواسم پرت بود، یا روز خوبی بود..."></textarea>
+    <div class="sheet-actions">
+      <button class="btn btn-secondary" id="reflectionCancel">انصراف</button>
+      <button class="btn btn-primary" id="reflectionSave">ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ================= STORAGE ================= */
+  const STORE_KEY = "studyapp_data_v2";
+  function loadData(){
+    try{
+      const raw = localStorage.getItem(STORE_KEY);
+      if(raw) return JSON.parse(raw);
+      // migrate from v1 if present
+      const oldRaw = localStorage.getItem("studyapp_data_v1");
+      if(oldRaw){
+        const old = JSON.parse(oldRaw);
+        return Object.assign(defaultData(), old);
+      }
+    }catch(e){}
+    return defaultData();
+  }
+  function defaultData(){
+    return {
+      subjects: [
+        {id:"riazi", name:"ریاضی", color:"var(--clay)"},
+        {id:"fizik", name:"فیزیک", color:"var(--slate)"},
+        {id:"zist", name:"زیست", color:"var(--teal)"}
+      ],
+      sessions: [],
+      selectedSubject: "riazi",
+      soundVolumes: {rain:0.5, forest:0.5, ocean:0.5, lofi:0.5},
+      dailyGoalSeconds: 4*3600,
+      reflections: {},
+      sleepLogs: {},
+      testEntries: [],
+      testGoalCount: 50,
+      books: [],
+      celebrated: {}
+    };
+  }
+  let DATA = loadData();
+  // backward-compat defaults
+  const _defaults = defaultData();
+  Object.keys(_defaults).forEach(k=>{ if(DATA[k] === undefined) DATA[k] = _defaults[k]; });
+
+  function persist(){
+    localStorage.setItem(STORE_KEY, JSON.stringify(DATA));
+  }
+
+  const COLORS = ["var(--clay)","var(--ochre)","var(--teal)","var(--plum)","var(--slate)","var(--rose)","var(--sky)","var(--accent)","var(--indigo)","var(--forestgreen)","var(--wine)","var(--denim)","var(--mustard)","var(--sand)","var(--lilac)","var(--steel)"];
+
+  function toast(msg, celebrate){
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = "toast show" + (celebrate ? " celebrate" : "");
+    setTimeout(()=>t.classList.remove("show"), celebrate ? 3200 : 1800);
+  }
+
+  const CELEBRATIONS = ["آفرین! 🎉","عالی بود! 👏","دمت گرم، امروز رو بردی! 🔥","فوق‌العاده بودی امروز! ⭐","همینه! ادامه بده 💪"];
+  function celebrate(){
+    return CELEBRATIONS[Math.floor(Math.random()*CELEBRATIONS.length)];
+  }
+
+  function pad(n){ return String(n).padStart(2,"0"); }
+  function fmtHMS(totalSeconds){
+    totalSeconds = Math.max(0, Math.round(totalSeconds));
+    const h = Math.floor(totalSeconds/3600);
+    const m = Math.floor((totalSeconds%3600)/60);
+    const s = totalSeconds%60;
+    return `${pad(h)}:${pad(m)}:${pad(s)}`;
+  }
+  function fmtClock(date){
+    return pad(date.getHours())+":"+pad(date.getMinutes());
+  }
+  function todayStr(){
+    const d = new Date();
+    return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+  }
+  function toDateStr(d){
+    return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+  }
+  function dateNDaysAgo(n){
+    const d = new Date();
+    d.setDate(d.getDate()-n);
+    return d;
+  }
+
+  /* ================= MOTIVATIONAL QUOTES ================= */
+  const QUOTES = [
+    "هر دقیقه‌ای که می‌ذاری، یه آجر از آینده‌ته.",
+    "پیشرفت کوچیک هم پیشرفته.",
+    "امروز رو بساز، فردا نتیجه‌شو می‌بینی.",
+    "استمرار از هوش مهم‌تره.",
+    "خسته‌ای؟ عادیه. متوقف نشو.",
+    "هر صفحه‌ای که می‌خونی، یه قدمه.",
+    "نه برای امتحان، برای خودت بخون.",
+    "کارهای بزرگ از تکرار روزهای معمولی ساخته می‌شن.",
+    "امروز تلاش کن، فردا مغرور باش.",
+    "تمرکز یعنی الان به کارهای دیگه نه گفتن.",
+    "هیچ تلاشی هدر نمی‌ره.",
+    "یه قدم امروز، بهتر از هزار قدم فرداست.",
+    "انگیزه شروعت می‌کنه، عادت نگه‌ت می‌داره.",
+    "هر بار که میشینی پای درس، یه‌نفر داره جا می‌زنه؛ اون تو نباش.",
+    "نتیجه دیر میاد، ولی میاد.",
+    "خودتو با دیروز خودت مقایسه کن، نه با بقیه.",
+    "یه ساعت تمرکز، بهتر از سه ساعت پرت‌حواسیه.",
+    "راحتی امروز، پشیمونی فرداست.",
+    "قوی‌ترین آدما، فقط بیشتر از بقیه دووم آوردن.",
+    "هدفتو یادت باشه، نه سختیشو.",
+    "هیچ‌کس یهو موفق نشده، همه پله‌پله رفتن بالا.",
+    "هر روز یه فرصت جدیده، هدرش نده.",
+    "شروع کردن سخت‌ترین قسمتشه؛ الان که شروع کردی، ادامه بده.",
+    "تمرکز کن رو کاری که الان دستته، نه کل مسیر.",
+    "خستگی موقتیه، پشیمونی از جا زدن موقتی نیست.",
+    "هر تستی که می‌زنی، یه قدم به آمادگی نزدیک‌تری.",
+    "بهونه راحته، نتیجه سخت.",
+    "امروز خوندی؟ فردا راحت‌تری.",
+    "کسی که مداوم تلاش کنه، از کسی که فقط بااستعداده جلو می‌زنه.",
+    "هیچ وقت خیلی دیر نیست که شروع کنی.",
+    "یه چیز کوچیک رو امروز تموم کن، بهتر از برنامه‌ی بزرگ ناتموم فرداست.",
+    "درد امروز، غرور فرداست.",
+    "تمرکز رو کیفیت مطالعه، نه فقط ساعتش.",
+    "هر روزی که جا می‌زنی، یه روز دیرتر به هدفت می‌رسی.",
+    "خودتو محک بزن، نه با دیگران، با پتانسیل خودت.",
+    "استراحت لازمه، ولی جا زدن نه.",
+    "پیشرفت یعنی امروز یه‌ذره بهتر از دیروز.",
+    "کوچیک شروع کن، ولی هر روز شروع کن.",
+    "هیچ تلاشی که با هدف انجام بشه، بی‌فایده نیست.",
+    "امروز رو که از دست بدی، دیگه برنمی‌گرده.",
+    "یاد بگیر که با بی‌حوصلگی هم بشینی درس بخونی؛ همینه فرق آدم‌ها.",
+    "هر باری که وسوسه شدی بیخیال بشی، یادت باشه چرا شروع کردی.",
+    "کاری که امروز سخته، تمرینه برای روزی که آسون بشه.",
+    "به جای نگرانی برای نتیجه، روی مسیر تمرکز کن.",
+    "هر مبحثی که تموم می‌کنی، یه بار از دوشت کم می‌شه.",
+    "پشتکار بی‌سروصداست، ولی نتیجه‌ش بلنده.",
+    "امروز رو جوری بگذرون که فردا بهش افتخار کنی.",
+    "هیچ آدم موفقی نبوده که یه روز نخواسته باشه بیخیال بشه؛ فرقشون اینه که نشدن.",
+    "به‌جای کامل بودن، به‌جلو رفتن فکر کن.",
+    "هر بار که یه فصل رو تموم می‌کنی، خودتو یه نفر جلوتر می‌بینی."
+  ];
+  function quoteOfDay(){
+    const d = new Date();
+    const seed = d.getFullYear()*372 + d.getMonth()*31 + d.getDate();
+    return QUOTES[seed % QUOTES.length];
+  }
+
+  /* ================= TAB NAVIGATION ================= */
+  const tabs = document.querySelectorAll(".tab");
+  const screens = document.querySelectorAll(".screen");
+  tabs.forEach(tab=>{
+    tab.addEventListener("click", ()=>{
+      tabs.forEach(t=>t.classList.remove("active"));
+      tab.classList.add("active");
+      screens.forEach(s=>s.classList.remove("active"));
+      document.getElementById("screen-"+tab.dataset.screen).classList.add("active");
+      if(tab.dataset.screen === "log") renderLog();
+      if(tab.dataset.screen === "stats") renderStats();
+      if(tab.dataset.screen === "practice"){ renderTestTodayCard(); renderBookList(); }
+    });
+  });
+
+  /* ================= SUBJECTS ================= */
+  function renderSubjectRow(container, selectable, onSelect){
+    container.innerHTML = "";
+    DATA.subjects.forEach(sub=>{
+      const chip = document.createElement("button");
+      chip.className = "subject-chip" + (sub.id === DATA.selectedSubject && selectable ? " selected" : "");
+      chip.innerHTML = `<span class="dot" style="background:${sub.color}"></span>${sub.name}`;
+      chip.addEventListener("click", ()=>{
+        if(onSelect) onSelect(sub.id);
+        container.querySelectorAll(".subject-chip").forEach(c=>c.classList.remove("selected"));
+        chip.classList.add("selected");
+      });
+      container.appendChild(chip);
+    });
+    const addChip = document.createElement("button");
+    addChip.className = "subject-chip add-new";
+    addChip.textContent = "+ درس جدید";
+    addChip.addEventListener("click", openNewSubjectSheet);
+    container.appendChild(addChip);
+  }
+
+  let manualSelectedSubject = DATA.selectedSubject;
+  let testSelectedSubject = DATA.selectedSubject;
+
+  function refreshAllSubjectRows(){
+    renderSubjectRow(document.getElementById("subjectRow"), true, (id)=>{
+      DATA.selectedSubject = id; persist();
+    });
+    renderSubjectRow(document.getElementById("manualSubjectRow"), true, (id)=>{
+      manualSelectedSubject = id;
+    });
+    renderSubjectRow(document.getElementById("testSubjectRow"), true, (id)=>{
+      testSelectedSubject = id;
+    });
+  }
+
+  /* New subject sheet */
+  let pickedColor = COLORS[0];
+  function openNewSubjectSheet(){
+    document.getElementById("newSubjectName").value = "";
+    const picker = document.getElementById("colorPicker");
+    picker.innerHTML = "";
+    pickedColor = COLORS[DATA.subjects.length % COLORS.length];
+    COLORS.forEach(c=>{
+      const el = document.createElement("button");
+      el.className = "subject-chip";
+      el.style.padding = "0";
+      el.style.width = "30px";
+      el.style.height = "30px";
+      el.style.borderRadius = "50%";
+      el.style.background = c;
+      el.style.border = c === pickedColor ? "2.5px solid var(--ink)" : "2.5px solid transparent";
+      el.addEventListener("click", ()=>{
+        pickedColor = c;
+        picker.querySelectorAll(".subject-chip").forEach(x=>x.style.border="2.5px solid transparent");
+        el.style.border = "2.5px solid var(--ink)";
+      });
+      picker.appendChild(el);
+    });
+    document.getElementById("newSubjectOverlay").classList.add("active");
+  }
+  document.getElementById("newSubjectCancel").addEventListener("click", ()=>{
+    document.getElementById("newSubjectOverlay").classList.remove("active");
+  });
+  document.getElementById("newSubjectSave").addEventListener("click", ()=>{
+    const name = document.getElementById("newSubjectName").value.trim();
+    if(!name){ toast("نام درس را وارد کنید"); return; }
+    const id = "s_" + Date.now();
+    DATA.subjects.push({id, name, color: pickedColor});
+    DATA.selectedSubject = id;
+    persist();
+    refreshAllSubjectRows();
+    document.getElementById("newSubjectOverlay").classList.remove("active");
+    toast("درس اضافه شد");
+  });
+
+  /* ================= TIMER ENGINE ================= */
+  let timerMode = "stopwatch";
+  let running = false;
+  let startEpoch = 0;
+  let elapsedBeforePause = 0;
+  let rafId = null;
+  let sessionWallStart = null;
+
+  let countdownTotalSeconds = 60*60;
+  let pomoConfig = { focus:25*60, short:5*60, long:15*60 };
+  let pomoPhase = "focus";
+  let pomoCount = 0;
+  let pomoPhaseSeconds = pomoConfig.focus;
+
+  const timerDisplay = document.getElementById("timerDisplay");
+  const timerSub = document.getElementById("timerSub");
+  const startStopBtn = document.getElementById("startStopBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const countdownSetup = document.getElementById("countdownSetup");
+  const pomoSetup = document.getElementById("pomoSetup");
+  const pomoPhaseLabel = document.getElementById("pomoPhaseLabel");
+
+  document.querySelectorAll('[data-timer-mode]').forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      if(running){ toast("ابتدا تایمر را متوقف کنید"); return; }
+      document.querySelectorAll('[data-timer-mode]').forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      timerMode = btn.dataset.timerMode;
+      countdownSetup.style.display = timerMode === "countdown" ? "flex" : "none";
+      pomoSetup.style.display = timerMode === "pomodoro" ? "flex" : "none";
+      pomoPhaseLabel.style.display = timerMode === "pomodoro" ? "block" : "none";
+      resetTimerState();
+    });
+  });
+
+  function resetTimerState(){
+    running = false;
+    elapsedBeforePause = 0;
+    pomoPhase = "focus";
+    pomoCount = 0;
+    readPomoConfig();
+    pomoPhaseSeconds = pomoConfig.focus;
+    updatePomoLabel();
+    startStopBtn.textContent = "شروع";
+    startStopBtn.classList.remove("running");
+    resetBtn.style.display = "none";
+    renderTimerDisplay(0);
+    timerSub.textContent = "آماده برای شروع";
+  }
+
+  function readCountdownInputs(){
+    const h = parseInt(document.getElementById("cdHours").value) || 0;
+    const m = parseInt(document.getElementById("cdMinutes").value) || 0;
+    countdownTotalSeconds = Math.max(1, h*3600 + m*60);
+  }
+  function readPomoConfig(){
+    pomoConfig.focus = Math.max(1,(parseInt(document.getElementById("pomoFocus").value)||25))*60;
+    pomoConfig.short = Math.max(1,(parseInt(document.getElementById("pomoBreak").value)||5))*60;
+    pomoConfig.long = Math.max(1,(parseInt(document.getElementById("pomoLongBreak").value)||15))*60;
+  }
+  function updatePomoLabel(){
+    const labels = {focus:"🎯 زمان تمرکز", short:"☕ استراحت کوتاه", long:"🌿 استراحت بلند"};
+    pomoPhaseLabel.textContent = labels[pomoPhase] + `  ·  دور ${pomoCount+1}`;
+  }
+  function renderTimerDisplay(seconds){
+    timerDisplay.textContent = fmtHMS(seconds);
+  }
+
+  function tick(){
+    if(!running) return;
+    const now = Date.now();
+    const elapsedSec = (now - startEpoch)/1000 + elapsedBeforePause;
+
+    if(timerMode === "stopwatch"){
+      renderTimerDisplay(elapsedSec);
+    } else if(timerMode === "countdown"){
+      const remaining = countdownTotalSeconds - elapsedSec;
+      if(remaining <= 0){ renderTimerDisplay(0); finishCountdown(); return; }
+      renderTimerDisplay(remaining);
+    } else if(timerMode === "pomodoro"){
+      const remaining = pomoPhaseSeconds - elapsedSec;
+      if(remaining <= 0){ renderTimerDisplay(0); advancePomoPhase(); return; }
+      renderTimerDisplay(remaining);
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function finishCountdown(){
+    running = false;
+    logSession(countdownTotalSeconds, "countdown");
+    playChime();
+    timerSub.textContent = "پایان زمان — جلسه ثبت شد ✓";
+    startStopBtn.textContent = "شروع";
+    startStopBtn.classList.remove("running");
+    resetBtn.style.display = "none";
+    elapsedBeforePause = 0;
+  }
+
+  function advancePomoPhase(){
+    if(pomoPhase === "focus"){
+      logSession(pomoConfig.focus, "pomodoro");
+      pomoCount++;
+      pomoPhase = (pomoCount % 4 === 0) ? "long" : "short";
+      pomoPhaseSeconds = pomoConfig[pomoPhase === "long" ? "long" : "short"];
+      playChime();
+      timerSub.textContent = "وقت استراحت است";
+    } else {
+      pomoPhase = "focus";
+      pomoPhaseSeconds = pomoConfig.focus;
+      playChime();
+      timerSub.textContent = "برگردیم به درس";
+    }
+    updatePomoLabel();
+    elapsedBeforePause = 0;
+    startEpoch = Date.now();
+    sessionWallStart = new Date();
+    renderTimerDisplay(pomoPhaseSeconds);
+    rafId = requestAnimationFrame(tick);
+  }
+
+  startStopBtn.addEventListener("click", ()=>{
+    if(!running){
+      if(timerMode === "countdown") readCountdownInputs();
+      if(timerMode === "pomodoro" && elapsedBeforePause === 0 && pomoCount === 0 && pomoPhase === "focus"){
+        readPomoConfig();
+        pomoPhaseSeconds = pomoConfig.focus;
+        updatePomoLabel();
+      }
+      running = true;
+      startEpoch = Date.now();
+      if(elapsedBeforePause === 0) sessionWallStart = new Date();
+      startStopBtn.textContent = "توقف";
+      startStopBtn.classList.add("running");
+      resetBtn.style.display = "inline-block";
+      timerSub.textContent = timerMode === "stopwatch" ? "در حال شمارش..." : "در حال مطالعه...";
+      rafId = requestAnimationFrame(tick);
+    } else {
+      running = false;
+      cancelAnimationFrame(rafId);
+      const now = Date.now();
+      elapsedBeforePause += (now - startEpoch)/1000;
+      startStopBtn.textContent = "ادامه";
+      startStopBtn.classList.remove("running");
+      timerSub.textContent = "متوقف شد";
+
+      if(timerMode === "stopwatch"){
+        if(elapsedBeforePause >= 1){
+          logSession(elapsedBeforePause, "stopwatch");
+          timerSub.textContent = "جلسه ثبت شد ✓ (" + fmtHMS(elapsedBeforePause) + ")";
+        }
+        elapsedBeforePause = 0;
+        startStopBtn.textContent = "شروع";
+        resetBtn.style.display = "none";
+      }
+    }
+  });
+
+  resetBtn.addEventListener("click", ()=>{
+    cancelAnimationFrame(rafId);
+    resetTimerState();
+  });
+
+  function logSession(seconds, mode){
+    const endDate = new Date();
+    const startDate = sessionWallStart || new Date(endDate.getTime() - seconds*1000);
+    DATA.sessions.push({
+      id: "sess_"+Date.now()+Math.random().toString(36).slice(2,6),
+      subjectId: DATA.selectedSubject,
+      seconds: Math.round(seconds),
+      date: todayStr(),
+      mode: mode,
+      startTime: fmtClock(startDate),
+      endTime: fmtClock(endDate),
+      ts: Date.now()
+    });
+    persist();
+    renderTodayCard();
+    checkStudyCelebration();
+  }
+
+  /* chime via WebAudio */
+  let audioCtx = null;
+  function getCtx(){
+    if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    return audioCtx;
+  }
+  function playChime(){
+    try{
+      const ctx = getCtx();
+      const notes = [880, 1108];
+      notes.forEach((freq, i)=>{
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.15, ctx.currentTime + 0.02 + i*0.18);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.6 + i*0.18);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(ctx.currentTime + i*0.18);
+        osc.stop(ctx.currentTime + 0.8 + i*0.18);
+      });
+      if(navigator.vibrate) navigator.vibrate([80,40,80]);
+    }catch(e){}
+  }
+
+  /* ================= MANUAL ENTRY ================= */
+  const manualOverlay = document.getElementById("manualOverlay");
+  document.getElementById("openManualBtn").addEventListener("click", ()=>{
+    manualSelectedSubject = DATA.selectedSubject;
+    renderSubjectRow(document.getElementById("manualSubjectRow"), true, (id)=>{ manualSelectedSubject = id; });
+    document.getElementById("manualHours").value = 1;
+    document.getElementById("manualMinutes").value = 0;
+    document.getElementById("manualStartTime").value = "";
+    document.getElementById("manualEndTime").value = "";
+    document.getElementById("manualDate").value = todayStr();
+    manualOverlay.classList.add("active");
+  });
+  document.getElementById("manualCancel").addEventListener("click", ()=>{
+    manualOverlay.classList.remove("active");
+  });
+  function timeStrToMinutes(t){
+    const [h,m] = t.split(":").map(Number);
+    return h*60+m;
+  }
+  document.getElementById("manualStartTime").addEventListener("change", syncManualDuration);
+  document.getElementById("manualEndTime").addEventListener("change", syncManualDuration);
+  function syncManualDuration(){
+    const s = document.getElementById("manualStartTime").value;
+    const e = document.getElementById("manualEndTime").value;
+    if(s && e){
+      let diff = timeStrToMinutes(e) - timeStrToMinutes(s);
+      if(diff < 0) diff += 24*60;
+      document.getElementById("manualHours").value = Math.floor(diff/60);
+      document.getElementById("manualMinutes").value = diff%60;
+    }
+  }
+  document.getElementById("manualSave").addEventListener("click", ()=>{
+    const h = parseInt(document.getElementById("manualHours").value)||0;
+    const m = parseInt(document.getElementById("manualMinutes").value)||0;
+    const totalSec = h*3600 + m*60;
+    if(totalSec <= 0){ toast("مدت زمان را وارد کنید"); return; }
+    const dateVal = document.getElementById("manualDate").value || todayStr();
+    const startTime = document.getElementById("manualStartTime").value || null;
+    const endTime = document.getElementById("manualEndTime").value || null;
+    DATA.sessions.push({
+      id: "sess_"+Date.now()+Math.random().toString(36).slice(2,6),
+      subjectId: manualSelectedSubject,
+      seconds: totalSec,
+      date: dateVal,
+      mode: "manual",
+      startTime: startTime,
+      endTime: endTime,
+      ts: Date.now()
+    });
+    persist();
+    manualOverlay.classList.remove("active");
+    toast("زمان ثبت شد");
+    renderLog();
+    renderTodayCard();
+    checkStudyCelebration();
+  });
+
+  /* ================= PRACTICE: TESTS ================= */
+  document.querySelectorAll('[data-practice-mode]').forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll('[data-practice-mode]').forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      const mode = btn.dataset.practiceMode;
+      document.getElementById("testPanel").style.display = mode === "test" ? "block" : "none";
+      document.getElementById("bookPanel").style.display = mode === "book" ? "block" : "none";
+      if(mode === "book") renderBookList();
+    });
+  });
+
+  document.getElementById("testDate").value = todayStr();
+  document.getElementById("bookDate").value = todayStr();
+
+  function todayTestTotal(){
+    return DATA.testEntries.filter(t=>t.date===todayStr())
+      .reduce((acc,t)=>acc + t.correct + t.wrong + t.unanswered, 0);
+  }
+
+  function renderTestTodayCard(){
+    const card = document.getElementById("testTodayCard");
+    if(!card) return;
+    const total = todayTestTotal();
+    const goal = DATA.testGoalCount;
+    const pct = goal>0 ? Math.min(100, Math.round((total/goal)*100)) : 0;
+    card.innerHTML = `
+      <div class="today-top">
+        <span class="today-label">تست‌های امروز</span>
+        <button class="today-edit-goal" id="editTestGoalBtn">هدف: ${goal} سوال ✎</button>
+      </div>
+      <div class="today-numbers">
+        <span class="big">${total}</span>
+        <span class="slash">/</span>
+        <span class="goal">${goal} سوال</span>
+      </div>
+      <div class="today-bar-track"><div class="today-bar-fill" style="width:${pct}%"></div></div>
+    `;
+    document.getElementById("editTestGoalBtn").addEventListener("click", ()=>{
+      document.getElementById("testGoalCount").value = DATA.testGoalCount;
+      document.getElementById("testGoalOverlay").classList.add("active");
+    });
+  }
+  document.getElementById("testGoalCancel").addEventListener("click", ()=>{
+    document.getElementById("testGoalOverlay").classList.remove("active");
+  });
+  document.getElementById("testGoalSave").addEventListener("click", ()=>{
+    const v = parseInt(document.getElementById("testGoalCount").value)||50;
+    DATA.testGoalCount = Math.max(1,v);
+    persist();
+    document.getElementById("testGoalOverlay").classList.remove("active");
+    renderTestTodayCard();
+    toast("هدف تست ذخیره شد");
+  });
+
+  document.getElementById("saveTestBtn").addEventListener("click", ()=>{
+    const correct = parseInt(document.getElementById("testCorrect").value)||0;
+    const wrong = parseInt(document.getElementById("testWrong").value)||0;
+    const unanswered = parseInt(document.getElementById("testUnanswered").value)||0;
+    if(correct+wrong+unanswered === 0){ toast("حداقل یک عدد را وارد کن"); return; }
+    const dateVal = document.getElementById("testDate").value || todayStr();
+    DATA.testEntries.push({
+      id:"test_"+Date.now()+Math.random().toString(36).slice(2,6),
+      date: dateVal,
+      subjectId: testSelectedSubject,
+      correct, wrong, unanswered,
+      ts: Date.now()
+    });
+    persist();
+    document.getElementById("testCorrect").value = 0;
+    document.getElementById("testWrong").value = 0;
+    document.getElementById("testUnanswered").value = 0;
+    toast("تست ثبت شد");
+    renderTestTodayCard();
+    checkTestCelebration();
+  });
+
+  function checkTestCelebration(){
+    const total = todayTestTotal();
+    if(total >= DATA.testGoalCount && DATA.celebrated.testDate !== todayStr()){
+      DATA.celebrated.testDate = todayStr();
+      persist();
+      toast(celebrate() + " به هدف تستت رسیدی", true);
+    }
+  }
+  function checkStudyCelebration(){
+    const done = todaySeconds();
+    if(done >= DATA.dailyGoalSeconds && DATA.celebrated.studyDate !== todayStr()){
+      DATA.celebrated.studyDate = todayStr();
+      persist();
+      toast(celebrate() + " به هدف مطالعه‌ت رسیدی", true);
+    }
+  }
+
+  /* ================= PRACTICE: BOOKS ================= */
+  document.getElementById("saveBookBtn").addEventListener("click", ()=>{
+    const title = document.getElementById("bookTitle").value.trim();
+    const pages = parseInt(document.getElementById("bookPages").value)||0;
+    if(!title || pages<=0){ toast("نام کتاب و تعداد صفحه را وارد کن"); return; }
+    const dateVal = document.getElementById("bookDate").value || todayStr();
+    DATA.books.push({
+      id:"book_"+Date.now()+Math.random().toString(36).slice(2,6),
+      title, pages, date: dateVal, ts: Date.now()
+    });
+    persist();
+    document.getElementById("bookTitle").value = "";
+    document.getElementById("bookPages").value = 10;
+    toast("ثبت شد");
+    renderBookList();
+  });
+  function renderBookList(){
+    const list = document.getElementById("bookList");
+    if(!list) return;
+    const items = [...DATA.books].sort((a,b)=>b.ts-a.ts).slice(0,10);
+    if(items.length===0){
+      list.innerHTML = `<div class="empty-state" style="padding:16px 0;">هنوز کتابی ثبت نشده</div>`;
+      return;
+    }
+    list.innerHTML = "";
+    items.forEach(b=>{
+      const row = document.createElement("div");
+      row.className = "log-item";
+      row.innerHTML = `
+        <div class="log-main">
+          <div class="log-subject">${b.title}</div>
+          <div class="log-date">${b.date}</div>
+        </div>
+        <div class="log-dur">${b.pages} صفحه</div>
+        <button class="log-del">✕</button>
+      `;
+      row.querySelector(".log-del").addEventListener("click", ()=>{
+        DATA.books = DATA.books.filter(x=>x.id!==b.id);
+        persist();
+        renderBookList();
+      });
+      list.appendChild(row);
+    });
+  }
+
+  /* ================= LOG SCREEN ================= */
+  function subjectById(id){
+    return DATA.subjects.find(s=>s.id===id) || {name:"نامشخص", color:"var(--ink-faint)"};
+  }
+  let currentLogTab = "study";
+  document.querySelectorAll(".log-tab-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll(".log-tab-btn").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      currentLogTab = btn.dataset.logtab;
+      renderLog();
+    });
+  });
+
+  function renderLog(){
+    const list = document.getElementById("logList");
+    if(currentLogTab === "study"){
+      const sessions = [...DATA.sessions].sort((a,b)=>b.ts-a.ts);
+      if(sessions.length === 0){
+        list.innerHTML = `<div class="empty-state">هنوز جلسه‌ای ثبت نشده.<br>از تب تایمر شروع کن یا زمان را دستی اضافه کن.</div>`;
+        return;
+      }
+      list.innerHTML = "";
+      sessions.forEach(sess=>{
+        const sub = subjectById(sess.subjectId);
+        const row = document.createElement("div");
+        row.className = "log-item";
+        const h = Math.floor(sess.seconds/3600);
+        const m = Math.round((sess.seconds%3600)/60);
+        const durStr = h>0 ? `${h}س ${m}د` : `${m} دقیقه`;
+        const timeRange = sess.startTime && sess.endTime ? ` · ${sess.startTime}–${sess.endTime}` : "";
+        row.innerHTML = `
+          <span class="log-dot" style="background:${sub.color}"></span>
+          <div class="log-main">
+            <div class="log-subject">${sub.name}</div>
+            <div class="log-date">${sess.date}${timeRange}</div>
+          </div>
+          <div class="log-dur">${durStr}</div>
+          <button class="log-del">✕</button>
+        `;
+        row.querySelector(".log-del").addEventListener("click", ()=>{
+          DATA.sessions = DATA.sessions.filter(s=>s.id!==sess.id);
+          persist();
+          renderLog();
+        });
+        list.appendChild(row);
+      });
+    } else if(currentLogTab === "test"){
+      const items = [...DATA.testEntries].sort((a,b)=>b.ts-a.ts);
+      if(items.length===0){
+        list.innerHTML = `<div class="empty-state">هنوز تستی ثبت نشده.</div>`;
+        return;
+      }
+      list.innerHTML = "";
+      items.forEach(t=>{
+        const sub = subjectById(t.subjectId);
+        const total = t.correct+t.wrong+t.unanswered;
+        const row = document.createElement("div");
+        row.className = "log-item";
+        row.innerHTML = `
+          <span class="log-dot" style="background:${sub.color}"></span>
+          <div class="log-main">
+            <div class="log-subject">${sub.name} · ${total} سوال</div>
+            <div class="log-date">${t.date} · ✅${t.correct} ❌${t.wrong} ⬜${t.unanswered}</div>
+          </div>
+          <button class="log-del">✕</button>
+        `;
+        row.querySelector(".log-del").addEventListener("click", ()=>{
+          DATA.testEntries = DATA.testEntries.filter(x=>x.id!==t.id);
+          persist();
+          renderLog();
+        });
+        list.appendChild(row);
+      });
+    } else if(currentLogTab === "book"){
+      const items = [...DATA.books].sort((a,b)=>b.ts-a.ts);
+      if(items.length===0){
+        list.innerHTML = `<div class="empty-state">هنوز کتابی ثبت نشده.</div>`;
+        return;
+      }
+      list.innerHTML = "";
+      items.forEach(b=>{
+        const row = document.createElement("div");
+        row.className = "log-item";
+        row.innerHTML = `
+          <div class="log-main">
+            <div class="log-subject">${b.title}</div>
+            <div class="log-date">${b.date}</div>
+          </div>
+          <div class="log-dur">${b.pages} صفحه</div>
+          <button class="log-del">✕</button>
+        `;
+        row.querySelector(".log-del").addEventListener("click", ()=>{
+          DATA.books = DATA.books.filter(x=>x.id!==b.id);
+          persist();
+          renderLog();
+        });
+        list.appendChild(row);
+      });
+    }
+  }
+
+  /* ================= STATS SCREEN ================= */
+  let statsRange = "week";
+  document.querySelectorAll(".range-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll(".range-btn").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      statsRange = btn.dataset.range;
+      renderStats();
+    });
+  });
+
+  function renderStats(){
+    let days = 7;
+    if(statsRange === "month") days = 30;
+    if(statsRange === "all") days = null;
+
+    let filtered = DATA.sessions;
+    if(days){
+      const cutoff = dateNDaysAgo(days-1);
+      const cutoffStr = toDateStr(cutoff);
+      filtered = DATA.sessions.filter(s=>s.date >= cutoffStr);
+    }
+
+    const totalSeconds = filtered.reduce((a,s)=>a+s.seconds,0);
+    const totalHours = totalSeconds/3600;
+    const dayCount = days || (function(){
+      if(filtered.length===0) return 1;
+      const dates = filtered.map(s=>s.date).sort();
+      const first = new Date(dates[0]);
+      const last = new Date();
+      return Math.max(1, Math.round((last-first)/86400000)+1);
+    })();
+    const avgHoursPerDay = totalHours/dayCount;
+
+    document.getElementById("statTotal").textContent = totalHours.toFixed(1);
+    document.getElementById("statAvg").textContent = avgHoursPerDay.toFixed(1);
+    document.getElementById("statSessions").textContent = filtered.length;
+
+    renderLineChart(filtered, days);
+    renderSubjectBars(filtered, totalSeconds);
+    renderReflectionHistory();
+    renderWeekCal();
+    renderTestStats(days);
+  }
+
+  function renderLineChart(filtered, days){
+    const svg = document.getElementById("lineChart");
+    const W = 320, H = 140, padL = 28, padR = 10, padT = 12, padB = 22;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+
+    let bucketDays;
+    if(days === null){
+      const dates = [...new Set(filtered.map(s=>s.date))].sort();
+      if(dates.length === 0){ bucketDays = []; }
+      else{
+        const first = new Date(dates[0]);
+        const last = new Date();
+        const span = Math.min(30, Math.max(1, Math.round((last-first)/86400000)+1));
+        bucketDays = [];
+        for(let i=span-1;i>=0;i--) bucketDays.push(toDateStr(dateNDaysAgo(i)));
+      }
+    } else {
+      bucketDays = [];
+      for(let i=days-1;i>=0;i--) bucketDays.push(toDateStr(dateNDaysAgo(i)));
+    }
+
+    const perDay = {};
+    bucketDays.forEach(d=>perDay[d]=0);
+    filtered.forEach(s=>{ if(perDay.hasOwnProperty(s.date)) perDay[s.date] += s.seconds; });
+    const values = bucketDays.map(d=>perDay[d]/3600);
+    const maxVal = Math.max(1, ...values);
+
+    if(bucketDays.length === 0){
+      svg.innerHTML = `<text x="160" y="70" text-anchor="middle" font-size="12" fill="var(--ink-faint)">داده‌ای برای نمایش نیست</text>`;
+      return;
+    }
+
+    const stepX = plotW / Math.max(1, bucketDays.length-1);
+    let points = values.map((v,i)=>{
+      const x = padL + i*stepX;
+      const y = padT + plotH - (v/maxVal)*plotH;
+      return [x,y];
+    });
+
+    let path = "M " + points.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L ");
+    let areaPath = path + ` L ${points[points.length-1][0].toFixed(1)},${(padT+plotH).toFixed(1)} L ${points[0][0].toFixed(1)},${(padT+plotH).toFixed(1)} Z`;
+
+    let grid = "";
+    for(let i=0;i<=2;i++){
+      const y = padT + (plotH/2)*i;
+      grid += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--line)" stroke-width="1"/>`;
+    }
+
+    let labels = "";
+    const labelEvery = Math.ceil(bucketDays.length/5);
+    bucketDays.forEach((d,i)=>{
+      if(i % labelEvery === 0 || i === bucketDays.length-1){
+        const x = padL + i*stepX;
+        const dt = new Date(d);
+        const lbl = dt.getMonth()+1 + "/" + dt.getDate();
+        labels += `<text x="${x.toFixed(1)}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--ink-faint)">${lbl}</text>`;
+      }
+    });
+
+    let dots = points.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.5" fill="var(--accent)"/>`).join("");
+
+    svg.innerHTML = `${grid}<path d="${areaPath}" fill="var(--accent)" opacity="0.12" stroke="none"/><path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>${dots}${labels}`;
+  }
+
+  function renderSubjectBars(filtered, totalSeconds){
+    const container = document.getElementById("subjectBars");
+    const bySubject = {};
+    filtered.forEach(s=>{ bySubject[s.subjectId] = (bySubject[s.subjectId]||0) + s.seconds; });
+    const entries = Object.entries(bySubject).sort((a,b)=>b[1]-a[1]);
+    if(entries.length === 0){
+      container.innerHTML = `<div class="empty-state" style="padding:20px 0;">داده‌ای در این بازه نیست</div>`;
+      return;
+    }
+    container.innerHTML = "";
+    entries.forEach(([subId, secs])=>{
+      const sub = subjectById(subId);
+      const pct = totalSeconds>0 ? Math.round((secs/totalSeconds)*100) : 0;
+      const hrs = (secs/3600).toFixed(1);
+      const row = document.createElement("div");
+      row.className = "subject-bar-row";
+      row.innerHTML = `
+        <div class="subject-bar-top"><span>${sub.name}</span><span>${hrs} ساعت · ${pct}%</span></div>
+        <div class="subject-bar-track"><div class="subject-bar-fill" style="width:${pct}%; background:${sub.color}"></div></div>
+      `;
+      container.appendChild(row);
+    });
+  }
+
+  function renderTestStats(days){
+    let filtered = DATA.testEntries;
+    if(days){
+      const cutoffStr = toDateStr(dateNDaysAgo(days-1));
+      filtered = DATA.testEntries.filter(t=>t.date >= cutoffStr);
+    }
+    const totalCorrect = filtered.reduce((a,t)=>a+t.correct,0);
+    const totalWrong = filtered.reduce((a,t)=>a+t.wrong,0);
+    const totalUnanswered = filtered.reduce((a,t)=>a+t.unanswered,0);
+    const total = totalCorrect+totalWrong+totalUnanswered;
+    document.getElementById("statTestTotal").textContent = total;
+    document.getElementById("statTestCorrectPct").textContent = total>0 ? Math.round((totalCorrect/total)*100)+"٪" : "۰٪";
+    document.getElementById("statTestUnansweredPct").textContent = total>0 ? Math.round((totalUnanswered/total)*100)+"٪" : "۰٪";
+
+    const svg = document.getElementById("testChart");
+    const W = 320, H = 140, padL = 24, padR = 10, padT = 12, padB = 22;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+
+    let bucketDays;
+    const d = days || 14;
+    bucketDays = [];
+    for(let i=d-1;i>=0;i--) bucketDays.push(toDateStr(dateNDaysAgo(i)));
+
+    const perDay = {};
+    bucketDays.forEach(dd=>perDay[dd]=0);
+    filtered.forEach(t=>{ if(perDay.hasOwnProperty(t.date)) perDay[t.date] += (t.correct+t.wrong+t.unanswered); });
+    const values = bucketDays.map(dd=>perDay[dd]);
+    const maxVal = Math.max(1, ...values);
+
+    if(bucketDays.length===0 || total===0){
+      svg.innerHTML = `<text x="160" y="70" text-anchor="middle" font-size="12" fill="var(--ink-faint)">داده‌ای برای نمایش نیست</text>`;
+      return;
+    }
+
+    const barW = plotW / bucketDays.length * 0.6;
+    const step = plotW / bucketDays.length;
+    let bars = "";
+    bucketDays.forEach((dd,i)=>{
+      const v = values[i];
+      const barH = (v/maxVal)*plotH;
+      const x = padL + i*step + (step-barW)/2;
+      const y = padT + plotH - barH;
+      bars += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${barH.toFixed(1)}" rx="2" fill="var(--indigo)"/>`;
+    });
+    svg.innerHTML = bars;
+  }
+
+  function renderWeekCal(){
+    const container = document.getElementById("weekCal");
+    if(!container) return;
+    const today = new Date();
+    const dow = today.getDay(); // 0=Sun..6=Sat
+    const daysSinceSat = (dow - 6 + 7) % 7;
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() - daysSinceSat);
+
+    const names = ["ش","ی","د","س","چ","پ","ج"]; // Sat,Sun,Mon,Tue,Wed,Thu,Fri
+    const holidayIdx = [5,6]; // Thu index5, Fri index6
+    const todayDateStr = todayStr();
+
+    container.innerHTML = "";
+    for(let i=0;i<7;i++){
+      const d = new Date(weekStart);
+      d.setDate(weekStart.getDate()+i);
+      const dStr = toDateStr(d);
+      const secs = DATA.sessions.filter(s=>s.date===dStr).reduce((a,s)=>a+s.seconds,0);
+      const hrs = (secs/3600).toFixed(1);
+      const cell = document.createElement("div");
+      cell.className = "week-day" + (holidayIdx.includes(i)?" holiday":"") + (dStr===todayDateStr?" today":"");
+      cell.innerHTML = `
+        <div class="wd-name">${names[i]}</div>
+        <div class="wd-num">${d.getDate()}</div>
+        <div class="wd-hrs">${hrs}</div>
+      `;
+      container.appendChild(cell);
+    }
+  }
+
+  /* ================= DAILY GOAL & REFLECTION ================= */
+  function todaySeconds(){
+    return DATA.sessions.filter(s=>s.date===todayStr()).reduce((a,s)=>a+s.seconds,0);
+  }
+
+  function renderTodayCard(){
+    const card = document.getElementById("todayCard");
+    if(!card) return;
+    const done = todaySeconds();
+    const goal = DATA.dailyGoalSeconds;
+    const pct = goal>0 ? Math.min(100, Math.round((done/goal)*100)) : 0;
+    const doneH = (done/3600).toFixed(1);
+    const goalH = (goal/3600).toFixed(1);
+
+    let feedback;
+    const diff = done - goal;
+    if(done === 0){
+      feedback = "هنوز چیزی برای امروز ثبت نشده.";
+    } else if(Math.abs(diff) < 60){
+      feedback = "دقیقاً به هدف امروزت رسیدی 👌";
+    } else if(diff > 0){
+      feedback = `${(diff/3600).toFixed(1)} ساعت بیشتر از هدف — عالی بود.`;
+    } else {
+      feedback = `${(Math.abs(diff)/3600).toFixed(1)} ساعت کمتر از هدف.`;
+    }
+
+    const todayReflection = DATA.reflections[todayStr()];
+    const reflectionBtnText = todayReflection ? "ویرایش بازخورد امروز" : "چطور گذشت؟";
+
+    const sleepLog = DATA.sleepLogs[todayStr()];
+    const sleepText = sleepLog ? `🌙 ${sleepLog.sleepTime||"—"}   ☀️ ${sleepLog.wakeTime||"—"}` : "خواب/بیداری ثبت نشده";
+
+    card.innerHTML = `
+      <div class="today-top">
+        <span class="today-label">امروز</span>
+        <button class="today-edit-goal" id="editGoalBtn">هدف: ${goalH} ساعت ✎</button>
+      </div>
+      <div class="today-numbers">
+        <span class="big">${doneH}</span>
+        <span class="slash">/</span>
+        <span class="goal">${goalH} ساعت</span>
+      </div>
+      <div class="today-bar-track"><div class="today-bar-fill" style="width:${pct}%"></div></div>
+      <div class="today-feedback">${feedback}</div>
+      <div class="today-actions"><button id="openReflectionBtn">${reflectionBtnText}</button></div>
+      <div class="today-sleep-row">
+        <span>${sleepText}</span>
+        <button id="editSleepBtn">ویرایش</button>
+      </div>
+    `;
+    document.getElementById("editGoalBtn").addEventListener("click", openGoalSheet);
+    document.getElementById("openReflectionBtn").addEventListener("click", openReflectionSheet);
+    document.getElementById("editSleepBtn").addEventListener("click", openSleepSheet);
+  }
+
+  function openGoalSheet(){
+    const h = Math.floor(DATA.dailyGoalSeconds/3600);
+    const m = Math.round((DATA.dailyGoalSeconds%3600)/60);
+    document.getElementById("goalHours").value = h;
+    document.getElementById("goalMinutes").value = m;
+    document.getElementById("goalOverlay").classList.add("active");
+  }
+  document.getElementById("goalCancel").addEventListener("click", ()=>{
+    document.getElementById("goalOverlay").classList.remove("active");
+  });
+  document.getElementById("goalSave").addEventListener("click", ()=>{
+    const h = parseInt(document.getElementById("goalHours").value)||0;
+    const m = parseInt(document.getElementById("goalMinutes").value)||0;
+    DATA.dailyGoalSeconds = Math.max(60, h*3600+m*60);
+    persist();
+    document.getElementById("goalOverlay").classList.remove("active");
+    renderTodayCard();
+    toast("هدف روزانه ذخیره شد");
+  });
+
+  function openSleepSheet(){
+    const log = DATA.sleepLogs[todayStr()] || {};
+    document.getElementById("sleepTimeInput").value = log.sleepTime || "";
+    document.getElementById("wakeTimeInput").value = log.wakeTime || "";
+    document.getElementById("sleepOverlay").classList.add("active");
+  }
+  document.getElementById("sleepCancel").addEventListener("click", ()=>{
+    document.getElementById("sleepOverlay").classList.remove("active");
+  });
+  document.getElementById("sleepSave").addEventListener("click", ()=>{
+    const sleepTime = document.getElementById("sleepTimeInput").value;
+    const wakeTime = document.getElementById("wakeTimeInput").value;
+    DATA.sleepLogs[todayStr()] = {sleepTime, wakeTime};
+    persist();
+    document.getElementById("sleepOverlay").classList.remove("active");
+    renderTodayCard();
+    toast("ذخیره شد");
+  });
+
+  let selectedSatisfaction = 0;
+  let selectedProductivity = 0;
+  function buildRatingRow(container, selected, onPick){
+    container.innerHTML = "";
+    for(let i=1;i<=5;i++){
+      const b = document.createElement("button");
+      b.className = "rating-btn" + (i===selected ? " selected" : "");
+      b.textContent = i;
+      b.addEventListener("click", ()=>{
+        onPick(i);
+        container.querySelectorAll(".rating-btn").forEach((el,idx)=>{
+          el.classList.toggle("selected", idx+1===i);
+        });
+      });
+      container.appendChild(b);
+    }
+  }
+  function openReflectionSheet(){
+    const existing = DATA.reflections[todayStr()] || {};
+    selectedSatisfaction = existing.satisfaction || 0;
+    selectedProductivity = existing.productivity || 0;
+    document.getElementById("reflectionNote").value = existing.note || "";
+    buildRatingRow(document.getElementById("satisfactionRow"), selectedSatisfaction, (v)=>{selectedSatisfaction=v;});
+    buildRatingRow(document.getElementById("productivityRow"), selectedProductivity, (v)=>{selectedProductivity=v;});
+    document.getElementById("reflectionOverlay").classList.add("active");
+  }
+  document.getElementById("reflectionCancel").addEventListener("click", ()=>{
+    document.getElementById("reflectionOverlay").classList.remove("active");
+  });
+  document.getElementById("reflectionSave").addEventListener("click", ()=>{
+    if(selectedSatisfaction===0 || selectedProductivity===0){
+      toast("هر دو مورد را انتخاب کن");
+      return;
+    }
+    DATA.reflections[todayStr()] = {
+      satisfaction: selectedSatisfaction,
+      productivity: selectedProductivity,
+      note: document.getElementById("reflectionNote").value.trim(),
+      ts: Date.now()
+    };
+    persist();
+    document.getElementById("reflectionOverlay").classList.remove("active");
+    renderTodayCard();
+    toast("بازخورد امروز ذخیره شد");
+  });
+
+  function renderReflectionHistory(){
+    const container = document.getElementById("reflectionHistory");
+    if(!container) return;
+    const entries = Object.entries(DATA.reflections).sort((a,b)=> a[0] < b[0] ? 1 : -1).slice(0,7);
+    if(entries.length===0){
+      container.innerHTML = `<div class="empty-state" style="padding:16px 0;">هنوز بازخوردی ثبت نشده</div>`;
+      return;
+    }
+    container.innerHTML = "";
+    entries.forEach(([date, r])=>{
+      const row = document.createElement("div");
+      row.className = "reflection-history-item";
+      row.innerHTML = `
+        <div class="reflection-history-top">
+          <span class="rh-date">${date}</span>
+          <span class="reflection-history-scores">رضایت ${r.satisfaction}/۵ · مفید بودن ${r.productivity}/۵</span>
+        </div>
+        ${r.note ? `<div class="reflection-history-note">${r.note}</div>` : ""}
+      `;
+      container.appendChild(row);
+    });
+  }
+
+  /* ================= AMBIENT SOUNDS ================= */
+  const SOUND_DEFS = [
+    {id:"rain", name:"باران", desc:"صدای نرم بارش پیوسته"},
+    {id:"forest", name:"جنگل", desc:"باد ملایم میان درختان"},
+    {id:"ocean", name:"اقیانوس", desc:"موج‌های آرام دریا"},
+    {id:"lofi", name:"لوفای", desc:"ریتم آروم شبیه‌سازی‌شده برای تمرکز"}
+  ];
+  let soundNodes = {};
+  let soundCtx = null;
+  function getSoundCtx(){
+    if(!soundCtx) soundCtx = new (window.AudioContext||window.webkitAudioContext)();
+    return soundCtx;
+  }
+  function makeNoiseBuffer(ctx, seconds){
+    const bufferSize = ctx.sampleRate * seconds;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for(let i=0;i<bufferSize;i++){ data[i] = Math.random()*2-1; }
+    return buffer;
+  }
+
+  function startSound(id){
+    const ctx = getSoundCtx();
+    if(ctx.state === "suspended") ctx.resume();
+    const vol = DATA.soundVolumes[id] ?? 0.5;
+
+    if(id === "lofi"){
+      startLofi(ctx, vol);
+      return;
+    }
+
+    const noiseBuf = makeNoiseBuffer(ctx, 4);
+    const src = ctx.createBufferSource();
+    src.buffer = noiseBuf;
+    src.loop = true;
+    const filter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+
+    if(id === "rain"){
+      filter.type = "highpass"; filter.frequency.value = 1200; gain.gain.value = vol*0.25;
+    } else if(id === "forest"){
+      filter.type = "bandpass"; filter.frequency.value = 500; filter.Q.value = 0.6; gain.gain.value = vol*0.18;
+      const lfo = ctx.createOscillator(); lfo.frequency.value = 0.15;
+      const lfoGain = ctx.createGain(); lfoGain.gain.value = vol*0.08;
+      lfo.connect(lfoGain).connect(gain.gain); lfo.start();
+      soundNodes[id+"_lfo"] = lfo;
+    } else if(id === "ocean"){
+      filter.type = "lowpass"; filter.frequency.value = 700; gain.gain.value = vol*0.3;
+      const lfo = ctx.createOscillator(); lfo.frequency.value = 0.08;
+      const lfoGain = ctx.createGain(); lfoGain.gain.value = vol*0.15;
+      lfo.connect(lfoGain).connect(gain.gain); lfo.start();
+      soundNodes[id+"_lfo"] = lfo;
+    }
+    src.connect(filter).connect(gain).connect(ctx.destination);
+    src.start();
+    soundNodes[id] = {src, gain, filter};
+  }
+
+  function startLofi(ctx, vol){
+    // simple generative lo-fi style loop: soft chord pad + mellow kick/hat + vinyl crackle
+    const master = ctx.createGain();
+    master.gain.value = vol*0.35;
+    master.connect(ctx.destination);
+
+    // vinyl crackle (filtered noise, quiet)
+    const crackle = makeNoiseBuffer(ctx, 4);
+    const crackleSrc = ctx.createBufferSource();
+    crackleSrc.buffer = crackle; crackleSrc.loop = true;
+    const crackleFilter = ctx.createBiquadFilter();
+    crackleFilter.type = "highpass"; crackleFilter.frequency.value = 3000;
+    const crackleGain = ctx.createGain();
+    crackleGain.gain.value = 0.04;
+    crackleSrc.connect(crackleFilter).connect(crackleGain).connect(master);
+    crackleSrc.start();
+
+    // chord pad: a few detuned sines
+    const chordFreqs = [130.81, 164.81, 196.00, 246.94]; // Cmaj7-ish
+    const padOscs = [];
+    chordFreqs.forEach((f,i)=>{
+      const osc = ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.value = f;
+      const padGain = ctx.createGain();
+      padGain.gain.value = 0.06;
+      const lfo = ctx.createOscillator();
+      lfo.frequency.value = 0.05 + i*0.01;
+      const lfoGain = ctx.createGain();
+      lfoGain.gain.value = 0.02;
+      lfo.connect(lfoGain).connect(padGain.gain);
+      lfo.start();
+      osc.connect(padGain).connect(master);
+      osc.start();
+      padOscs.push(osc, lfo);
+    });
+
+    // soft rhythmic kick using scheduled envelope loop
+    let stopped = false;
+    const beatInterval = 60/72; // 72 bpm-ish
+    function scheduleBeat(){
+      if(stopped) return;
+      const now = ctx.currentTime;
+      // kick
+      const kick = ctx.createOscillator();
+      const kickGain = ctx.createGain();
+      kick.frequency.setValueAtTime(110, now);
+      kick.frequency.exponentialRampToValueAtTime(40, now+0.15);
+      kickGain.gain.setValueAtTime(0.25, now);
+      kickGain.gain.exponentialRampToValueAtTime(0.001, now+0.2);
+      kick.connect(kickGain).connect(master);
+      kick.start(now); kick.stop(now+0.25);
+      // soft hat on off-beat
+      const hatBuf = makeNoiseBuffer(ctx, 0.05);
+      const hat = ctx.createBufferSource();
+      hat.buffer = hatBuf;
+      const hatFilter = ctx.createBiquadFilter();
+      hatFilter.type = "highpass"; hatFilter.frequency.value = 6000;
+      const hatGain = ctx.createGain();
+      hatGain.gain.setValueAtTime(0.05, now+beatInterval/2);
+      hatGain.gain.exponentialRampToValueAtTime(0.001, now+beatInterval/2+0.05);
+      hat.connect(hatFilter).connect(hatGain).connect(master);
+      hat.start(now+beatInterval/2); hat.stop(now+beatInterval/2+0.06);
+
+      soundNodes.lofi_timeout = setTimeout(scheduleBeat, beatInterval*1000*2);
+    }
+    scheduleBeat();
+
+    soundNodes.lofi = {
+      stop(){
+        stopped = true;
+        clearTimeout(soundNodes.lofi_timeout);
+        try{ crackleSrc.stop(); }catch(e){}
+        padOscs.forEach(o=>{ try{o.stop();}catch(e){} });
+      },
+      gain: master
+    };
+  }
+
+  function stopSound(id){
+    const node = soundNodes[id];
+    if(node){
+      if(node.stop){ node.stop(); }
+      else{ try{ node.src.stop(); }catch(e){} }
+      delete soundNodes[id];
+    }
+    const lfo = soundNodes[id+"_lfo"];
+    if(lfo){ try{lfo.stop();}catch(e){} delete soundNodes[id+"_lfo"]; }
+  }
+  function setSoundVolume(id, vol){
+    DATA.soundVolumes[id] = vol;
+    persist();
+    const node = soundNodes[id];
+    if(node){
+      if(id==="lofi"){ node.gain.gain.value = vol*0.35; }
+      else{
+        const base = id==="rain"?0.25:(id==="forest"?0.18:0.3);
+        node.gain.gain.value = vol*base;
+      }
+    }
+  }
+
+  let activeSounds = new Set();
+  function renderSounds(){
+    const list = document.getElementById("soundList");
+    list.innerHTML = "";
+    SOUND_DEFS.forEach(def=>{
+      const row = document.createElement("div");
+      row.className = "sound-item";
+      row.style.flexDirection = "column";
+      row.style.alignItems = "stretch";
+      const isOn = activeSounds.has(def.id);
+      row.innerHTML = `
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div>
+            <div class="sound-name">${def.name}</div>
+            <div class="sound-desc">${def.desc}</div>
+          </div>
+          <button class="toggle ${isOn?'on':''}" data-sound="${def.id}"></button>
+        </div>
+        <div class="vol-row" style="display:${isOn?'flex':'none'}">
+          <span style="font-size:11px; color:var(--ink-faint);">میزان</span>
+          <input type="range" min="0" max="1" step="0.05" value="${DATA.soundVolumes[def.id]??0.5}" data-vol="${def.id}">
+        </div>
+      `;
+      list.appendChild(row);
+    });
+    list.querySelectorAll(".toggle").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const id = btn.dataset.sound;
+        if(activeSounds.has(id)){ activeSounds.delete(id); stopSound(id); }
+        else{ activeSounds.add(id); startSound(id); }
+        renderSounds();
+      });
+    });
+    list.querySelectorAll("input[data-vol]").forEach(inp=>{
+      inp.addEventListener("input", ()=>{ setSoundVolume(inp.dataset.vol, parseFloat(inp.value)); });
+    });
+  }
+
+  /* ================= WELCOME SCREEN ================= */
+  document.getElementById("welcomeStartBtn").addEventListener("click", ()=>{
+    document.getElementById("welcomeOverlay").style.display = "none";
+  });
+
+  /* ================= INIT ================= */
+  refreshAllSubjectRows();
+  renderSounds();
+  resetTimerState();
+  renderTodayCard();
+  document.getElementById("quoteBar").textContent = "💬 " + quoteOfDay();
+
+})();
+</script>
+</body>
+</html>
