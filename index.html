@@ -8,13 +8,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="StudyFlow">
-<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIlN0dWR5RmxvdyIsICJzaG9ydF9uYW1lIjogIlN0dWR5RmxvdyIsICJzdGFydF91cmwiOiAiLiIsICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLCAiYmFja2dyb3VuZF9jb2xvciI6ICIjRkZGRkZGIiwgInRoZW1lX2NvbG9yIjogIiNGRkZGRkYiLCAiaWNvbnMiOiBbeyJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhkcFpIUm9QU0kxTVRJaUlHaGxhV2RvZEQwaU5URXlJaUIyYVdWM1FtOTRQU0l3SURBZ05URXlJRFV4TWlJK0NpQWdQSEpsWTNRZ2QybGtkR2c5SWpVeE1pSWdhR1ZwWjJoMFBTSTFNVElpSUhKNFBTSTVOaUlnWm1sc2JEMGlJMFpHUmtaR1JpSXZQZ29nSUR4amFYSmpiR1VnWTNnOUlqSTFOaUlnWTNrOUlqSTFOaUlnY2owaU1UVXdJaUJtYVd4c1BTSnViMjVsSWlCemRISnZhMlU5SWlNeU5ESXdNVGtpSUhOMGNtOXJaUzEzYVdSMGFEMGlNVFlpTHo0S0lDQThjR0YwYUNCa1BTSk5NalUySURFMk1DQldNalUySUV3ek1qQWdNekF3SWlCemRISnZhMlU5SWlNMVFUVkJPVU1pSUhOMGNtOXJaUzEzYVdSMGFEMGlNVGdpSUhOMGNtOXJaUzFzYVc1bFkyRndQU0p5YjNWdVpDSWdabWxzYkQwaWJtOXVaU0l2UGdvZ0lEeGphWEpqYkdVZ1kzZzlJakkxTmlJZ1kzazlJakkxTmlJZ2NqMGlNVEFpSUdacGJHdzlJaU15TkRJd01Ua2lMejRLUEM5emRtYysiLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLCAicHVycG9zZSI6ICJhbnkgbWFza2FibGUifV19">
-<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5NiIgZmlsbD0iI0ZGRkZGRiIvPgogIDxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMTUwIiBmaWxsPSJub25lIiBzdHJva2U9IiMyNDIwMTkiIHN0cm9rZS13aWR0aD0iMTYiLz4KICA8cGF0aCBkPSJNMjU2IDE2MCBWMjU2IEwzMjAgMzAwIiBzdHJva2U9IiM1QTVBOUMiIHN0cm9rZS13aWR0aD0iMTgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPgogIDxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMTAiIGZpbGw9IiMyNDIwMTkiLz4KPC9zdmc+">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIlN0dWR5RmxvdyIsICJzaG9ydF9uYW1lIjogIlN0dWR5RmxvdyIsICJkZXNjcmlwdGlvbiI6ICJUcmFjayB5b3VyIHN0dWR5IHNlc3Npb25zLCB0ZXN0cywgc2xlZXAsIGFuZCBwcm9ncmVzcyB3aXRoIHRpbWVycywgc3RhdHMsIGFuZCBmb2N1cyBzb3VuZHMuIiwgInN0YXJ0X3VybCI6ICIuIiwgInNjb3BlIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwgImJhY2tncm91bmRfY29sb3IiOiAiI0ZGRkZGRiIsICJ0aGVtZV9jb2xvciI6ICIjRkZGRkZGIiwgImxhbmciOiAiZmEiLCAiZGlyIjogInJ0bCIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQVlBQUFCUzNHd0hBQUFGcFVsRVFWUjRuTzNkUFpMVVNCUkY0ZGNUckFJUGd5MWdzSlUyV1FmV3JBT3p0NExCRnNZWWI3WlJZelFWTklWK01xV1U5TzY3NXpPSm1BZ3A4eDBwcTJ1Z24yNjMyeTBBVTM5ZGZRSEFsUWdBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExdDVkZlFIVmZmendmdGQvLzgrLy93MjZFa3g1NHRla2pyTjMyRnNSeFRnRXNNTlpBNytHSUxZamdFNVpobjRPTWZRaGdFYlpCLzhSSWJRaGdBVnFReitIR09ZUndJVFJnNzkxQUxOY1IyVUU4Q0Q3ankyelg1OGFBdmhwNjJCZFBWQ3ExNTJGZlFCYkJpanI4RlM2bDdOWUI5QTdNQ3JEVXZXK2ptQWJRTStRcUE2SXd6M3VaUmVBNDFBNDNuTXJxd0JhQjZIcUVMamYveFNiQUZvMjMyWGpXWXRmTFA0K0FCdit1NVo3cmZJdCtKcnlBVEQ4MDRqZ1Zla2owTm9HT2c3K0ZPZDFLdnNHY043VVhtdHJVZmxOVURJQWhyK2Zhd1RsQW1ENHQzT01vRlFBRFA5K2JoR1VDWURoSDhjcGdqSUJMR0g0Kzdtc1dZa0FscDVJTGh0NWhLVzFxL0lXa0ErQTRUOVc5UWlrLzJVNDVRMTRmdjQyK2VjdkwxOU92cEo5UG41NEwvMmdrWDhEekZIZWxHd3FyNlZzQUJ4OXpsWDFLQ1Fid0J5Ry96Z1YxMVl5QU9VblRsV3FleUlYQUVlZmExVTdDc2tGQUl3a0ZRQlAveHdxdlFXa0FnQkdLeEVBVC8velZWbHptUURVWHEzT2xQWktKb0E1Vlo1RWlpcXN2VVFBU2s4VXZGTFpNNGtBNWxSNEFxbFQzd1BwQUlDOTBnZWc4aXJGbnhUMkxuMEFjOVJmdlpVbzc0VnNBTUFJQkFCcnFRTlFPRU5pV2ZZOVRCM0FIT1V6WjFXcWV5SVpBREFLQWNBYUFjQmEyZ0N5ZjNoQ3U4eDdtVGFBT2FvZnRod283bzMwdnd5bjdNZjNyMy84MmFmUGYxOXdKZDdrM2dBVnpCMEpwcUxBc1FqZ1pHdm40Y3puNVlvSTRFU3R3MDBFNXlHQWsvUU9OUkdjZ3dCZ2pRQmdqUUJnalFBU2UzNytOdnViWkRBR0FaeWs5MXZTdDErS0VjSnhDT0JFclJITWZTTk1DT01Sd01uV0ltajUzeUdJWUJ3Q3VNQmNCRDNISk40R1l6emRicmZiMVJjeHhmMTNBZlFPZDRaZnI2cTRaMmtEaUpoZjBLeUxlUVNsRUJUM2l3QkVLSVNndUY5OEJoRHg4dktsYTZqNWZOQ0dBTVQwUmtBSXl5U1BRQkc1WDZ0bnlYUXNVdDJyMUcrQXpBdVhRZSt4NkFyWjl6QjFBR2pURWtMMlVLNUNBSVV3NVAxU2Z3YUkwRDFiWHUzdDU0T2p3MURlby9SdmdPd0xtRldHendjS2U1YytBT3h6ZFFUWlNRZkFYeHkvbnZvZVNBU2c4Q3JGNzFUMlRDS0FKZXBQSUdVVjFsNG1BSlVuQ3JUMlNpYUFKUldlUkdxcXJIbUpBSUN0cEFKWWVyVldlU0lwVVA3aTY1RlVBTUJvY2dId0ZyaFdwYWQvaEdBQUVab0xYWjNxbmtnR3NJUzN3SEVxcnExc0FCeUZ6bFh0NkhNbkc4QWFJaGluOGxwS0I2RDg1S2xDZlEra0E0amdLSFMwcWtlZk8va0FJb2pnS05XSFA2SklBR3VJb0ovTG1wVUpZTzJKNUxLaEk2eXRWWlduZjBTaEFDS0lZQVNuNFk4b0ZrQUVFZXpoTnZ3UkJRT0lJSUl0SEljL29tZ0FFVVRRdzNYNEl3VCtZYXk5V2dhOThnWXZZVzBLdndIdVdqYlE4VzNBOEw4cUgwQUVFVHhpK0g4cGZ3UjZxM1hJcTI2KysvMVBzUW9nb3U5SlgyVVFITys1bFYwQWR3NUQ0WENQZTlrR0VORi83bGNaa3FyM2RRVHJBQ0syZmZqTk9qQ1Y3dVVzOWdIY2JmMHAwTlVEcEhyZFdSREFnNzAvRGoxNnNMSmZueG9DbURENk80R3RRNWZsT2lvamdBVlZ2aHhqOE9jUlFDTzFHQmo2TmdUUUtYc0lESDRmQXRnaFN3d00vWFlFTU5CWlFURHc0eERBd2ZpeFpXNEVBR3NXZng4QW1FTUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNQWS9uZUtCc2hmeGJsd0FBQUFBU1VWT1JLNUNZSUk9IiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmciLCAicHVycG9zZSI6ICJhbnkifSwgeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFNQUFBQURBQ0FZQUFBQlMzR3dIQUFBRnBVbEVRVlI0bk8zZFBaTFVTQlJGNGRjVHJBSVBneTFnc0pVMldRZldyQU96dDRMQkZzWVliN1pSWXpRVk5JVitNcVdVOU82NzV6T0ptQWdwOHgwcHEydWduMjYzMnkwQVUzOWRmUUhBbFFnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMWdnQTFnZ0ExZ2dBMXQ1ZGZRSFZmZnp3ZnRkLy84Ky8vdzI2RWt4NTR0ZWtqck4zMkZzUnhUZ0VzTU5aQTcrR0lMWWpnRTVaaG40T01mUWhnRWJaQi84UkliUWhnQVZxUXorSEdPWVJ3SVRSZzc5MUFMTmNSMlVFOENEN2p5MnpYNThhQXZocDYyQmRQVkNxMTUyRmZRQmJCaWpyOEZTNmw3TllCOUE3TUNyRFV2VytqbUFiUU0rUXFBNkl3ejN1WlJlQTQxQTQzbk1ycXdCYUI2SHFFTGpmL3hTYkFGbzIzMlhqV1l0ZkxQNCtBQnYrdTVaN3JmSXQrSnJ5QVREODA0amdWZWtqME5vR09nNytGT2QxS3ZzR2NON1VYbXRyVWZsTlVESUFocitmYXdUbEFtRDR0M09Nb0ZRQURQOStiaEdVQ1lEaEg4Y3BnaklCTEdINCs3bXNXWWtBbHA1SUxodDVoS1cxcS9JV2tBK0E0VDlXOVFpay8yVTQ1UTE0ZnY0MitlY3ZMMTlPdnBKOVBuNTRMLzJna1g4RHpGSGVsR3dxcjZWc0FCeDl6bFgxS0NRYndCeUcvemdWMTFZeUFPVW5UbFdxZXlJWEFFZWZhMVU3Q3NrRkFJd2tGUUJQL3h3cXZRV2tBZ0JHS3hFQVQvL3pWVmx6bVFEVVhxM09sUFpLSm9BNVZaNUVpaXFzdlVRQVNrOFV2RkxaTTRrQTVsUjRBcWxUM3dQcEFJQzkwZ2VnOGlyRm54VDJMbjBBYzlSZnZaVW83NFZzQU1BSUJBQnJxUU5RT0VOaVdmWTlUQjNBSE9VeloxV3FleUlaQURBS0FjQWFBY0JhMmdDeWYzaEN1OHg3bVRhQU9hb2Z0aHdvN28zMHZ3eW43TWYzcjMvODJhZlBmMTl3SmQ3azNnQVZ6QjBKcHFMQXNRamdaR3ZuNGN6bjVZb0k0RVN0dzAwRTV5R0FrL1FPTlJHY2d3QmdqUUJnalFCZ2pRQVNlMzcrTnZ1YlpEQUdBWnlrOTF2U3QxK0tFY0p4Q09CRXJSSE1mU05NQ09NUndNbldJbWo1M3lHSVlCd0N1TUJjQkQzSEpONEdZenpkYnJmYjFSY3h4ZjEzQWZRT2Q0WmZyNnE0WjJrRGlKaGYwS3lMZVFTbEVCVDNpd0JFS0lTZ3VGOThCaER4OHZLbGE2ajVmTkNHQU1UMFJrQUl5eVNQUUJHNVg2dG55WFFzVXQycjFHK0F6QXVYUWUreDZBclo5ekIxQUdqVEVrTDJVSzVDQUlVdzVQMVNmd2FJMEQxYlh1M3Q1NE9qdzFEZW8vUnZnT3dMbUZXR3p3Y0tlNWMrQU94emRRVFpTUWZBWHh5L252b2VTQVNnOENyRjcxVDJUQ0tBSmVwUElHVVYxbDRtQUpVbkNyVDJTaWFBSlJXZVJHcXFySG1KQUlDdHBBSlllclZXZVNJcFVQN2k2NUZVQU1Cb2NnSHdGcmhXcGFkL2hHQUFFWm9MWFozcW5rZ0dzSVMzd0hFcXJxMXNBQnlGemxYdDZITW5HOEFhSWhpbjhscEtCNkQ4NUtsQ2ZRK2tBNGpnS0hTMHFrZWZPL2tBSW9qZ0tOV0hQNkpJQUd1SW9KL0xtcFVKWU8ySjVMS2hJNnl0VlpXbmYwU2hBQ0tJWUFTbjRZOG9Ga0FFRWV6aE52d1JCUU9JSUlJdEhJYy9vbWdBRVVUUXczWDRJd1QrWWF5OVdnYTk4Z1l2WVcwS3Z3SHVXamJROFczQThMOHFIMEFFRVR4aStIOHBmd1I2cTNYSXEyNisrLzFQc1FvZ291OUpYMlVRSE8rNWxWMEFkdzVENFhDUGU5a0dFTkYvN2xjWmtxcjNkUVRyQUNLMmZmak5PakNWN3VVczlnSGNiZjBwME5VRHBIcmRXUkRBZzcwL0RqMTZzTEpmbnhvQ21ERDZPNEd0UTVmbE9pb2pnQVZWdmh4ajhPY1JRQ08xR0JqNk5nVFFLWHNJREg0ZkF0Z2hTd3dNL1hZRU1OQlpRVER3NHhEQXdmaXhaVzRFQUdzV2Z4OEFtRU1Bc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzRVlBc0VZQXNFWUFzUFkvbmVLQnNoZnhibHdBQUFBQVNVVk9SSzVDWUlJPSIsICJzaXplcyI6ICIxOTJ4MTkyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIiwgInB1cnBvc2UiOiAibWFza2FibGUifSwgeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFnQUFBQUlBQ0FZQUFBRDBlTlQ2QUFBUW9VbEVRVlI0bk8zZHU1VWJWeGFHMGFLV29oaHZqRW1CaGxKcGszR01wVGhvTWhVWms0SU1lVW9EWTBpa21td0FqY2Q5bm45dmN4NFNGcnZxbks5dW9hVVBwOVBwZEFBQVVYNmEvUUVBZ1BFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdYNmUvUUdBZHY3ejczOTEvZXYvL3NlZlhmLzZ3RGdmVHFmVGFmYUhBTjdYZTdtM0loSmdEd0lBRnJMTGtuK1VPSUIxQ0FDWXBQcXl2NVVvZ0RrRUFBeGk0ZDlHRU1BWUFnQTZzZkRiRUFUUWh3Q0FoaXo5dnNRQXRDTUE0RW1XL2h4aUFKNGpBT0FCbHY1YXhBRGNUd0RBalN6OVBZZ0J1STBBZ0Nzcy9iMkpBYmhNQU1BWkZuOHRRZ0RlRWdEd04wcy9neGlBdndnQTRsbjhtWVFBNlFRQXNTeCtqa01Ja0VzQUVNZmk1eHdoUUJvQlFJeUV4ZDk3aWZremhEb0VBT1ZWV2xxckx5ZC8xckFQQVVCWk95K2phc3ZIendMV0l3QW9aN2RsazdwZy9KeGdMZ0ZBR2Jzc0ZJdmtQRDgvR0VzQVVNTEt5OFBDZUl5ZktmUWxBTmphcWt2Q2dtakx6eG5hRXdCc2FjV0ZZQm1NNFdjUGJRZ0F0clBTQWpENDUzSXR3T01FQU5zdzdMbkV0UUgzRXdCc1lZVUJiN0R2d2JVQ3R4RUFMTTB3NTFHdUhiaE9BTENzMlFQYzhLN0JkUVRuQ1FDV05HdG9HOWExdWE3Z0h3S0FwUmpRak9BNkF3SEFRbVlNWlFNNW0ydU9aQUtBSll3ZXhJWXdyN24rU0NRQW1Nb1RHS3R3TFpKR0FEQ05weTVXNUxva2hRQmdpcEZEMW9EbEVhNVJxaE1BRERkcXNCcXF0T0I2cFNvQndEQ2VxTmlWYTVlS0JBQkRlSXFpQXRjeGxmdzArd05RbjZGSkZhT3VzZG4vK0dJeU9BR2dxeEdEek9KbkJ0YzJ1M01DUURjR0pKV051UGFjQk5DVEFLQUx5NThFSW9DZGVRVkFjNzBIbHNYUGlsejM3TVlKQUUwWmdxVHFmVzA2Q2FBMUFVQXpsai9wUkFBNzhRcUFKbm9PSm91Zkhia25XSjBUQUo1bTBNRmJQYTlkSndHMElBQjRpdVVQbDRrQVZpWUFlSmpsRCs4VEFheEtBUEFReXg5dUp3SllrUzhCY3JkZUE4ZmlKNEg3aDFVNEFlQXVoaGM4cDllMTdpU0Fld2tBYm1iNVF4c2lnQlVJQUtheS9FbmwybWMyQWNCTmVqeFpHSUNrNjNFUE9BWGdWZ0tBZDFuKzBJOElZQllCd0ZXV1AvUW5BcGhCQUhDUjVRL2ppQUJHRXdBTVkvbkRkZTRSUmhJQW5OWDZ5Y0ZnZzl1MHZsZWNBbkNKQU9BTnl4L21FZ0dNSUFENGprRUJOYm0zK1pFQW9DdFAvL0FZOXc2OUNRQytjZlFQYS9FcWdKNEVBTWR4V1A2d0toRkFMd0lBeXg4V0p3TG9RUURRbE9VUGZiaTNhRTBBaFBNa0FKbmMrM3c0blU2bjJSK0NPUno5WjNoNStmelUvLy9MbDArTlBna3R1RzlweFFrQVRSZ2lNSVo3alZZRVFLaVdUeEVHRW96VjhwN3pLaUNYQUFqa2hnZGVNeE15Q1FDZTR1a2Y1bkR2OFN3QkVNYlJQOVRoVlFEUEVBQTh4UEtITmJnWGVaUUFDS0x3Z1d2TWlDd0NJSVNqZjZqTHF3QWVJUUM0aStVUGEzSnZjaThCRUVEUkEvY3dNeklJQUc3bUNRUFc1aDdsSGdLZ3VGWWxiN0RBSGxyZHEwNEI2aE1BQUJCSUFCVG02Ujh5T1FYZ0ZnSUFBQUlKZ0tJOC9VTTJwd0M4UndBQVFDQUJVSkNuZitBNG5BSnduUURnTE1zZmFuQXZjNGtBS0VhcEF6MllMZlVJQU43d3hBQzF1S2M1UndBVW90Q0Juc3lZV2dRQTMvR2tBRFc1dC9tUkFDaENtUU1qbURWMUNBQys4WVFBdGJuSGVVMEFBRUFnQVZDQUl6bGdKRE9uQmdIQWNSeU9CaUdGZTUydkJNRG1sRGd3ZzltelB3R0FKd0lJNDU3bk9BUUFBRVFTQUJ0cmNRVG5TUUF5dGJqM3ZRYlltd0FBZ0VBQ0FBQUNDWUJOT2Y0SG51VTFRRFlCQUFDQkJFQW9ULy9BY1pnRnlRVEFoaHk1QVNzeGsvWWtBQUFna0FBSTVNZ1BlTTFNeUNRQU51T29EVmlSMmJRZkFRQUFnUVJBR0VkOXdEbG1ReDRCc0JGSGJNREt6S2k5Q0FBQUNDUUFnamppQTY0eEk3SUlBQUFJSkFBMjRkMGFzQU96YWg4Q0FBQUNDWUFRM3UwQnR6QXJjZ2dBQUFna0FEYmduUnF3RXpOckR3SUFBQUlKZ0FEZTZRSDNNRE15Q0FBQUNDUUFBQ0NRQUZpY0w5TUFPeks3MWljQUFDQ1FBQ2pPbDNtQVI1Z2Q5UWtBQUFna0FBQWdrQUFBZ0VBQ0FBQUNDWUNGK1RVYVlHZG0yTm9FUUdHK3hRczh3d3lwVFFBQVFDQUJBQUNCQkFBQUJQcDU5Z2NBeHZyZmIvKzkrTjk5L09YWGdaOEVtRWtBUUlCclMvL1MvMDRNUUcwQ0FBcDc1dGV3L29tQlQyMCtETEFVM3dHQW9scjlEcmJmNVlhYVBweE9wOVBzRDhGYnp3NWR2NyticStmQ2RsMWxNbzlxY2dJQWhmUitXbmNhQUhVSUFBQUlKQUNnaUZGUDUwNEJvQVlCQUFXTVhzb2lBUFluQUFBZ2tBQ0F6YzE2R25jS0FIc1RBQUFRU0FBQVFDQUJBQnViZlF3LysrOFBQRTRBQUVBZ0FRQUFnUVFBQUFRU0FNQlRYbDQrei80SXdBTUVBUEMwbDVmUFFnQTJJd0NBWmtRQTdFTUF3TVptLzN2V1AvN3k2NXYvekdrQTdFRUFBRjBJQVZpYkFBQzZFZ0t3SmdFQW01djFHdURjOGY4MVFnRFdJZ0NBb1VRQXJFRUFRQUdqVHdIdWZmci9rZE1BbUU4QVFCR2pJdURaNWYrYUVJQjVCQUF3blJDQThUNmNUcWZUN0EvQmVjLytxMVpuLzQ0NGMvVDhWL1MyZlBxLzVzdVhUMFArUHJ6UEhLckxDUUFVOC9zZmZ6WWZ1aDkvK1hYWThqOE9YeFNFRVFRQUZOVXFBbVk5d1hrdEFIMTVCYkF3UjIrMDhzaTFkTzc2bWJtUXZSYVl3eHlxU3dBc3pJMUhEOWV1cTF1dW1kbFA1VUpnTEhPb0xnR3dNRGNlS3hNQ0djeWh1Z1RBd3R4NDdFQUkxR1lPMWVWTGdNQlR2bno1TkhVSnp3NFEySlVUZ0lXMStIMXU5YzFvdmloWWh4bFVtd0JZbk9NM2RqVDdxVndJdEdIKzFDWUFGdWNHWkdkQ1lHL21UMjBDWUhGdVFDb1FBbnN5ZjJyekpVQ2dPMThVaFBVNEFWaWNBcWNpWHhUY2cvbFRtd0JZbkcvaFVwa1FXSmZaVTU5WEFNQTBzMThMZURWQU1pY0FHM0FNUjRMWnk5aUp3UGZNbmZvRXdBYmNpQ1FSQW1zd2QrcnpDZ0JZaXQ4WWdER2NBR3pBbDNGSTVvdUM0NWs1R1p3QUFFdWJmUnJnUklDcW5BQnN3dnM0bUhNYWtIZ0tZTjVrY0FJQWJHUDI5d09nRWljQW0vQk9EdDdxZlNLUUdCdG1UUTRuQU1DMm5BakE0d1RBSmhRMVhOWWpBb1RGWTh5cWZRZ0FvQVNuQVhBZjN3SFlpSGR6Y0x0bnZoK1FHaEptVEJZbkFFQkpUZ1RnT2ljQW0vSDd1ZkNZVzA4RWtxUEJmTW5pQkNCTWl5TSsySkVUZ2V2TWhqd0NBSWh5TFFJRUFra0V3R1ljc2NIem5BYTBaemJ0eDNjQU51U2J1dERXeTh2bjZDQXdVekk1QVFEaUpTOS9jZ21BRFNsdFlDVm0wcDRFUUNqZitBV093eXhJSmdBQUlKQUEyRlNMSXpmbEQ5bDgrUytiQUFDQVFBSUFBQUlKZ0kxNURRQTh5dkUvQWdBQUFna0FuQUpBR1BjOHh5RUF0dWNJRHBqQjdObWZBT0E0RGs4RWtNSzl6bGNDb0FBbERveGs1dFFnQUFBZ2tBRGdHMGVEVUp0N25OY0VRQkdPNUlBUnpKbzZCQURmOFlRQU5ibTMrWkVBS0VTWkF6MlpNYlVJQU43d3BBQzF1S2M1UndBVW85Q0JIc3lXZWdRQVozbGlnQnJjeTF3aUFBcHFWZW9HQit5dDFUM3M2YjhtQVFBQWdRUkFVVTRCSUp1bmY5NGpBQUFna0FBb3pDa0FaUEwwenkwRUFBQUVFZ0RGT1FXQUxKNyt1WlVBNEdZaUFOYm1IdVVlQWlDQWtnZnVZV1prRUFEY3hSTUdyTW05eWIwRVFJaVdSVy9Rd0ZwYTNwT2Uvbk1JZ0NCdWJPQWFNeUtMQU9BaFRnRmdEZTVGSGlVQXduZ1ZBSFU0K3VjWkFvQ25pQUNZdzczSHN3UkFJS1VQdkdZbVpCSUFvYndLZ0gwNStxY0ZBVUFUSWdER2NLL1JpZ0FJMXJyOERTYm9xL1U5NXVrL213QUlad0JBSnZjK0FvQ21uQUpBSCs0dFdoTUFlQlVBaTNQMFR3OENnT000UkFDc3l2S25Gd0hBTnlJQTFtTDUwNU1Bb0NzUkFJOXg3OUNiQU9BN25oQ2dKdmMyUHhJQXZPRlZBTXpsNko4UkJBQm5pUUNZdy9KbkZBSEFNQ0lBcm5PUE1KSUE0S0llVHc0R0hKelg0OTd3OU04MUFvQ3JSQUQwWi9remd3RGdYU0lBK3JIOG1VVUFjQk1SQU8xWi9zd2tBSmhLQkpES3RjOXNBb0NiOVhxeU1BaEowK3VhOS9UUFBRUUFkeEVCOEJ6TG4xVjhPSjFPcDlrZmd2MzBYTmdHR1JXNVoxaU5Fd0FlMG5QZ09BMmdHc3VmRlFrQUhpWUM0SDJXUDZzU0FEeEZCTUJsbGo4ckV3QThUUVRBVzVZL3EvTWxRSnJwdmF3TlBYYmdQbUFYVGdCb3B2ZGdjaHJBNml4L2RpSUFhRW9Fa01yeVp6ZGVBZERGaUVWdElMSUMxenE3Y2dKQUZ5TUdsdE1BWnJQODJaa0FvQnNSUUdXV1A3dnpDb0R1UmkxcHc1SVJYTTlVNFFTQTdrWU5NcWNCOUdiNVU0a1RBSVladWFBTlVGcHk3VktSQUdBNFQxSHN4UFZLVlFLQUtUeFJzVHJYS05VSkFLWVovYzdla09VV3JrdFNDQUNtbXZIRlBRT1hjMXlMcEJFQUxNRlRGek81L2tna0FGaUdKekJHYzgyUlRBQ3dsRm0veTI4b1ozR2RnUUJnVVFZMFBiaXU0QjhDZ0dYTi9pZjdHZG8xdUk3Z1BBSEEwbVlQNytNd3dIZmwyb0hyQkFCYk1NeTVsV3NGYmlNQTJNWUtnLzByQTM0dHJnMjRud0JnTzRZOVg3a1c0SEVDZ0MydE5QaS9zZ0RHOExPSE5nUUFXMXR4R1J5SGhkQ2Fuek8wSndBb1lkVUZjUnlXeEtQOFRLRXZBVUFaS3krTTF5eVA4L3o4WUN3QlFEbTdMSkt2VWhlS254UE1KUUFvYTdjRjgxcTFaZU5uQWVzUkFKUzM4L0w1MGVyTHlKODE3RU1BRUtQU2NycWs5OUx5WndoMUNBRGlKQ3d4N21meGswWUFFRXNJY0J3V1A3a0VBUEdFUUNhTG4zUUNBUDRtQkRKWS9QQVhBUUJuaUlGYUxIMTRTd0RBRlVKZ2J4WS9YQ1lBNEVaaVlBK1dQdHhHQU1BRHhNQmFMSDI0bndDQUo0bUJPU3g5ZUk0QWdJYkVRRitXUHJRakFLQVRNZENHcFE5OUNBQVlSQkRjeHNLSE1RUUFUQ0lJL21MaHd4d0NBQlpTUFFvc2UxaUhBSUJON0JJSGxqenNRUUJBSWIwandYS0hPZ1FBQUFUNmFmWUhBQURHRXdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFUNlA2V3Z3aWRmMEIxdEFBQUFBRWxGVGtTdVFtQ0MiLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFRb1VsRVFWUjRuTzNkdTVVYlZ4YUcwYUtXb2hodmpFbUJobEpwazNHTXBUaG9NaFVaazRJTWVVb0RZMGlrbW13QWpjZDlubjl2Y3g0U0ZydnFuSzl1b2FVUHA5UHBkQUFBVVg2YS9RRUFnUEVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1g2ZS9RR0Fkdjd6NzM5MS9ldi8vc2VmWGYvNndEZ2ZUcWZUYWZhSEFON1hlN20zSWhKZ0R3SUFGckxMa24rVU9JQjFDQUNZcFBxeXY1VW9nRGtFQUF4aTRkOUdFTUFZQWdBNnNmRGJFQVRRaHdDQWhpejl2c1FBdENNQTRFbVcvaHhpQUo0akFPQUJsdjVheEFEY1R3REFqU3o5UFlnQnVJMEFnQ3NzL2IySkFiaE1BTUFaRm44dFFnRGVFZ0R3TjBzL2d4aUF2d2dBNGxuOG1ZUUE2UVFBc1N4K2prTUlrRXNBRU1maTV4d2hRQm9CUUl5RXhkOTdpZmt6aERvRUFPVlZXbHFyTHlkLzFyQVBBVUJaT3kramFzdkh6d0xXSXdBb1o3ZGxrN3BnL0p4Z0xnRkFHYnNzRkl2a1BEOC9HRXNBVU1MS3k4UENlSXlmS2ZRbEFOamFxa3ZDZ21qTHp4bmFFd0JzYWNXRllCbU00V2NQYlFnQXRyUFNBakQ0NTNJdHdPTUVBTnN3N0xuRXRRSDNFd0JzWVlVQmI3RHZ3YlVDdHhFQUxNMHc1MUd1SGJoT0FMQ3MyUVBjOEs3QmRRVG5DUUNXTkd0b0c5YTF1YTdnSHdLQXBSalFqT0E2QXdIQVFtWU1aUU01bTJ1T1pBS0FKWXdleElZd3I3bitTQ1FBbU1vVEdLdHdMWkpHQURDTnB5NVc1TG9raFFCZ2lwRkQxb0RsRWE1UnFoTUFERGRxc0JxcXRPQjZwU29Cd0RDZXFOaVZhNWVLQkFCRGVJcWlBdGN4bGZ3MCt3TlFuNkZKRmFPdXNkbi8rR0l5T0FHZ3F4R0R6T0puQnRjMnUzTUNRRGNHSkpXTnVQYWNCTkNUQUtBTHk1OEVJb0NkZVFWQWM3MEhsc1hQaWx6MzdNWUpBRTBaZ3FUcWZXMDZDYUExQVVBemxqL3BSQUE3OFFxQUpub09Kb3VmSGJrbldKMFRBSjVtME1GYlBhOWRKd0cwSUFCNGl1VVBsNGtBVmlZQWVKamxEKzhUQWF4S0FQQVF5eDl1SndKWWtTOEJjcmRlQThmaUo0SDdoMVU0QWVBdWhoYzhwOWUxN2lTQWV3a0FibWI1UXhzaWdCVUlBS2F5L0VubDJtYzJBY0JOZWp4WkdJQ2s2M0VQT0FYZ1ZnS0FkMW4rMEk4SVlCWUJ3RldXUC9RbkFwaEJBSENSNVEvamlBQkdFd0FNWS9uRGRlNFJSaElBbk5YNnljRmdnOXUwdmxlY0FuQ0pBT0FOeXgvbUVnR01JQUQ0amtFQk5ibTMrWkVBb0N0UC8vQVk5dzY5Q1FDK2NmUVBhL0VxZ0o0RUFNZHhXUDZ3S2hGQUx3SUF5eDhXSndMb1FRRFFsT1VQZmJpM2FFMEFoUE1rQUpuYyszdzRuVTZuMlIrQ09SejlaM2g1K2Z6VS8vL0xsMCtOUGdrdHVHOXB4UWtBVFJnaU1JWjdqVllFUUtpV1R4RUdFb3pWOHA3ektpQ1hBQWpraGdkZU14TXlDUUNlNHVrZjVuRHY4U3dCRU1iUlA5VGhWUURQRUFBOHhQS0hOYmdYZVpRQUNLTHdnV3ZNaUN3Q0lJU2pmNmpMcXdBZUlRQzRpK1VQYTNKdmNpOEJFRURSQS9jd016SUlBRzdtQ1FQVzVoN2xIZ0tndUZZbGI3REFIbHJkcTA0QjZoTUFBQkJJQUJUbTZSOHlPUVhnRmdJQUFBSUpnS0k4L1VNMnB3QzhSd0FBUUNBQlVKQ25mK0E0bkFKd25RRGdMTXNmYW5BdmM0a0FLRWFwQXoyWUxmVUlBTjd3eEFDMXVLYzVSd0FVb3RDQm5zeVlXZ1FBMy9Ha0FEVzV0L21SQUNoQ21RTWptRFYxQ0FDKzhZUUF0Ym5IZVUwQUFFQWdBVkNBSXpsZ0pET25CZ0hBY1J5T0JpR0ZlNTJ2Qk1EbWxEZ3dnOW16UHdHQUp3SUk0NTduT0FRQUFFUVNBQnRyY1FUblNRQXl0YmozdlFiWW13QUFnRUFDQUFBQ0NZQk5PZjRIbnVVMVFEWUJBQUNCQkVBb1QvL0FjWmdGeVFUQWhoeTVBU3N4ay9Za0FBQWdrQUFJNU1nUGVNMU15Q1FBTnVPb0RWaVIyYlFmQVFBQWdRUkFHRWQ5d0RsbVF4NEJzQkZIYk1ES3pLaTlDQUFBQ0NRQWdqamlBNjR4STdJSUFBQUlKQUEyNGQwYXNBT3phaDhDQUFBQ0NZQVEzdTBCdHpBcmNnZ0FBQWdrQURiZ25ScXdFek5yRHdJQUFBSUpnQURlNlFIM01ETXlDQUFBQ0NRQUFDQ1FBRmljTDlNQU96SzcxaWNBQUNDUUFDak9sM21BUjVnZDlRa0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NZQ0YrVFVhWUdkbTJOb0VRR0creFFzOHd3eXBUUUFBUUNBQkFBQ0JCQUFBQlBwNTlnY0F4dnJmYi8rOStOOTkvT1hYZ1o4RW1Fa0FRSUJyUy8vUy8wNE1RRzBDQUFwNzV0ZXcvb21CVDIwK0RMQVUzd0dBb2xyOURyYmY1WWFhUHB4T3A5UHNEOEZienc1ZHY3K2JxK2ZDZGwxbE1vOXFjZ0lBaGZSK1duY2FBSFVJQUFBSUpBQ2dpRkZQNTA0Qm9BWUJBQVdNWHNvaUFQWW5BQUFna0FDQXpjMTZHbmNLQUhzVEFBQVFTQUFBUUNBQkFCdWJmUXcvKys4UFBFNEFBRUFnQVFBQWdRUUFBQVFTQU1CVFhsNCt6LzRJd0FNRUFQQzBsNWZQUWdBMkl3Q0Faa1FBN0VNQXdNWm0vM3ZXUC83eTY1di96R2tBN0VFQUFGMElBVmliQUFDNkVnS3dKZ0VBbTV2MUd1RGM4ZjgxUWdEV0lnQ0FvVVFBckVFQVFBR2pUd0h1ZmZyL2tkTUFtRThBUUJHakl1RFo1ZithRUlCNUJBQXduUkNBOFQ2Y1RxZlQ3QS9CZWMvK3ExWm4vNDQ0Yy9UOFYvUzJmUHEvNXN1WFQwUCtQcnpQSEtyTENRQVU4L3NmZnpZZnVoOS8rWFhZOGo4T1h4U0VFUVFBRk5VcUFtWTl3WGt0QUgxNUJiQXdSMiswOHNpMWRPNzZtYm1RdlJhWXd4eXFTd0FzekkxSEQ5ZXVxMXV1bWRsUDVVSmdMSE9vTGdHd01EY2VLeE1DR2N5aHVnVEF3dHg0N0VBSTFHWU8xZVZMZ01CVHZuejVOSFVKenc0UTJKVVRnSVcxK0gxdTljMW92aWhZaHhsVW13QlluT00zZGpUN3FWd0l0R0grMUNZQUZ1Y0daR2RDWUcvbVQyMENZSEZ1UUNvUUFuc3lmMnJ6SlVDZ08xOFVoUFU0QVZpY0FxY2lYeFRjZy9sVG13QlluRy9oVXBrUVdKZlpVNTlYQU1BMHMxOExlRFZBTWljQUczQU1SNExaeTlpSndQZk1uZm9Fd0FiY2lDUVJBbXN3ZCtyekNnQllpdDhZZ0RHY0FHekFsM0ZJNW91QzQ1azVHWndBQUV1YmZScmdSSUNxbkFCc3d2czRtSE1ha0hnS1lONWtjQUlBYkdQMjl3T2dFaWNBbS9CT0R0N3FmU0tRR0J0bVRRNG5BTUMybkFqQTR3VEFKaFExWE5ZakFvVEZZOHlxZlFnQW9BU25BWEFmM3dIWWlIZHpjTHRudmgrUUdoSm1UQlluQUVCSlRnVGdPaWNBbS9IN3VmQ1lXMDhFa3FQQmZNbmlCQ0JNaXlNKzJKRVRnZXZNaGp3Q0FJaHlMUUlFQWtrRXdHWWNzY0h6bkFhMFp6YnR4M2NBTnVTYnV0RFd5OHZuNkNBd1V6STVBUURpSlM5L2NnbUFEU2x0WUNWbTBwNEVRQ2pmK0FXT3d5eElKZ0FBSUpBQTJGU0xJemZsRDlsOCtTK2JBQUNBUUFJQUFBSUpnSTE1RFFBOHl2RS9BZ0FBQWdrQW5BSkFHUGM4eHlFQXR1Y0lEcGpCN05tZkFPQTREazhFa01LOXpsY0NvQUFsRG94azV0UWdBQUFna0FEZ0cwZURVSnQ3bk5jRVFCR081SUFSekpvNkJBRGY4WVFBTmJtMytaRUFLRVNaQXoyWk1iVUlBTjd3cEFDMXVLYzVSd0FVbzlDQkhzeVdlZ1FBWjNsaWdCcmN5MXdpQUFwcVZlb0dCK3l0MVQzczZiOG1BUUFBZ1FSQVVVNEJJSnVuZjk0akFBQWdrQUFvekNrQVpQTDB6eTBFQUFBRUVnREZPUVdBTEo3K3VaVUE0R1lpQU5ibUh1VWVBaUNBa2dmdVlXWmtFQURjeFJNR3JNbTl5YjBFUUlpV1JXL1F3RnBhM3BPZS9uTUlnQ0J1Yk9BYU15S0xBT0FoVGdGZ0RlNUZIaVVBd25nVkFIVTQrdWNaQW9DbmlBQ1l3NzNIc3dSQUlLVVB2R1ltWkJJQW9id0tnSDA1K3FjRkFVQVRJZ0RHY0svUmlnQUkxcnI4RFNib3EvVTk1dWsvbXdBSVp3QkFKdmMrQW9DbW5BSkFIKzR0V2hNQWVCVUFpM1AwVHc4Q2dPTTRSQUNzeXZLbkZ3SEFOeUlBMW1MNTA1TUFvQ3NSQUk5eDc5Q2JBT0E3bmhDZ0p2YzJQeElBdk9GVkFNemw2SjhSQkFCbmlRQ1l3L0puRkFIQU1DSUFybk9QTUpJQTRLSWVUdzRHSEp6WDQ5N3c5TTgxQW9DclJBRDBaL2t6Z3dEZ1hTSUErckg4bVVVQWNCTVJBTzFaL3N3a0FKaEtCSkRLdGM5c0FvQ2I5WHF5TUFoSjArdWE5L1RQUFFRQWR4RUI4QnpMbjFWOE9KMU9wOWtmZ3YzMFhOZ0dHUlc1WjFpTkV3QWUwblBnT0EyZ0dzdWZGUWtBSGlZQzRIMldQNnNTQUR4RkJNQmxsajhyRXdBOFRRVEFXNVkvcS9NbFFKcnB2YXdOUFhiZ1BtQVhUZ0JvcHZkZ2NockE2aXgvZGlJQWFFb0VrTXJ5WnpkZUFkREZpRVZ0SUxJQzF6cTdjZ0pBRnlNR2x0TUFaclA4MlprQW9Cc1JRR1dXUDd2ekNvRHVSaTFwdzVJUlhNOVU0UVNBN2tZTk1xY0I5R2I1VTRrVEFJWVp1YUFOVUZweTdWS1JBR0E0VDFIc3hQVktWUUtBS1R4UnNUclhLTlVKQUtZWi9jN2VrT1VXcmt0U0NBQ21tdkhGUFFPWGMxeUxwQkVBTE1GVEZ6TzUva2drQUZpR0p6QkdjODJSVEFDd2xGbS95MjhvWjNHZGdRQmdVUVkwUGJpdTRCOENnR1hOL2lmN0dkbzF1STdnUEFIQTBtWVA3K013d0hmbDJvSHJCQUJiTU15NWxXc0ZiaU1BMk1ZS2cvMHJBMzR0cmcyNG53QmdPNFk5WDdrVzRIRUNnQzJ0TlBpL3NnREc4TE9ITmdRQVcxdHhHUnlIaGRDYW56TzBKd0FvWWRVRmNSeVd4S1A4VEtFdkFVQVpLeStNMXl5UDgvejhZQ3dCUURtN0xKS3ZVaGVLbnhQTUpRQW9hN2NGODFxMVplTm5BZXNSQUpTMzgvTDUwZXJMeUo4MTdFTUFFS1BTY3Jxazk5THlad2gxQ0FEaUpDd3g3bWZ4azBZQUVFc0ljQndXUDdrRUFQR0VRQ2FMbjNRQ0FQNG1CREpZL1BBWEFRQm5pSUZhTEgxNFN3REFGVUpnYnhZL1hDWUE0RVppWUErV1B0eEdBTUFEeE1CYUxIMjRud0NBSjRtQk9TeDllSTRBZ0liRVFGK1dQclFqQUtBVE1kQ0dwUTk5Q0FBWVJCRGN4c0tITVFRQVRDSUkvbUxod3h3Q0FCWlNQUW9zZTFpSEFJQk43QklIbGp6c1FRQkFJYjBqd1hLSE9nUUFBQVQ2YWZZSEFBREdFd0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVQ2UDZXdndpZGYwQjF0QUFBQUFFbEZUa1N1UW1DQyIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIiwgInB1cnBvc2UiOiAibWFza2FibGUifV19">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAFpUlEQVR4nO3dPZLUSBRF4dcTrAIPgy1gsJU2WQfWrAOzt4LBFsYYb7ZRYzQVNIV+MqWU9O675zOJmAgp8x0pq2ugn2632y0AU39dfQHAlQgA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1t5dfQHVffzwftd//8+//w26Ekx54tekjrN32FsRxTgEsMNZA7+GILYjgE5Zhn4OMfQhgEbZB/8RIbQhgAVqQz+HGOYRwITRg791ALNcR2UE8CD7jy2zX58aAvhp62BdPVCq152FfQBbBijr8FS6l7NYB9A7MCrDUvW+jmAbQM+QqA6Iwz3uZReA41A43nMrqwBaB6HqELjf/xSbAFo232XjWYtfLP4+ABv+u5Z7rfIt+JryATD804jgVekj0NoGOg7+FOd1KvsGcN7UXmtrUflNUDIAhr+fawTlAmD4t3OMoFQADP9+bhGUCYDhH8cpgjIBLGH4+7msWYkAlp5ILht5hKW1q/IWkA+A4T9W9Qik/2U45Q14fv42+ecvL19OvpJ9Pn54L/2gkX8DzFHelGwqr6VsABx9zlX1KCQbwByG/zgV11YyAOUnTlWqeyIXAEefa1U7CskFAIwkFQBP/xwqvQWkAgBGKxEAT//zVVlzmQDUXq3OlPZKJoA5VZ5EiiqsvUQASk8UvFLZM4kA5lR4AqlT3wPpAIC90geg8irFnxT2Ln0Ac9RfvZUo74VsAMAIBABrqQNQOENiWfY9TB3AHOUzZ1WqeyIZADAKAcAaAcBa2gCyf3hCu8x7mTaAOaofthwo7o30vwyn7Mf3r3/82afPf19wJd7k3gAVzB0JpqLAsQjgZGvn4czn5YoI4EStw00E5yGAk/QONRGcgwBgjQBgjQBgjQASe37+NvubZDAGAZyk91vSt1+KEcJxCOBErRHMfSNMCOMRwMnWImj53yGIYBwCuMBcBD3HJN4GYzzdbrfb1Rcxxf13AfQOd4Zfr6q4Z2kDiJhf0KyLeQSlEBT3iwBEKISguF98BhDx8vKla6j5fNCGAMT0RkAIyySPQBG5X6tnyXQsUt2r1G+AzAuXQe+x6ArZ9zB1AGjTEkL2UK5CAIUw5P1SfwaI0D1bXu3t54Ojw1Deo/RvgOwLmFWGzwcKe5c+AOxzdQTZSQfAXxy/nvoeSASg8CrF71T2TCKAJepPIGUV1l4mAJUnCrT2SiaAJRWeRGqqrHmJAICtpAJYerVWeSIpUP7i65FUAMBocgHwFrhWpad/hGAAEZoLXZ3qnkgGsIS3wHEqrq1sAByFzlXt6HMnG8AaIhin8lpKB6D85KlCfQ+kA4jgKHS0qkefO/kAIojgKNWHP6JIAGuIoJ/LmpUJYO2J5LKhI6ytVZWnf0ShACKIYASn4Y8oFkAEEezhNvwRBQOIIIItHIc/omgAEUTQw3X4IwT+Yay9Wga98gYvYW0KvwHuWjbQ8W3A8L8qH0AEETxi+H8pfwR6q3XIq26++/1PsQogou9JX2UQHO+5lV0Adw5D4XCPe9kGENF/7lcZkqr3dQTrACK2ffjNOjCV7uUs9gHcbf0p0NUDpHrdWRDAg70/Dj16sLJfnxoCmDD6O4GtQ5flOiojgAVVvhxj8OcRQCO1GBj6NgTQKXsIDH4fAtghSwwM/XYEMNBZQTDw4xDAwfixZW4EAGsWfx8AmEMAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsPY/neKBshfxblwAAAAASUVORK5CYII=">
 <title>StudyFlow</title>
 <style>
   :root{
-    --paper:#FFFFFF; --paper-raised:#F5F5F4; --ink:#242019; --ink-soft:#5C574C; --ink-faint:#9A9384;
-    --line:#E4E2DE; --accent:#5A5A9C; --accent-soft:#E7E6F2; --danger:#A5493A; --gold:#C79A3E; --gold-soft:#FBF3E1;
+    --paper:#FFFFFF; --paper-raised:#FAFAF9; --ink:#242019; --ink-soft:#5C574C; --ink-faint:#9A9384;
+    --line:#EDEBE7; --accent:#5A5A9C; --accent-soft:#E7E6F2; --danger:#A5493A; --gold:#3FAE7A; --gold-soft:#E9F8F0;
+    --pausecolor:#D98A9A;
     --clay:#B5654A; --ochre:#C79A3E; --teal:#3D7A73; --plum:#7A5478; --slate:#516075; --rose:#A15C6B; --sky:#4C7A94;
     --moss:#5B6B4F; --indigo:#5A5A9C; --forestgreen:#3F6B4A; --wine:#7A3B4A; --denim:#3E5C82; --mustard:#B98B2A;
     --sand:#A98358; --lilac:#8672A0; --steel:#5C6B73; --radius:16px;
@@ -26,7 +27,7 @@
   }
   html[data-theme="dark"]{
     --paper:#1B1A17; --paper-raised:#242220; --ink:#EFEAE2; --ink-soft:#C7C0B2; --ink-faint:#847E70;
-    --line:#39362F; --accent-soft:#2C2A3D; --gold-soft:#332B1A;
+    --line:#39362F; --accent-soft:#2C2A3D; --gold-soft:#1E332A;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{height:100%;}
@@ -51,20 +52,32 @@
   .gear-btn svg{width:18px; height:18px; stroke:var(--ink-soft); fill:none; stroke-width:1.8;}
   .page-sub{ font-size:12px; color:var(--ink-faint); margin:2px 0 16px; }
 
-  #tabbar{ position:sticky; bottom:0; display:flex; background:var(--paper-raised); border-top:1px solid var(--line);
-    padding:8px 6px calc(env(safe-area-inset-bottom,0px) + 8px); z-index:50; box-shadow:0 -4px 16px rgba(0,0,0,0.04); }
-  .tab{ flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 2px; background:none; border:none;
-    color:var(--ink-faint); font-family:inherit; font-size:9.5px; cursor:pointer; border-radius:14px; transition:all .18s; }
-  .tab .tab-icon-wrap{ width:34px; height:26px; display:flex; align-items:center; justify-content:center; border-radius:12px; transition:background .18s; }
+  #tabbar{ position:sticky; bottom:10px; display:flex; background:var(--paper); border:1px solid var(--line);
+    margin:0 12px; border-radius:26px; padding:7px 6px calc(env(safe-area-inset-bottom,0px)); z-index:50; box-shadow:0 6px 24px rgba(0,0,0,0.09); }
+  .tab{ flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; padding:5px 2px; background:none; border:none;
+    color:var(--ink-faint); font-family:inherit; font-size:9.5px; cursor:pointer; border-radius:18px; transition:all .22s; }
+  .tab .tab-icon-wrap{ width:38px; height:30px; display:flex; align-items:center; justify-content:center; border-radius:15px; transition:background .22s, transform .22s; }
   .tab svg{width:19px;height:19px;stroke:var(--ink-faint);fill:none;stroke-width:1.7;}
-  .tab.active{color:var(--ink); font-weight:600;}
+  .tab.active{color:var(--accent); font-weight:700;}
   .tab.active svg{stroke:var(--accent);}
-  .tab.active .tab-icon-wrap{background:var(--accent-soft);}
+  .tab.active .tab-icon-wrap{background:var(--accent-soft); transform:translateY(-3px);}
 
-  .quote-bar{ background:var(--accent-soft); border-radius:14px; padding:11px 14px; margin-bottom:14px;
-    font-size:12.5px; color:var(--ink-soft); line-height:1.7; text-align:center; font-style:italic; }
+  .quote-bar{ background:linear-gradient(135deg, var(--accent-soft), var(--paper-raised)); border-radius:18px; padding:20px 18px; margin-bottom:16px;
+    font-size:15.5px; color:var(--ink); line-height:1.9; text-align:center; font-family:Georgia,serif; font-style:normal; font-weight:600; }
 
-  .level-card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius); padding:16px; margin-bottom:14px; }
+  .level-card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius); padding:16px; margin-bottom:14px; cursor:pointer; }
+  .level-hint{ text-align:center; font-size:10.5px; color:var(--ink-faint); margin-top:2px; }
+  .mission-item{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .mission-item:last-child{ border-bottom:none; }
+  .mission-item .m-badge{ width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:Georgia,serif; font-weight:700; font-size:13px; flex-shrink:0; color:#fff; }
+  .mission-item.done .m-badge{ background:var(--accent); }
+  .mission-item.current .m-badge{ background:var(--gold); }
+  .mission-item.locked .m-badge{ background:var(--line); color:var(--ink-faint); }
+  .mission-item .m-title{ font-size:13.5px; font-weight:700; color:var(--ink); }
+  .mission-item.locked .m-title{ color:var(--ink-faint); }
+  .mission-item .m-sub{ font-size:11.5px; color:var(--ink-faint); margin-top:2px; }
+  .mission-item .m-detail{ font-size:11.5px; color:var(--ink-soft); background:var(--accent-soft); border-radius:8px; padding:8px 10px; margin-top:8px; line-height:1.7; }
+  .mission-item .m-main{ flex:1; min-width:0; }
   .level-top{ display:flex; align-items:center; gap:14px; margin-bottom:14px; }
   .level-ring-wrap{ position:relative; width:70px; height:70px; flex-shrink:0; }
   .level-ring-wrap svg{ width:70px; height:70px; }
@@ -81,6 +94,10 @@
   .ach-box b{ margin-left:auto; font-family:Georgia,serif; font-size:15px; color:var(--ink); }
   .ach-dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
   .ach-total{ text-align:center; font-size:11px; color:var(--ink-faint); }
+  .totals-row{ display:flex; gap:10px; }
+  .totals-row > div{ flex:1; text-align:center; }
+  .totals-row .t-num{ font-family:Georgia,serif; font-size:19px; color:var(--ink); }
+  .totals-row .t-lbl{ font-size:10.5px; color:var(--ink-faint); margin-top:3px; }
 
   .goal-banner{ border:1.5px solid var(--line); border-radius:var(--radius); padding:14px 16px; margin-bottom:16px; background:var(--paper-raised); }
   .goal-banner.completed{ border-color:var(--gold); background:var(--gold-soft); }
@@ -88,7 +105,7 @@
   .gb-label{font-size:13px; font-weight:700; color:var(--ink-soft);}
   .goal-banner.completed .gb-label{color:var(--gold);}
   .gb-nums{font-size:12.5px; color:var(--ink-soft); display:flex; align-items:center; gap:6px;}
-  .gb-edit{background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:13px;}
+  .gb-edit{ background:var(--paper); border:1.5px solid var(--line); color:var(--ink-soft); cursor:pointer; font-size:11.5px; border-radius:8px; padding:5px 10px; font-family:inherit; }
   .gb-track{height:8px; background:var(--line); border-radius:4px; overflow:hidden; margin-bottom:6px;}
   .gb-fill{height:100%; border-radius:4px; background:var(--accent); transition:width .3s;}
   .goal-banner.completed .gb-fill{background:var(--gold);}
@@ -96,10 +113,10 @@
   .goal-banner.completed .gb-pct{color:var(--gold); font-weight:700;}
   .gb-bottom{display:flex; justify-content:space-between; align-items:center; margin-top:8px;}
   .gb-feedback{font-size:12px; color:var(--ink-soft);}
-  .gb-actions button{background:none;border:none;color:var(--accent);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;}
+  .gb-actions button{ background:var(--accent-soft); border:none; color:var(--accent); font-family:inherit; font-size:11.5px; font-weight:700; cursor:pointer; border-radius:8px; padding:6px 12px; }
   .gb-sleep{display:flex; justify-content:space-between; align-items:center; font-size:11.5px; color:var(--ink-soft);
     border-top:1px solid var(--line); margin-top:10px; padding-top:8px;}
-  .gb-sleep button{background:none;border:none;color:var(--ink-faint);font-size:11px;text-decoration:underline;font-family:inherit;cursor:pointer;}
+  .gb-sleep button{ background:var(--paper); border:1.5px solid var(--line); color:var(--ink-soft); font-size:11px; font-family:inherit; cursor:pointer; border-radius:8px; padding:5px 10px; }
 
   .mode-switch{ display:flex; background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; padding:3px; margin-bottom:20px; }
   .mode-btn{ flex:1; padding:9px 4px; text-align:center; border:none; background:none; font-family:inherit; font-size:12.5px;
@@ -113,28 +130,43 @@
   .subject-chip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
   .subject-chip.selected{border-color:var(--ink); color:var(--ink); font-weight:600;}
   .subject-chip.add-new{color:var(--ink-faint); border-style:dashed;}
-  .manage-subjects-link{ display:block; background:none; border:none; color:var(--ink-faint); font-size:11.5px; text-decoration:underline; font-family:inherit; cursor:pointer; margin:-12px 0 20px; }
+  .manage-subjects-wrap{ margin:-10px 0 20px; text-align:center; }
+  .note-input{ width:100%; padding:10px 12px; border:1.5px solid var(--line); border-radius:10px; background:var(--paper-raised);
+    font-family:inherit; font-size:12.5px; color:var(--ink); margin:-8px 0 20px; }
   .manage-subject-item{ display:flex; align-items:center; gap:10px; padding:11px 0; border-bottom:1px solid var(--line); }
   .manage-subject-item .dot{width:12px; height:12px; border-radius:50%; flex-shrink:0;}
   .manage-subject-item .name{flex:1; font-size:14px; color:var(--ink);}
-  .manage-subject-del{ background:none; border:none; color:var(--danger); font-size:12.5px; cursor:pointer; font-family:inherit; }
+  .manage-subject-del{ background:rgba(165,73,58,0.08); border:none; color:var(--danger); font-size:11.5px; font-weight:600; cursor:pointer; font-family:inherit; border-radius:8px; padding:6px 12px; }
 
-  .ring-wrap{ position:relative; display:flex; align-items:center; justify-content:center; margin:6px auto 20px; width:270px; height:270px; }
-  .ring-wrap svg.ring{ width:270px; height:270px; transform:rotate(-90deg); }
+  .ring-wrap{ position:relative; display:flex; align-items:center; justify-content:center; margin:6px auto 20px; width:300px; height:300px; overflow:visible; }
+  .ring-wrap svg.ring{ width:300px; height:300px; transform:rotate(-90deg); overflow:visible; }
+  
   .ring-track{ fill:none; stroke:var(--line); }
-  .ring-progress{ fill:none; stroke:var(--accent); stroke-linecap:round; transition:stroke-dashoffset .25s linear; }
+  .ring-progress{ fill:none; stroke:var(--ring-color, var(--accent)); stroke-linecap:round; transition:stroke-dashoffset .25s linear, stroke .3s;
+    filter:drop-shadow(0 0 5px var(--ring-color, var(--accent))) drop-shadow(0 0 10px var(--ring-color, var(--accent))); }
   /* stopwatch mode now grows the arc smoothly instead of spinning the whole ring */
   @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
   .ring-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:2px; }
   @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
   @keyframes twinkle{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-  .mascot-inline{ animation:bob 2.4s ease-in-out infinite; }
-  .mascot-inline svg{width:60px;height:60px;}
-  .mascot-inline .sparkle{ animation:twinkle 1.6s ease-in-out infinite; transform-origin:center; }
-  .mascot-inline .turning-page{ animation:pageTurn 3.4s ease-in-out infinite; }
-  @keyframes pageTurn{ 0%,38%{transform:scaleX(1);} 50%{transform:scaleX(0.05);} 62%,100%{transform:scaleX(1);} }
+  .mascot-inline svg{width:96px;height:96px;}
+  .type-chips{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 0 14px;}
+  .type-chip{ padding:7px 13px; border-radius:18px; border:1.5px solid var(--line); background:var(--paper-raised);
+    font-size:12px; color:var(--ink-soft); font-family:inherit; cursor:pointer; }
+  .type-chip.selected{ border-color:var(--accent); background:var(--accent-soft); color:var(--ink); font-weight:700; }
+  .note-center{ display:flex; justify-content:center; margin:0 0 18px; }
+  .log-type-tag{ display:inline-block; font-size:10px; color:var(--accent); background:var(--accent-soft); border-radius:8px; padding:2px 8px; margin-top:4px; }
+  .mascot-inline.state-studying{ animation:bob 2.4s ease-in-out infinite; }
+  .mascot-inline .turning-page{ animation:pageTurn 6s ease-in-out infinite; }
+  @keyframes pageTurn{ 0%,42%{transform:scaleX(1);} 50%{transform:scaleX(0.05);} 58%,100%{transform:scaleX(1);} }
+  .zzz{ animation:zzzFloat 2.6s ease-in-out infinite; }
+  .zzz.z2{ animation-delay:.5s; } .zzz.z3{ animation-delay:1s; }
+  @keyframes zzzFloat{ 0%{opacity:0; transform:translateY(0) scale(0.8);} 25%{opacity:1;} 100%{opacity:0; transform:translateY(-16px) scale(1.1);} }
+  .mascot-toggle-row{ display:flex; justify-content:center; margin-bottom:4px; }
+  .minute-adjust-row{ display:flex; justify-content:center; gap:10px; margin-bottom:10px; }
+  .mascot-toggle-row button{ background:var(--paper-raised); border:1.5px solid var(--line); border-radius:20px; padding:6px 14px; font-size:11.5px; color:var(--ink-soft); font-family:inherit; cursor:pointer; }
   .timer-display{ font-family:Georgia,"Times New Roman",serif; font-variant-numeric:tabular-nums; letter-spacing:0.01em;
-    line-height:1; color:var(--ink); font-size:40px; margin-top:2px; }
+    line-height:1; color:var(--ink); font-size:46px; margin-top:2px; }
   .timer-sub{ margin-top:6px; font-size:12px; color:var(--ink-faint); letter-spacing:0.03em; }
   .timer-end{ margin-top:2px; font-size:11px; color:var(--ink-faint); }
 
@@ -152,14 +184,16 @@
   .btn{ font-family:inherit; border:none; border-radius:16px; padding:16px 30px; font-size:15px; font-weight:700; cursor:pointer; transition:transform .1s, background .15s; }
   .btn:active{transform:scale(0.97);}
   .btn-primary{background:var(--accent); color:#fff; flex:1;}
-  .btn-primary.running{background:var(--danger);}
+  .btn-primary.running{background:var(--pausecolor); color:var(--ink);}
   .btn-secondary{background:var(--paper-raised); color:var(--ink-soft); border:1.5px solid var(--line);}
   .btn-full{width:100%;}
   .circle-btn{ width:54px; height:54px; border-radius:50%; border:1.5px solid var(--line); background:var(--paper-raised);
     display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; }
   .circle-btn svg{width:20px;height:20px; stroke:var(--ink-soft); fill:none; stroke-width:1.8;}
-  .reset-link{ display:block; text-align:center; margin-top:14px; background:none; border:none; color:var(--ink-faint);
-    font-size:12px; text-decoration:underline; font-family:inherit; cursor:pointer; }
+  .reset-link{ display:block; text-align:center; margin:14px auto 0; }
+  .mini-btn{ background:var(--paper-raised); border:1.5px solid var(--line); border-radius:10px; padding:7px 14px; font-size:11.5px; color:var(--ink-soft); font-family:inherit; cursor:pointer; }
+  .mini-btn.accent{ background:var(--accent-soft); border-color:transparent; color:var(--accent); font-weight:700; }
+  .mini-btn.danger{ background:rgba(165,73,58,0.08); border-color:transparent; color:var(--danger); font-weight:600; }
 
   .sheet-overlay{ position:fixed; inset:0; background:rgba(20,18,14,0.45); display:none; align-items:flex-end; z-index:100; }
   .sheet-overlay.active{display:flex;}
@@ -212,6 +246,9 @@
   .empty-state{ text-align:center; padding:50px 20px; color:var(--ink-faint); font-size:14px; line-height:1.9; }
 
   .range-switch{ display:flex; gap:8px; margin-bottom:20px; }
+  .period-nav{ display:flex; align-items:center; justify-content:space-between; margin:-10px 0 18px; font-size:12px; }
+  .period-nav button{ background:var(--paper-raised); border:1.5px solid var(--line); border-radius:8px; padding:6px 12px; color:var(--ink-soft); font-family:inherit; font-size:12px; cursor:pointer; }
+  .period-nav span{ color:var(--ink-faint); font-size:11.5px; }
   .range-btn{ flex:1; padding:8px; border:1.5px solid var(--line); background:var(--paper-raised); border-radius:10px; font-family:inherit; font-size:13px; color:var(--ink-soft); cursor:pointer; }
   .range-btn.active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
   .stat-summary{ display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
@@ -270,7 +307,7 @@
     width:38px; height:38px; border-radius:50%; font-size:16px; color:var(--ink-soft); cursor:pointer;
   }
   .focus-display-wrap{ text-align:center; }
-  .focus-display{ font-family:Georgia,serif; font-variant-numeric:tabular-nums; color:var(--ink); font-size:min(18vw,110px); line-height:1; }
+  .focus-display{ font-family:Georgia,serif; font-variant-numeric:tabular-nums; color:var(--ink); font-size:min(26vw,170px); line-height:1; }
   .focus-display.style-flip{
     background:var(--ink); color:var(--paper); padding:0.25em 0.4em; border-radius:0.15em; letter-spacing:0.04em;
     box-shadow:0 8px 0 rgba(0,0,0,0.15);
@@ -310,7 +347,7 @@
     100%{ transform:translateY(560px) rotate(540deg); opacity:0; }
   }
 
-  #welcomeOverlay{ position:fixed; inset:0; z-index:500; background:linear-gradient(160deg, #1B1914, #242019 60%, #1B1914); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:30px; text-align:center; }
+  #welcomeOverlay{ position:fixed; inset:0; z-index:500; background:linear-gradient(160deg, var(--accent), #1B1914 85%); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:30px; text-align:center; }
   .brand-logo-card{ background:#111008; border-radius:18px; padding:22px 34px; margin-bottom:26px; display:flex; flex-direction:column; align-items:center; gap:10px; box-shadow:0 8px 30px rgba(0,0,0,0.4); }
   .brand-logo-card .wordmark{ font-family:Georgia,serif; letter-spacing:0.28em; font-size:20px; color:#DCD8CC; font-weight:600; padding-right:0.28em; }
   .welcome-title{ font-size:22px; font-weight:700; color:var(--paper); margin-bottom:8px; font-family:Georgia,serif; }
@@ -343,7 +380,6 @@
     <p class="page-sub">همراه روزانه‌ی مطالعه‌ات</p>
 
     <div class="quote-bar" id="quoteBar"></div>
-    <div class="level-card" id="levelCard"></div>
     <div class="goal-banner" id="goalBanner"></div>
 
     <div class="mode-switch">
@@ -353,11 +389,11 @@
     </div>
 
     <div class="subject-row" id="subjectRow"></div>
-    <button class="manage-subjects-link" id="manageSubjectsBtn">مدیریت درس‌ها ✎</button>
+    <div class="note-center"><button class="mini-btn" id="noteOpenBtn">🏷️ مرور</button></div>
 
     <div id="countdownSetup" class="countdown-setup" style="display:none;">
-      <div class="cd-field"><label>ساعت</label><input type="number" id="cdHours" min="0" max="23" value="1" inputmode="numeric"></div>
       <div class="cd-field"><label>دقیقه</label><input type="number" id="cdMinutes" min="0" max="59" value="0" inputmode="numeric"></div>
+      <div class="cd-field"><label>ساعت</label><input type="number" id="cdHours" min="0" max="23" value="1" inputmode="numeric"></div>
     </div>
     <div id="pomoSetup" class="pomo-config" style="display:none;">
       <div class="cd-field"><label>تمرکز (دقیقه)</label><input type="number" id="pomoFocus" min="1" max="180" value="25"></div>
@@ -372,42 +408,21 @@
         <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="90" stroke-width="10" stroke-dasharray="565.5" stroke-dashoffset="0"/>
       </svg>
       <div class="ring-center">
-        <div class="mascot-inline" id="mascotInline">
-          <svg viewBox="0 0 120 120" fill="none">
-            <path d="M40 46a20 20 0 0140 0" stroke="var(--ink)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-            <circle cx="60" cy="52" r="17" fill="#fff" stroke="var(--ink)" stroke-width="2.4"/>
-            <path d="M52 55c1.2 3 3.6 5 8 5s6.8-2 8-5" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-            <circle cx="53" cy="50" r="1.6" fill="var(--ink)"/>
-            <circle cx="67" cy="50" r="1.6" fill="var(--ink)"/>
-            <ellipse cx="49" cy="57" rx="3" ry="2" fill="var(--accent)" opacity="0.35"/>
-            <ellipse cx="71" cy="57" rx="3" ry="2" fill="var(--accent)" opacity="0.35"/>
-            <path d="M40 100c0-16 9-27 20-27s20 11 20 27" fill="var(--accent)"/>
-            <rect x="42" y="80" width="36" height="20" rx="3" fill="#fff" stroke="var(--ink)" stroke-width="2"/>
-            <line x1="60" y1="80" x2="60" y2="100" stroke="var(--ink)" stroke-width="1.4"/>
-            <path d="M45 85q7-3 13 0" stroke="var(--ink-faint)" stroke-width="1.2" fill="none"/>
-            <path d="M45 91q7-3 13 0" stroke="var(--ink-faint)" stroke-width="1.2" fill="none"/>
-            <rect class="turning-page" x="60" y="81" width="17" height="18" rx="2" fill="#fff" stroke="var(--ink)" stroke-width="1.2" style="transform-box:fill-box; transform-origin:0% 50%;"/>
-            <path d="M63 85q6-3 11 0" stroke="var(--ink-faint)" stroke-width="1" fill="none" opacity="0.8"/>
-            <path d="M63 91q6-3 11 0" stroke="var(--ink-faint)" stroke-width="1" fill="none" opacity="0.8"/>
-            <rect x="14" y="82" width="9" height="18" rx="2" fill="#fff" stroke="var(--accent)" stroke-width="2"/>
-            <rect x="16" y="78" width="5" height="5" rx="1" fill="var(--accent)"/>
-            <rect x="88" y="86" width="16" height="12" rx="2.5" fill="#fff" stroke="var(--ink)" stroke-width="2"/>
-            <path d="M104 89c3 0 3 6 0 6" stroke="var(--ink)" stroke-width="1.6" fill="none"/>
-            <path d="M93 82c0-2 2-2 2-4M99 82c0-2 2-2 2-4" stroke="var(--ink-faint)" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/>
-            <path class="sparkle" d="M94 26l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="var(--accent)"/>
-            <path class="sparkle" d="M28 34l1.2 3.6 3.6 1.2-3.6 1.2L28 44l-1.2-3.6L23.2 39l3.6-1.2z" fill="var(--accent)" opacity="0.7"/>
-          </svg>
-        </div>
+        <div class="mascot-inline" id="mascotInline"></div>
         <div class="timer-display" id="timerDisplay">00:00:00</div>
         <div class="timer-sub" id="timerSub">آماده برای شروع</div>
         <div class="timer-end" id="timerEnd" style="display:none;"></div>
       </div>
     </div>
 
+    <div class="mascot-toggle-row"><button id="mascotSleepToggle">🌙 می‌رم بخوابم</button></div>
+
+    <div class="minute-adjust-row" id="minuteAdjustRow">
+      <button class="mini-btn" id="subMinuteBtn">−۱ دقیقه</button>
+      <button class="mini-btn" id="addMinuteBtn">+۱ دقیقه</button>
+    </div>
+
     <div class="timer-controls">
-      <button class="circle-btn" id="addMinuteBtn" title="یک دقیقه اضافه کن" style="display:none;">
-        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-      </button>
       <button class="btn btn-primary" id="startStopBtn">شروع</button>
       <button class="circle-btn" id="expandBtn" title="تمام‌صفحه">
         <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg>
@@ -416,7 +431,7 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></svg>
       </button>
     </div>
-    <button class="reset-link" id="resetBtn" style="display:none;">بازنشانی</button>
+    <div class="reset-link" style="display:none;" id="resetBtnWrap"><button class="mini-btn" id="resetBtn">بازنشانی</button></div>
   </section>
 
   <!-- ============ PRACTICE SCREEN ============ -->
@@ -439,6 +454,7 @@
       </div>
       <div class="field-label">تاریخ</div>
       <input type="date" id="testDate">
+      <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:12px;"><input type="checkbox" id="testAnalyzed"> تحلیل کردم</label>
       <button class="btn btn-primary btn-full" id="saveTestBtn" style="margin-top:18px;">ثبت تست</button>
     </div>
     <div id="bookPanel" style="display:none;">
@@ -469,20 +485,29 @@
   <section class="screen" id="screen-stats">
     <h1 class="page-title">آمار</h1>
     <p class="page-sub">روند و پیشرفتت</p>
+    <div class="level-card" id="levelCard"></div>
     <div class="growth-hero" id="growthHero"></div>
+    <div class="chart-card" id="totalsSummaryCard" style="padding:14px 14px;"></div>
+
     <div class="range-switch">
       <button class="range-btn active" data-range="week">هفتگی</button>
       <button class="range-btn" data-range="month">ماهانه</button>
       <button class="range-btn" data-range="all">کل</button>
+    </div>
+    <div class="period-nav" id="periodNav" style="display:none;">
+      <button id="periodPrevBtn">‹ قبلی</button>
+      <span id="periodLabel"></span>
+      <button id="periodNextBtn">بعدی ›</button>
     </div>
     <div class="stat-summary">
       <div class="stat-box"><div class="num" id="statTotal">۰</div><div class="lbl">مجموع ساعت</div></div>
       <div class="stat-box"><div class="num" id="statAvg">۰</div><div class="lbl">میانگین روزانه</div></div>
       <div class="stat-box"><div class="num" id="statSessions">۰</div><div class="lbl">تعداد جلسات</div></div>
     </div>
-    <div class="chart-card"><h3>تقویم هفتگی</h3><div class="week-cal" id="weekCal"></div></div>
+    <div class="chart-card"><h3>تقویم هفتگی <span id="weekCalMonthLabel" style="font-weight:400;color:var(--ink-faint);"></span></h3><div class="week-cal" id="weekCal"></div></div>
     <div class="chart-card"><h3>روند رشد</h3><svg id="growthChart" viewBox="0 0 320 140" style="width:100%; height:140px;"></svg></div>
-    <div class="chart-card"><h3>روند مطالعه (ساعت در روز)</h3><svg id="lineChart" viewBox="0 0 320 140" style="width:100%; height:140px;"></svg></div>
+    <div class="chart-card"><h3>روند مطالعه (ساعت در روز)</h3><div style="text-align:center;margin:-4px 0 8px;"><button class="mini-btn" id="chartToggleBtn">📊 نمایش ستونی</button></div>
+    <svg id="lineChart" viewBox="0 0 320 140" style="width:100%; height:140px;"></svg></div>
     <div class="chart-card">
       <h3>تفکیک بر اساس درس</h3>
       <div style="display:flex; justify-content:center; margin-bottom:16px;">
@@ -499,6 +524,8 @@
         <div class="stat-box"><div class="num" id="statTestUnansweredPct">۰٪</div><div class="lbl">درصد بی‌پاسخ</div></div>
       </div>
     </div>
+    <div class="chart-card"><h3>درصد درست هر درس</h3><div id="subjectTestPct"></div><h3 style="margin-top:14px;">تحلیل آزمون‌ها</h3><div id="testAnalysisStat"></div></div>
+    <div class="chart-card"><h3>تایم‌لاین امروز (۲۴ ساعته)</h3><div style="display:flex;justify-content:center;"><svg id="dayTimeline" viewBox="0 0 200 200" style="width:220px;height:220px;"></svg></div><div id="dayTimelineList"></div></div>
     <div class="chart-card"><h3>بازخورد روزانه اخیر</h3><div id="reflectionHistory"></div></div>
   </section>
 
@@ -520,6 +547,15 @@
 </div>
 
 <!-- ============ SETTINGS SHEET ============ -->
+<!-- ============ MISSIONS / LEVELS SHEET ============ -->
+<div class="sheet-overlay" id="missionsOverlay">
+  <div class="sheet">
+    <h2>سطح‌ها و ماموریت‌ها</h2>
+    <div id="missionsList"></div>
+    <div class="sheet-actions"><button class="btn btn-primary btn-full" id="missionsClose">تمام</button></div>
+  </div>
+</div>
+
 <div class="sheet-overlay" id="settingsOverlay">
   <div class="sheet">
     <h2>تنظیمات</h2>
@@ -529,8 +565,14 @@
     </div>
     <div class="field-label">رنگ اصلی</div>
     <div class="accent-row" id="accentRow"></div>
-    <div class="field-label">صدای پایان تایمر</div>
+    <div class="field-label">رنگ دکمه‌ی توقف</div>
+    <div class="accent-row" id="pauseColorRow"></div>
+    <div class="field-label">صدای پایان تمرکز/تایمر</div>
     <div class="chime-row" id="chimeRow"></div>
+    <div class="field-label">صدای پایان استراحت</div>
+    <div class="chime-row" id="chimeRowBreak"></div>
+    <div class="field-label">درس‌ها</div>
+    <div class="manage-subjects-wrap" style="margin:0 0 18px;"><button class="mini-btn" id="manageSubjectsBtn">مدیریت درس‌ها ✎</button></div>
     <div class="field-label">اعلان‌ها</div>
     <button class="btn btn-secondary btn-full" id="enableNotifBtn">فعال‌سازی اعلان‌ها</button>
     <p style="font-size:11px; color:var(--ink-faint); margin-top:8px; line-height:1.7;">
@@ -548,13 +590,17 @@
     <div class="subject-row" id="manualSubjectRow"></div>
     <div class="field-label">مدت زمان</div>
     <div class="duration-inputs">
-      <div class="cd-field"><label>ساعت</label><input type="number" id="manualHours" min="0" max="23" value="1"></div>
       <div class="cd-field"><label>دقیقه</label><input type="number" id="manualMinutes" min="0" max="59" value="0"></div>
+      <div class="cd-field"><label>ساعت</label><input type="number" id="manualHours" min="0" max="23" value="1"></div>
     </div>
     <div class="field-label">ساعت شروع و پایان (اختیاری)</div>
     <div class="two-col"><div><input type="time" id="manualStartTime"></div><div><input type="time" id="manualEndTime"></div></div>
     <div class="field-label">تاریخ</div>
     <input type="date" id="manualDate">
+    <div class="field-label">نوع جلسه</div>
+    <div class="type-chips" id="manualTypeRow"></div>
+    <div class="field-label">یادداشت مبحث (اختیاری)</div>
+    <input type="text" id="manualNote" placeholder="یادداشت مبحث">
     <div class="sheet-actions"><button class="btn btn-secondary" id="manualCancel">انصراف</button><button class="btn btn-primary" id="manualSave">ذخیره</button></div>
   </div>
 </div>
@@ -564,6 +610,7 @@
   <div class="sheet">
     <h2>مدیریت درس‌ها</h2>
     <div id="manageSubjectsList"></div>
+    <div style="text-align:center;margin:14px 0 6px;"><button class="mini-btn accent" id="manageAddSubjectBtn">+ افزودن درس جدید</button></div>
     <p style="font-size:11px; color:var(--ink-faint); margin-top:12px; line-height:1.7;">
       حذف یه درس، جلسات و تست‌های ثبت‌شده‌ی قبلیش رو پاک نمی‌کنه؛ فقط دیگه توی لیست انتخاب درس‌ها نمی‌مونه.
     </p>
@@ -588,7 +635,7 @@
   <div class="sheet">
     <h2>هدف روزانه مطالعه</h2>
     <div class="field-label">مدت هدف</div>
-    <div class="duration-inputs"><div class="cd-field"><label>ساعت</label><input type="number" id="goalHours" min="0" max="23" value="4"></div><div class="cd-field"><label>دقیقه</label><input type="number" id="goalMinutes" min="0" max="59" value="0"></div></div>
+    <div class="duration-inputs"><div class="cd-field"><label>دقیقه</label><input type="number" id="goalMinutes" min="0" max="59" value="0"></div><div class="cd-field"><label>ساعت</label><input type="number" id="goalHours" min="0" max="23" value="4"></div></div>
     <div class="sheet-actions"><button class="btn btn-secondary" id="goalCancel">انصراف</button><button class="btn btn-primary" id="goalSave">ذخیره</button></div>
   </div>
 </div>
@@ -650,7 +697,7 @@
   <div class="celeb-card">
     <div class="celeb-mascot">
       <svg viewBox="0 0 120 120" fill="none">
-        <path d="M40 46a20 20 0 0140 0" stroke="var(--ink)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+        
         <circle cx="60" cy="52" r="17" fill="#fff" stroke="var(--ink)" stroke-width="2.4"/>
         <path d="M53 58q7 6 14 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
         <path d="M50 47l4 2M70 47l-4 2" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>
@@ -671,6 +718,18 @@
   </div>
 </div>
 
+<!-- ============ SESSION DETAIL SHEET (type + note) ============ -->
+<div class="sheet-overlay" id="noteOverlay">
+  <div class="sheet">
+    <h2>نوع جلسه و یادداشت</h2>
+    <div class="field-label">این جلسه چه جوری بود؟</div>
+    <div class="type-chips" id="sessionTypeRow"></div>
+    <div class="field-label">یادداشت مبحث</div>
+    <input type="text" id="sessionNoteInput" placeholder="یادداشت مبحث">
+    <div class="sheet-actions"><button class="btn btn-secondary" id="noteCancel">انصراف</button><button class="btn btn-primary" id="noteSave">ذخیره</button></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -682,7 +741,8 @@
       subjects: [ {id:"riazi", name:"ریاضی", color:"var(--clay)"}, {id:"fizik", name:"فیزیک", color:"var(--slate)"}, {id:"zist", name:"زیست", color:"var(--teal)"} ],
       sessions: [], selectedSubject: "riazi", soundVolumes: {rain:0.5, forest:0.5, ocean:0.5, lofi:0.5},
       dailyGoalSeconds: 4*3600, reflections: {}, sleepLogs: {}, testEntries: [], testGoalCount: 50, books: [], celebrated: {},
-      settings: { themeMode:"system", accent:"indigo", chime:"bell", notifAsked:false }
+      mascotSleeping: false,
+      settings: { themeMode:"system", accent:"indigo", pauseColor:"pink", chime:"bell", chimeBreak:"marimba", notifAsked:false }
     };
   }
   function loadData(){
@@ -703,25 +763,87 @@
 
   const SUBJECT_COLORS = ["var(--brightgreen)","var(--brightblue)","var(--brightorange)","var(--brightpink)","var(--brightyellow)","var(--brightpurple)","var(--brightteal)","var(--brightred)","var(--brightlime)","var(--brightcyan)","var(--brightcoral)","var(--brightlavender)","var(--brightmint)","var(--brightgold)","var(--brightsalmon)","var(--brightsky)","var(--clay)","var(--ochre)","var(--teal)","var(--plum)","var(--slate)","var(--rose)","var(--sky)","var(--moss)","var(--indigo)","var(--forestgreen)","var(--wine)","var(--denim)"];
   const ACCENT_OPTIONS = [
-    {id:"brightblue", color:"#5B9BFF"}, {id:"brightgreen", color:"#4CC98A"}, {id:"brightorange", color:"#FFA655"},
-    {id:"brightpink", color:"#F080A0"}, {id:"brightpurple", color:"#B08AE8"}, {id:"brightteal", color:"#4FD3C4"},
-    {id:"brightcyan", color:"#4FD6E8"}, {id:"brightcoral", color:"#FF8B7A"}, {id:"brightgold", color:"#F5C84C"},
+    {id:"vivraspberry", color:"#D6336C"}, {id:"vivviolet", color:"#7E4AE0"}, {id:"vivemerald", color:"#12A37A"},
+    {id:"vivcobalt", color:"#1C6FE0"}, {id:"vivtangerine", color:"#F07A1A"}, {id:"vivturq", color:"#10B5B0"},
+    {id:"vivmagenta", color:"#C2287E"}, {id:"vivroyal", color:"#5B45D6"}, {id:"vivsunflower", color:"#E8B20C"},
+    {id:"vivgreen", color:"#27A844"}, {id:"vivburnt", color:"#D9542B"}, {id:"vivsky", color:"#1B9BD8"},
+    {id:"midslate", color:"#5E7FA8"}, {id:"midsea", color:"#4F8F8A"}, {id:"midolive", color:"#7D8F55"},
+    {id:"midmauve", color:"#97739B"}, {id:"midterra", color:"#C27C5E"}, {id:"midnavy", color:"#46607F"},
+    {id:"midforest", color:"#5C8064"}, {id:"midrose", color:"#A06A82"}, {id:"midmustard", color:"#B39245"},
+    {id:"midsteel", color:"#6F8190"}, {id:"midbrick", color:"#A8665A"}, {id:"midlavgrey", color:"#7F7AA5"},
+    {id:"midteal", color:"#4D8E7B"}, {id:"midrust", color:"#B0683F"}, {id:"middenim", color:"#5577A3"},
+    {id:"midsage", color:"#6E8B6B"}, {id:"midcocoa2", color:"#A0806A"}, {id:"midberry", color:"#8A5A7E"},
+    {id:"softblue", color:"#6FA8DC"}, {id:"softmint", color:"#7CC4A8"}, {id:"softlilac", color:"#A89BD6"},
+    {id:"softpeach", color:"#E8A88C"}, {id:"softrose", color:"#D98BA6"}, {id:"softsky", color:"#8CC4E0"},
+    {id:"softsage", color:"#9BB58F"}, {id:"softlemon", color:"#D9C46A"}, {id:"softteal", color:"#6BBFB8"},
+    {id:"softcoral", color:"#E3998A"}, {id:"softindigo", color:"#7F86C9"}, {id:"softcocoa", color:"#B8917A"},
+    {id:"neongreen", color:"#39FF88"}, {id:"neonpink", color:"#FF3EC9"}, {id:"neoncyan", color:"#2FF3E0"},
+    {id:"neonpurple", color:"#B845FF"}, {id:"neonorange", color:"#FF7A2F"},
     {id:"indigo", color:"#5A5A9C"}, {id:"sky", color:"#4C7A94"}, {id:"moss", color:"#5B6B4F"},
     {id:"clay", color:"#B5654A"}, {id:"plum", color:"#7A5478"}, {id:"wine", color:"#7A3B4A"}
+  ];
+  const PAUSE_COLOR_OPTIONS = [
+    {id:"sameasapp", color:"var(--accent)"},
+    {id:"stoprose", color:"#FF6B9D"}, {id:"stopviolet", color:"#7B68EE"}, {id:"stopmint", color:"#20C997"},
+    {id:"stopsky", color:"#4DABF7"}, {id:"stoporange", color:"#FFA94D"}, {id:"stoporchid", color:"#E599F7"},
+    {id:"mpslate", color:"#8DA3BF"}, {id:"mpsea", color:"#88B9B3"}, {id:"mpolive", color:"#A7B58F"},
+    {id:"mpmauve", color:"#B9A0C0"}, {id:"mpterra", color:"#D9A590"}, {id:"mprose", color:"#C9A0B2"},
+    {id:"pink", color:"#D98A9A"}, {id:"gray", color:"#9A9A9A"}, {id:"lavender", color:"#B0A8D9"},
+    {id:"peach", color:"#E8B08A"}, {id:"mint", color:"#8ED9C0"}, {id:"rose", color:"#C97A94"},
+    {id:"sky", color:"#8EC0E0"}, {id:"sand", color:"#D9C09A"}, {id:"lilac", color:"#C0A8E0"},
+    {id:"coral", color:"#E89A8E"}, {id:"sage", color:"#A8C0A0"}, {id:"amber", color:"#E0C080"},
+    {id:"softsky2", color:"#9CC9E8"}, {id:"softmint2", color:"#9EDCC4"}, {id:"softlilac2", color:"#B9AEE0"},
+    {id:"softpeach2", color:"#F0BFA0"}, {id:"softrose2", color:"#E4A9BF"}, {id:"softlemon2", color:"#E6D68E"},
+    {id:"neongreen2", color:"#7DFFAE"}, {id:"neonpink2", color:"#FF8AD8"}, {id:"neoncyan2", color:"#7FF8EE"}
   ];
 
   function toast(msg, celebrate){
     const t = document.getElementById("toast");
     t.textContent = msg; t.className = "toast show" + (celebrate ? " celebrate" : "");
-    setTimeout(()=>t.classList.remove("show"), celebrate ? 3200 : 1800);
+    setTimeout(()=>t.classList.remove("show"), celebrate ? 4600 : 1800);
   }
   const CELEBRATIONS = ["آفرین! 🎉","عالی بود! 👏","دمت گرم، امروز رو بردی! 🔥","فوق‌العاده بودی امروز! ⭐","همینه! ادامه بده 💪"];
+  const FOUR_HOUR_QUOTES = [
+    "امروز ۴ ساعت درس خوندی، این خیلی خفنه! تو بی‌نظیری 🌟",
+    "۴ ساعت مطالعه‌ی مداوم امروز — آفرین بهت، واقعاً خوب بودی امروز 👏",
+    "یه روز کارت عالی بود، همین امروز. قربونت برم 🤷",
+    "۴ ساعت! نه یه ساعت، نه دو ساعت — چهار ساعت. خودتو نشون دادی 🔥"
+  ];
+  const HOUR_ENCOURAGEMENTS = [
+    "آفرین! {h} ساعت اومدی جلو، بازم برو جلو، تو می‌تونی! 💪",
+    "{h} ساعته داری می‌زنی، عالیه! ادامه بده 🔥",
+    "{h} ساعت گذشت و هنوز وایسادی — همینه! ✨",
+    "یه ساعت دیگه هم رد شد، خسته نباشی، ادامه بده 🌱",
+    "{h} ساعت مطالعه‌ی مداوم! داری خودتو می‌سازی 🚀"
+  ];
   function celebrate(){ return CELEBRATIONS[Math.floor(Math.random()*CELEBRATIONS.length)]; }
 
   function pad(n){ return String(n).padStart(2,"0"); }
   function fmtHMS(s){ s=Math.max(0,Math.round(s)); return `${pad(Math.floor(s/3600))}:${pad(Math.floor((s%3600)/60))}:${pad(s%60)}`; }
   function fmtClock(d){ return pad(d.getHours())+":"+pad(d.getMinutes()); }
   function todayStr(){ const d=new Date(); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+
+  /* ================= JALALI (PERSIAN) CALENDAR ================= */
+  const JALALI_MONTHS = ["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
+  function gregorianToJalali(gy, gm, gd){
+    const g_d_m = [0,31,59,90,120,151,181,212,243,273,304,334];
+    let gy2 = (gm > 2) ? (gy + 1) : gy;
+    let days = 355666 + (365*gy) + Math.floor((gy2+3)/4) - Math.floor((gy2+99)/100) + Math.floor((gy2+399)/400) + gd + g_d_m[gm-1];
+    let jy = -1595 + (33 * Math.floor(days/12053));
+    days %= 12053;
+    jy += 4 * Math.floor(days/1461);
+    days %= 1461;
+    if(days > 365){ jy += Math.floor((days-1)/365); days = (days-1)%365; }
+    let jm, jd;
+    if(days < 186){ jm = 1 + Math.floor(days/31); jd = 1 + (days%31); }
+    else{ jm = 7 + Math.floor((days-186)/30); jd = 1 + ((days-186)%30); }
+    return {jy, jm, jd};
+  }
+  function toJalaliDateStr(gDateStr){
+    const [gy,gm,gd] = gDateStr.split("-").map(Number);
+    const {jy,jm,jd} = gregorianToJalali(gy,gm,gd);
+    return `${jd} ${JALALI_MONTHS[jm-1]}`;
+  }
   function toDateStr(d){ return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
   function dateNDaysAgo(n){ const d=new Date(); d.setDate(d.getDate()-n); return d; }
 
@@ -734,6 +856,8 @@
     document.documentElement.style.setProperty("--accent", acc.color);
     const r=parseInt(acc.color.slice(1,3),16), g=parseInt(acc.color.slice(3,5),16), b=parseInt(acc.color.slice(5,7),16);
     document.documentElement.style.setProperty("--accent-soft", effective==="dark" ? `rgba(${r},${g},${b},0.28)` : `rgba(${r},${g},${b},0.14)`);
+    const pc = PAUSE_COLOR_OPTIONS.find(p=>p.id===DATA.settings.pauseColor) || PAUSE_COLOR_OPTIONS[0];
+    document.documentElement.style.setProperty("--pausecolor", pc.color);
   }
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ()=>{ if(DATA.settings.themeMode==="system") applyTheme(); });
 
@@ -756,9 +880,37 @@
     "هر باری که وسوسه شدی بیخیال بشی، یادت باشه چرا شروع کردی.","کاری که امروز سخته، تمرینه برای روزی که آسون بشه.",
     "به جای نگرانی برای نتیجه، روی مسیر تمرکز کن.","هر مبحثی که تموم می‌کنی، یه بار از دوشت کم می‌شه.","پشتکار بی‌سروصداست، ولی نتیجه‌ش بلنده.",
     "امروز رو جوری بگذرون که فردا بهش افتخار کنی.","هیچ آدم موفقی نبوده که یه روز نخواسته باشه بیخیال بشه؛ فرقشون اینه که نشدن.",
-    "به‌جای کامل بودن، به‌جلو رفتن فکر کن.","هر بار که یه فصل رو تموم می‌کنی، خودتو یه نفر جلوتر می‌بینی."
+    "به‌جای کامل بودن، به‌جلو رفتن فکر کن.","هر بار که یه فصل رو تموم می‌کنی، خودتو یه نفر جلوتر می‌بینی.",
+    "فعلاً فقط می‌دویم 🏃 — We are just running now",
+    "ندیدن به معنای نبودن نیست 🌱",
+    "تو الان تو گذشته‌ی آینده‌تی، پس پشیمونی نذار...",
+    "درصد افکار منفی ما به‌خاطر اتفاقاتیه که احتمال رخ دادنش یک درصد هم نیست ✨",
+    "بیشتر مردم زندگی نمی‌کنن، فقط وجود دارند. — اسکار وایلد",
+    "سبز و بهاری باشید، روزگارتون به رنگ بهار 🌿",
+    "باد هیچ‌وقت با شمع خاموش کاری نداره!",
+    "چشم من هرگز ندیده‌ست آدمی بی‌درد را؛ زندگی رنج مداومه، آدم سرسخت باش",
+    "روزهای معمولی، همون روزهای خوشبختی بودن که گذشتن.",
+    "همه می‌خوان برنده بشن، ولی هیچ‌کس حاضر نیست از اون آخرین قدم بزنه. قربونت برم 🤷",
+    "هر روزی که می‌مونی، یه نسخه‌ی قوی‌تر از خودتو می‌سازی 💪",
+    "تو همینی که هستی کافی نیستی؛ تو داری هر روز بیشتر می‌شی 🌱",
+    "کسی قرار نیست بیاد نجاتت بده، خودتو نجات بده — همین امروز",
+    "بزرگ‌ترین رقیبت همون آدمیه که دیروز بودی",
+    "یه روز به عقب نگاه می‌کنی و می‌بینی همین روزهای سخت، بهترین روزها بودن ✨",
+    "هیچ‌کس نمی‌بینه چقدر تلاش کردی، فقط نتیجه رو می‌بینن — پس ادامه بده",
+    "خستگیت موقتیه، ولی چیزی که می‌سازی موندگاره 🔥",
+    "امروز یکم بیشتر از دیروز تلاش کن، همین کافیه. قربونت برم 🤷"
   ];
-  function quoteOfDay(){ const d=new Date(); return QUOTES[(d.getFullYear()*372+d.getMonth()*31+d.getDate()) % QUOTES.length]; }
+  const EMOJI_TAIL = ["🌱","✨","💪","🔥","🚀","🌿","⭐","🕊️","🌤️","🎯"];
+  function endsWithEmoji(s){
+    return /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]\s*$/u.test(s);
+  }
+  function quoteOfDay(){
+    const d=new Date();
+    const seed = d.getFullYear()*372+d.getMonth()*31+d.getDate();
+    const q = QUOTES[seed % QUOTES.length];
+    if(endsWithEmoji(q)) return q;
+    return q + " " + EMOJI_TAIL[seed % EMOJI_TAIL.length];
+  }
 
   /* ================= XP / LEVEL / ACHIEVEMENTS ================= */
   const LEVELS = [
@@ -783,11 +935,12 @@
     return {level:idx+1, title:cur.title, xp, nextMin: next?next.min:null, nextMission: next?next.mission:null, progress: next?(xp-cur.min)/(next.min-cur.min):1};
   }
   const ACHIEVEMENTS = [
-    {tier:"bronze", check:s=>s.sessions>=1}, {tier:"bronze", check:s=>s.hours>=1}, {tier:"bronze", check:s=>s.streak>=1}, {tier:"bronze", check:s=>s.tests>=10},
-    {tier:"silver", check:s=>s.sessions>=10}, {tier:"silver", check:s=>s.hours>=10}, {tier:"silver", check:s=>s.streak>=3}, {tier:"silver", check:s=>s.tests>=50},
-    {tier:"gold", check:s=>s.sessions>=50}, {tier:"gold", check:s=>s.hours>=50}, {tier:"gold", check:s=>s.streak>=7}, {tier:"gold", check:s=>s.tests>=200},
-    {tier:"legendary", check:s=>s.sessions>=200}, {tier:"legendary", check:s=>s.hours>=200}, {tier:"legendary", check:s=>s.streak>=30}, {tier:"legendary", check:s=>s.tests>=1000}
+    {tier:"bronze", label:"۱ جلسه مطالعه ثبت کن", check:s=>s.sessions>=1}, {tier:"bronze", label:"۱ ساعت مجموع مطالعه", check:s=>s.hours>=1}, {tier:"bronze", label:"۱ روز متوالی", check:s=>s.streak>=1}, {tier:"bronze", label:"۱۰ سوال تست بزن", check:s=>s.tests>=10},
+    {tier:"silver", label:"۱۰ جلسه مطالعه", check:s=>s.sessions>=10}, {tier:"silver", label:"۱۰ ساعت مجموع مطالعه", check:s=>s.hours>=10}, {tier:"silver", label:"۳ روز متوالی", check:s=>s.streak>=3}, {tier:"silver", label:"۵۰ سوال تست", check:s=>s.tests>=50},
+    {tier:"gold", label:"۵۰ جلسه مطالعه", check:s=>s.sessions>=50}, {tier:"gold", label:"۵۰ ساعت مجموع مطالعه", check:s=>s.hours>=50}, {tier:"gold", label:"۷ روز متوالی", check:s=>s.streak>=7}, {tier:"gold", label:"۲۰۰ سوال تست", check:s=>s.tests>=200},
+    {tier:"legendary", label:"۲۰۰ جلسه مطالعه", check:s=>s.sessions>=200}, {tier:"legendary", label:"۲۰۰ ساعت مجموع مطالعه", check:s=>s.hours>=200}, {tier:"legendary", label:"۳۰ روز متوالی", check:s=>s.streak>=30}, {tier:"legendary", label:"۱۰۰۰ سوال تست", check:s=>s.tests>=1000}
   ];
+  const TIER_NAMES = {bronze:"برنز", silver:"نقره", gold:"طلا", legendary:"افسانه‌ای"};
   function computeAchievements(){
     const stats = {
       sessions: DATA.sessions.length,
@@ -797,7 +950,7 @@
     };
     const counts = {bronze:0, silver:0, gold:0, legendary:0};
     let earned = 0;
-    ACHIEVEMENTS.forEach(a=>{ if(a.check(stats)){ counts[a.tier]++; earned++; } });
+    ACHIEVEMENTS.forEach(a=>{ a.earned = a.check(stats); if(a.earned){ counts[a.tier]++; earned++; } });
     return {counts, earned, total: ACHIEVEMENTS.length};
   }
   function renderLevelCard(){
@@ -822,13 +975,75 @@
       </div>
       ${info.nextMission ? `<div class="level-mission">🎯 ماموریت بعدی: ${info.nextMission}</div>` : ""}
       <div class="ach-grid">
-        <div class="ach-box"><span class="ach-dot" style="background:var(--bronze)"></span>برنز<b>${ach.counts.bronze}</b></div>
-        <div class="ach-box"><span class="ach-dot" style="background:var(--silver)"></span>نقره<b>${ach.counts.silver}</b></div>
-        <div class="ach-box"><span class="ach-dot" style="background:var(--goldtier)"></span>طلا<b>${ach.counts.gold}</b></div>
-        <div class="ach-box"><span class="ach-dot" style="background:var(--legendary)"></span>افسانه‌ای<b>${ach.counts.legendary}</b></div>
+        <div class="ach-box" data-tier="bronze"><span class="ach-dot" style="background:var(--bronze)"></span>برنز<b>${ach.counts.bronze}</b></div>
+        <div class="ach-box" data-tier="silver"><span class="ach-dot" style="background:var(--silver)"></span>نقره<b>${ach.counts.silver}</b></div>
+        <div class="ach-box" data-tier="gold"><span class="ach-dot" style="background:var(--goldtier)"></span>طلا<b>${ach.counts.gold}</b></div>
+        <div class="ach-box" data-tier="legendary"><span class="ach-dot" style="background:var(--legendary)"></span>افسانه‌ای<b>${ach.counts.legendary}</b></div>
       </div>
       <div class="ach-total">${ach.earned} از ${ach.total} نشان کسب شده</div>
+      <div class="level-hint">برای دیدن همه‌ی سطح‌ها و ماموریت‌ها بزن 👆</div>
     `;
+    card.querySelectorAll(".ach-box").forEach(box=>{
+      box.addEventListener("click", (e)=>{
+        e.stopPropagation();
+        openTierDetail(box.dataset.tier);
+      });
+    });
+  }
+  function openTierDetail(tier){
+    const list = document.getElementById("missionsList");
+    list.innerHTML = "";
+    ACHIEVEMENTS.filter(a=>a.tier===tier).forEach((a, idx)=>{
+      const row = document.createElement("div");
+      row.className = "mission-item " + (a.earned ? "done" : "locked");
+      row.innerHTML = `<div class="m-badge">${a.earned?"✓":idx+1}</div><div class="m-main"><div class="m-title">نشان ${TIER_NAMES[tier]} ${idx+1}</div><div class="m-sub">${a.earned ? "کسب شده ✓" : a.label}</div></div>`;
+      list.appendChild(row);
+    });
+    document.getElementById("missionsOverlay").classList.add("active");
+  }
+  document.getElementById("levelCard").addEventListener("click", openMissionsSheet);
+  document.getElementById("missionsClose").addEventListener("click", ()=>{
+    document.getElementById("missionsOverlay").classList.remove("active");
+  });
+  function openMissionsSheet(){
+    const info = levelInfo();
+    const list = document.getElementById("missionsList");
+    list.innerHTML = "";
+    LEVELS.forEach((lvl, idx)=>{
+      const levelNum = idx+1;
+      let state = "locked";
+      if(levelNum < info.level) state = "done";
+      else if(levelNum === info.level) state = "current";
+      const row = document.createElement("div");
+      row.className = "mission-item " + state;
+      const sub = state === "current"
+        ? (info.nextMin ? `${info.nextMin-info.xp} XP دیگه تا اینجا رد بشه: ${lvl.mission}` : lvl.mission)
+        : (state === "done" ? "رد شده ✓ — برای جزئیات بزن" : lvl.mission + " — برای جزئیات بزن");
+      row.innerHTML = `<div class="m-badge">${levelNum}</div><div class="m-main"><div class="m-title">${lvl.title}${state==="current"?" (سطح فعلی تو)":""}</div><div class="m-sub">${sub}</div><div class="m-detail" id="m-detail-${idx}" style="display:none;"></div></div>`;
+      row.style.cursor = "pointer";
+      row.addEventListener("click", ()=>{
+        const detail = document.getElementById(`m-detail-${idx}`);
+        const isOpen = detail.style.display === "block";
+        document.querySelectorAll(".m-detail").forEach(d=>d.style.display="none");
+        if(isOpen) return;
+        const xpNeeded = Math.max(0, lvl.min - info.xp);
+        const hoursNeeded = Math.round(xpNeeded/60);
+        let text;
+        if(state === "done"){
+          text = `قبلاً از این سطح رد شدی، عالی بود! این سطح با رسیدن به ${lvl.min} XP باز شد.`;
+        } else if(hoursNeeded <= 0){
+          text = "به این سطح رسیدی 🎉";
+        } else {
+          const dailyFor30 = (hoursNeeded/30).toFixed(1);
+          const dailyFor14 = (hoursNeeded/14).toFixed(1);
+          text = `برای رسیدن به این سطح تقریباً ${hoursNeeded} ساعت مجموع مطالعه (یا معادلش از تست/بازخورد) لازم داری. مثلاً حدود ${dailyFor30} ساعت در روز طی یک ماه، یا ${dailyFor14} ساعت در روز طی دو هفته.`;
+        }
+        detail.textContent = "📌 " + text;
+        detail.style.display = "block";
+      });
+      list.appendChild(row);
+    });
+    document.getElementById("missionsOverlay").classList.add("active");
   }
 
   /* ================= STREAK ================= */
@@ -873,17 +1088,18 @@
       });
       container.appendChild(chip);
     });
-    const addChip = document.createElement("button");
-    addChip.className = "subject-chip add-new"; addChip.textContent = "+ درس جدید";
-    addChip.addEventListener("click", openNewSubjectSheet);
-    container.appendChild(addChip);
   }
   let manualSelectedSubject = DATA.selectedSubject;
   let testSelectedSubject = DATA.selectedSubject;
+  function applyRingColorForSubject(){
+    const sub = DATA.subjects.find(s=>s.id===DATA.selectedSubject);
+    document.documentElement.style.setProperty("--ring-color", sub ? sub.color : "var(--accent)");
+  }
   function refreshAllSubjectRows(){
-    renderSubjectRow(document.getElementById("subjectRow"), true, (id)=>{ DATA.selectedSubject=id; persist(); });
+    renderSubjectRow(document.getElementById("subjectRow"), true, (id)=>{ DATA.selectedSubject=id; persist(); applyRingColorForSubject(); });
     renderSubjectRow(document.getElementById("manualSubjectRow"), true, (id)=>{ manualSelectedSubject=id; });
     renderSubjectRow(document.getElementById("testSubjectRow"), true, (id)=>{ testSelectedSubject=id; });
+    applyRingColorForSubject();
   }
   let pickedColor = SUBJECT_COLORS[0];
   function openNewSubjectSheet(){
@@ -915,6 +1131,10 @@
     renderManageSubjectsList();
     document.getElementById("manageSubjectsOverlay").classList.add("active");
   });
+  document.getElementById("manageAddSubjectBtn").addEventListener("click", ()=>{
+    document.getElementById("manageSubjectsOverlay").classList.remove("active");
+    openNewSubjectSheet();
+  });
   document.getElementById("manageSubjectsClose").addEventListener("click", ()=>{
     document.getElementById("manageSubjectsOverlay").classList.remove("active");
   });
@@ -943,6 +1163,7 @@
 
   /* ================= TIMER ENGINE ================= */
   let timerMode = "stopwatch", running=false, startEpoch=0, elapsedBeforePause=0, rafId=null, sessionWallStart=null;
+  let lastHourNotified = 0;
   let countdownTotalSeconds = 60*60;
   let pomoConfig = { focus:25*60, short:5*60, long:15*60 };
   let pomoPhase = "focus", pomoCount = 0, pomoPhaseSeconds = pomoConfig.focus;
@@ -952,11 +1173,107 @@
   const timerEnd = document.getElementById("timerEnd");
   const startStopBtn = document.getElementById("startStopBtn");
   const resetBtn = document.getElementById("resetBtn");
+  const resetBtnWrap = document.getElementById("resetBtnWrap");
   const countdownSetup = document.getElementById("countdownSetup");
   const pomoSetup = document.getElementById("pomoSetup");
   const pomoPhaseLabel = document.getElementById("pomoPhaseLabel");
   const ringProgress = document.getElementById("ringProgress");
   const RING_CIRC = 2*Math.PI*90;
+
+  /* ================= MASCOT (idle / studying / sleeping) ================= */
+  function mascotHeadHairSVG(){
+    return `<circle cx="60" cy="50" r="21" fill="#fff" stroke="var(--ink)" stroke-width="2.4"/>`;
+  }
+  function mascotIdleSVG(){
+    return `<svg viewBox="0 0 120 120" fill="none">
+      ${mascotHeadHairSVG()}
+      <path d="M53 56q7 3 14 0" stroke="var(--ink)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="52" cy="47" r="2.2" fill="var(--ink)"/><circle cx="68" cy="47" r="2.2" fill="var(--ink)"/>
+      <ellipse cx="47" cy="55" rx="3.5" ry="2.4" fill="var(--accent)" opacity="0.3"/>
+      <ellipse cx="73" cy="55" rx="3.5" ry="2.4" fill="var(--accent)" opacity="0.3"/>
+      <path d="M42 100c0-14 8-24 18-24s18 10 18 24" fill="var(--accent)"/>
+      <rect x="45" y="86" width="30" height="14" rx="2.5" fill="#fff" stroke="var(--ink)" stroke-width="1.8"/>
+      <line x1="45" y1="93" x2="75" y2="93" stroke="var(--ink)" stroke-width="1.8"/>
+      <path d="M30 68l8 6M90 68l-8 6" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`;
+  }
+  function subjectSymbol(name){
+    const n = name || "";
+    if(n.includes("زیست")) return "♥";
+    if(n.includes("ریاضی")) return "f(x)";
+    if(n.includes("فیزیک")) return "E=mc²";
+    if(n.includes("شیمی")) return "H2O";
+    if(n.includes("انگلیسی") || n.includes("زبان")) return "English";
+    if(n.includes("عربی")) return "ع";
+    if(n.includes("فارسی")) return "ف";
+    return "📖";
+  }
+  function mascotStudyingSVG(sym){
+    return `<svg viewBox="0 0 120 120" fill="none">
+      ${mascotHeadHairSVG()}
+      <path d="M51 53c1.2 3 3.6 5 9 5s7.8-2 9-5" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <circle cx="52" cy="46" r="2.3" fill="var(--ink)"/><circle cx="68" cy="46" r="2.3" fill="var(--ink)"/>
+      <ellipse cx="47" cy="55" rx="3.5" ry="2.4" fill="var(--accent)" opacity="0.35"/>
+      <ellipse cx="73" cy="55" rx="3.5" ry="2.4" fill="var(--accent)" opacity="0.35"/>
+      <path d="M42 100c0-14 8-24 18-24s18 10 18 24" fill="var(--accent)"/>
+      <rect x="42" y="80" width="36" height="20" rx="3" fill="#fff" stroke="var(--ink)" stroke-width="2"/>
+      <line x1="60" y1="80" x2="60" y2="100" stroke="var(--ink)" stroke-width="1.4"/>
+      <path d="M45 85q7-3 13 0" stroke="var(--ink-faint)" stroke-width="1.2" fill="none"/>
+      <path d="M45 91q7-3 13 0" stroke="var(--ink-faint)" stroke-width="1.2" fill="none"/>
+      <rect class="turning-page" x="60" y="81" width="17" height="18" rx="2" fill="#fff" stroke="var(--ink)" stroke-width="1.2" style="transform-box:fill-box; transform-origin:0% 50%;"/>
+      <path d="M63 85q6-3 11 0" stroke="var(--ink-faint)" stroke-width="1" fill="none" opacity="0.8"/>
+      <path d="M63 91q6-3 11 0" stroke="var(--ink-faint)" stroke-width="1" fill="none" opacity="0.8"/>
+      <text x="51" y="98" text-anchor="middle" font-size="${sym && sym.length>4 ? 5.5 : 7.5}" font-weight="700" fill="var(--accent)" font-family="Georgia,serif">${sym || ""}</text>
+      <rect x="14" y="82" width="9" height="18" rx="2" fill="#fff" stroke="var(--accent)" stroke-width="2"/>
+      <rect x="16" y="78" width="5" height="5" rx="1" fill="var(--accent)"/>
+      <rect x="88" y="86" width="16" height="12" rx="2.5" fill="#fff" stroke="var(--ink)" stroke-width="2"/>
+      <path d="M104 89c3 0 3 6 0 6" stroke="var(--ink)" stroke-width="1.6" fill="none"/>
+      <path d="M93 82c0-2 2-2 2-4M99 82c0-2 2-2 2-4" stroke="var(--ink-faint)" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/>
+    </svg>`;
+  }
+  function mascotSleepingSVG(){
+    return `<svg viewBox="0 0 120 120" fill="none">
+      <rect x="16" y="54" width="34" height="26" rx="10" fill="#fff" stroke="var(--line)" stroke-width="2"/>
+      <rect x="70" y="54" width="34" height="26" rx="10" fill="#fff" stroke="var(--line)" stroke-width="2"/>
+      <circle cx="60" cy="56" r="26" fill="#fff" stroke="var(--ink)" stroke-width="2.4"/>
+      <path d="M46 54q5-5 9 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <path d="M65 54q5-5 9 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <path d="M50 65q10 7 20 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="44" cy="62" rx="4" ry="2.6" fill="var(--accent)" opacity="0.3"/>
+      <ellipse cx="76" cy="62" rx="4" ry="2.6" fill="var(--accent)" opacity="0.3"/>
+      <path d="M12 104c0-20 21-32 48-32s48 12 48 32" fill="var(--accent)"/>
+      <text class="zzz z1" x="86" y="38" font-size="13" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">z</text>
+      <text class="zzz z2" x="95" y="26" font-size="16" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">Z</text>
+      <text class="zzz z3" x="105" y="12" font-size="19" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">Z</text>
+    </svg>`;
+  }
+  function mascotState(){
+    if(DATA.mascotSleeping) return "sleeping";
+    if(running) return "studying";
+    return "idle";
+  }
+  function renderMascotState(){
+    const el = document.getElementById("mascotInline");
+    if(!el) return;
+    const state = mascotState();
+    el.className = "mascot-inline state-" + state;
+    if(state === "sleeping") el.innerHTML = mascotSleepingSVG();
+    else if(state === "studying") el.innerHTML = mascotStudyingSVG(subjectSymbol((subjectById(DATA.selectedSubject)||{}).name));
+    else el.innerHTML = mascotIdleSVG();
+  }
+  document.getElementById("mascotSleepToggle").addEventListener("click", ()=>{
+    DATA.mascotSleeping = !DATA.mascotSleeping;
+    const now = fmtClock(new Date());
+    const log = DATA.sleepLogs[todayStr()] || {};
+    if(DATA.mascotSleeping){ log.sleepTime = now; }
+    else { log.wakeTime = now; }
+    DATA.sleepLogs[todayStr()] = log;
+    persist();
+    document.getElementById("mascotSleepToggle").textContent = DATA.mascotSleeping ? "☀️ بیدار شدم" : "🌙 می‌رم بخوابم";
+    renderMascotState();
+    renderGoalBanner();
+    toast(DATA.mascotSleeping ? "شب بخیر 🌙" : "صبح بخیر ☀️");
+  });
 
   document.querySelectorAll('[data-timer-mode]').forEach(btn=>{
     btn.addEventListener("click", ()=>{
@@ -967,7 +1284,7 @@
       countdownSetup.style.display = timerMode === "countdown" ? "flex" : "none";
       pomoSetup.style.display = timerMode === "pomodoro" ? "flex" : "none";
       pomoPhaseLabel.style.display = timerMode === "pomodoro" ? "block" : "none";
-      document.getElementById("addMinuteBtn").style.display = timerMode === "stopwatch" ? "none" : "flex";
+      document.getElementById("minuteAdjustRow").style.display = "flex";
       resetTimerState();
     });
   });
@@ -976,12 +1293,13 @@
     running = false; elapsedBeforePause = 0; pomoPhase="focus"; pomoCount=0;
     readPomoConfig(); pomoPhaseSeconds = pomoConfig.focus; updatePomoLabel();
     startStopBtn.textContent = "شروع"; startStopBtn.classList.remove("running");
-    resetBtn.style.display = "none";
+    resetBtnWrap.style.display = "none";
     renderTimerDisplay(0);
     timerSub.textContent = "آماده برای شروع";
     timerEnd.style.display = "none";
     ringProgress.classList.remove("indeterminate");
     ringProgress.style.strokeDashoffset = 0;
+    renderMascotState();
   }
   function readCountdownInputs(){
     const h = parseInt(document.getElementById("cdHours").value)||0;
@@ -1012,6 +1330,14 @@
     if(timerMode === "stopwatch"){
       renderTimerDisplay(elapsedSec);
       setRingRemaining((elapsedSec % 3600) / 3600);
+      const hoursSoFar = Math.floor(elapsedSec / 3600);
+      if(hoursSoFar > lastHourNotified){
+        lastHourNotified = hoursSoFar;
+        const msg = HOUR_ENCOURAGEMENTS[Math.floor(Math.random()*HOUR_ENCOURAGEMENTS.length)].replace("{h}", hoursSoFar);
+        if("Notification" in window && Notification.permission === "granted"){
+          try{ new Notification("StudyFlow", {body: msg}); }catch(e){ toast(msg, true); }
+        } else { toast(msg, true); }
+      }
     } else if(timerMode === "countdown"){
       const remaining = countdownTotalSeconds - elapsedSec;
       if(remaining <= 0){ renderTimerDisplay(0); finishCountdown(); return; }
@@ -1027,13 +1353,41 @@
     }
     rafId = requestAnimationFrame(tick);
   }
+  const TIMER_DONE_MESSAGES = [
+    {title:"⏰ زمانت تموم شد", body:"جلسه با موفقیت ثبت شد. آفرین بهت!"},
+    {title:"✅ تمومه!", body:"یه جلسه‌ی دیگه به آمارت اضافه شد."},
+    {title:"🎉 عالی بود", body:"این جلسه هم ثبت شد، ادامه بده."},
+    {title:"🔥 یه قدم دیگه جلو رفتی", body:"همینه، ادامه بده."},
+    {title:"💪 محکم بودی", body:"جلسه ثبت شد، خسته نباشی."},
+    {title:"📚 یه جلسه‌ی دیگه تموم شد", body:"هر جلسه یه آجر از هدفته."},
+    {title:"✨ آفرین", body:"داری خیلی خوب پیش می‌ری."},
+    {title:"🎯 هدف نزدیک‌تر شد", body:"این جلسه رو هم بردی."},
+    {title:"🌟 ایول", body:"یه جلسه‌ی دیگه کامل شد، همینجوری ادامه بده."},
+    {title:"🚀 محکم زدی", body:"این جلسه خیلی خوب بود."},
+    {title:"🏆 خسته نباشی", body:"باز هم یه قدم به هدفت نزدیک شدی."},
+    {title:"🌈 عالی پیش می‌ری", body:"ثبت شد! حالا یه استراحت کوچیک بگیر."},
+    {title:"💎 همینه", body:"هر جلسه یه آجر از آینده‌ته."}
+  ];
+  const BREAK_DONE_MESSAGES = [
+    {title:"🔔 استراحت تموم شد", body:"وقتشه برگردیم پای درس."},
+    {title:"☕ زمان استراحت تموم شد", body:"یه نفس تازه کردی، بریم ادامه بدیم."},
+    {title:"📖 برگردیم به درس", body:"استراحتت تموم شد، وقت تمرکزه."},
+    {title:"🌿 استراحت خوبی بود", body:"حالا با انرژی بیشتر برگرد."},
+    {title:"⏳ وقت تمرکزه", body:"استراحت تموم شد، بریم ادامه بدیم."},
+    {title:"💪 آماده‌ی راند بعدی؟", body:"استراحتت تموم شد، بزن بریم."},
+    {title:"🌤️ تازه شدی؟", body:"بریم دوباره شروع کنیم."},
+    {title:"🔋 شارژ شدی", body:"وقتشه برگردی سر درس."},
+    {title:"🎧 استراحت تموم", body:"حالا با تمرکز کامل برگرد."}
+  ];
   function finishCountdown(){
     running = false;
     logSession(countdownTotalSeconds, "countdown");
-    playAlert();
+    playAlert("focus");
+    const m = TIMER_DONE_MESSAGES[Math.floor(Math.random()*TIMER_DONE_MESSAGES.length)];
+    sendAppNotification(m.title, m.body);
     timerSub.textContent = "پایان زمان — جلسه ثبت شد ✓";
     startStopBtn.textContent = "شروع"; startStopBtn.classList.remove("running");
-    resetBtn.style.display = "none"; timerEnd.style.display="none";
+    resetBtnWrap.style.display = "none"; timerEnd.style.display="none";
     elapsedBeforePause = 0;
   }
   function advancePomoPhase(){
@@ -1042,10 +1396,14 @@
       pomoCount++;
       pomoPhase = (pomoCount % 4 === 0) ? "long" : "short";
       pomoPhaseSeconds = pomoConfig[pomoPhase === "long" ? "long" : "short"];
-      playAlert(); timerSub.textContent = "وقت استراحت است";
+      playAlert("focus"); timerSub.textContent = "وقت استراحت است";
+      const m1 = TIMER_DONE_MESSAGES[Math.floor(Math.random()*TIMER_DONE_MESSAGES.length)];
+      sendAppNotification(m1.title, m1.body);
     } else {
       pomoPhase = "focus"; pomoPhaseSeconds = pomoConfig.focus;
-      playAlert(); timerSub.textContent = "برگردیم به درس";
+      playAlert("break"); timerSub.textContent = "برگردیم به درس";
+      const m2 = BREAK_DONE_MESSAGES[Math.floor(Math.random()*BREAK_DONE_MESSAGES.length)];
+      sendAppNotification(m2.title, m2.body);
     }
     updatePomoLabel();
     elapsedBeforePause = 0; startEpoch = Date.now(); sessionWallStart = new Date();
@@ -1059,10 +1417,12 @@
       running = true; startEpoch = Date.now();
       if(elapsedBeforePause === 0) sessionWallStart = new Date();
       startStopBtn.textContent = "توقف"; startStopBtn.classList.add("running");
-      resetBtn.style.display = "block";
+      resetBtnWrap.style.display = timerMode === "stopwatch" ? "block" : "none";
       timerSub.textContent = timerMode === "stopwatch" ? "در حال شمارش..." : "در حال مطالعه...";
       if(timerMode === "stopwatch"){ ringProgress.classList.add("indeterminate"); timerEnd.style.display="none"; }
       else{ timerEnd.style.display="block"; }
+      renderMascotState();
+      lastHourNotified = 0;
       rafId = requestAnimationFrame(tick);
     } else {
       running = false; cancelAnimationFrame(rafId);
@@ -1070,9 +1430,12 @@
       startStopBtn.textContent = "ادامه"; startStopBtn.classList.remove("running");
       timerSub.textContent = "متوقف شد";
       ringProgress.classList.remove("indeterminate");
+      resetBtnWrap.style.display = "block";
+      renderMascotState();
       if(timerMode === "stopwatch"){
         if(elapsedBeforePause >= 1){ logSession(elapsedBeforePause, "stopwatch"); timerSub.textContent = "جلسه ثبت شد ✓ (" + fmtHMS(elapsedBeforePause) + ")"; }
-        elapsedBeforePause = 0; startStopBtn.textContent = "شروع"; resetBtn.style.display = "none";
+        elapsedBeforePause = 0; startStopBtn.textContent = "شروع";
+        resetBtnWrap.style.display = "block";
       }
     }
   });
@@ -1106,7 +1469,10 @@
   });
 
   document.getElementById("addMinuteBtn").addEventListener("click", ()=>{
-    if(timerMode === "countdown"){
+    if(timerMode === "stopwatch"){
+      elapsedBeforePause += 60;
+      if(!running) renderTimerDisplay(elapsedBeforePause);
+    } else if(timerMode === "countdown"){
       if(running){ countdownTotalSeconds += 60; }
       else{ document.getElementById("cdMinutes").value = (parseInt(document.getElementById("cdMinutes").value)||0) + 1; }
     } else if(timerMode === "pomodoro"){
@@ -1115,13 +1481,43 @@
     }
     toast("۱ دقیقه اضافه شد");
   });
+  document.getElementById("subMinuteBtn").addEventListener("click", ()=>{
+    if(timerMode === "stopwatch"){
+      elapsedBeforePause = Math.max(0, elapsedBeforePause - 60);
+      if(!running) renderTimerDisplay(elapsedBeforePause);
+    } else if(timerMode === "countdown"){
+      if(running){ countdownTotalSeconds = Math.max(60, countdownTotalSeconds - 60); }
+      else{ document.getElementById("cdMinutes").value = Math.max(0, (parseInt(document.getElementById("cdMinutes").value)||0) - 1); }
+    } else if(timerMode === "pomodoro"){
+      if(running){ pomoPhaseSeconds = Math.max(60, pomoPhaseSeconds - 60); }
+      else{ document.getElementById("pomoFocus").value = Math.max(1, (parseInt(document.getElementById("pomoFocus").value)||0) - 1); }
+    }
+    toast("۱ دقیقه کم شد");
+  });
 
+  const SESSION_TYPES = ["مرور","درسنامه","ویدیو","تست آموزشی","تست زمان‌دار","تحلیل سوال","خلاصه‌نویسی","ترکیبی"];
+  let currentSessionType = "مرور";
+  let manualSessionType = "مرور";
+  function renderTypeChips(containerId, getCur, setCur){
+    const row = document.getElementById(containerId); if(!row) return;
+    row.innerHTML = "";
+    SESSION_TYPES.forEach(t=>{
+      const b = document.createElement("button");
+      b.className = "type-chip" + (t===getCur() ? " selected" : "");
+      b.textContent = t;
+      b.addEventListener("click", ()=>{ setCur(t); renderTypeChips(containerId, getCur, setCur); });
+      row.appendChild(b);
+    });
+  }
   function logSession(seconds, mode){
     const isFirstToday = DATA.sessions.filter(s=>s.date===todayStr()).length === 0;
     const endDate = new Date();
     const startDate = sessionWallStart || new Date(endDate.getTime()-seconds*1000);
-    DATA.sessions.push({ id:"sess_"+Date.now()+Math.random().toString(36).slice(2,6), subjectId:DATA.selectedSubject, seconds:Math.round(seconds), date:todayStr(), mode, startTime:fmtClock(startDate), endTime:fmtClock(endDate), ts:Date.now() });
+    const note = (document.getElementById("sessionNoteInput").value || "").trim();
+    DATA.sessions.push({ id:"sess_"+Date.now()+Math.random().toString(36).slice(2,6), subjectId:DATA.selectedSubject, seconds:Math.round(seconds), date:todayStr(), mode, startTime:fmtClock(startDate), endTime:fmtClock(endDate), note, sessionType:currentSessionType, ts:Date.now() });
     persist();
+    document.getElementById("sessionNoteInput").value = "";
+    refreshNoteBtn();
     renderGoalBanner(); renderLevelCard(); renderStreak();
     checkStudyCelebration();
     showSessionCelebration(seconds, isFirstToday);
@@ -1166,7 +1562,13 @@
   /* ================= ALERT SOUNDS ================= */
   let audioCtx = null;
   function getCtx(){ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
-  const CHIME_DEFS = [ {id:"bell", name:"زنگ"}, {id:"marimba", name:"ماریمبا"}, {id:"arcade", name:"آرکید"}, {id:"soft", name:"محو نرم"} ];
+  const CHIME_DEFS = [
+    {id:"bell", name:"زنگ"}, {id:"marimba", name:"ماریمبا"}, {id:"harp", name:"هارپ"},
+    {id:"glass", name:"شیشه‌ای"}, {id:"xylo", name:"زایلوفون"}, {id:"chime3", name:"زنگوله"},
+    {id:"sparkle", name:"جرقه"}, {id:"piano", name:"پیانو"}, {id:"celesta", name:"سلستا"},
+    {id:"kalimba", name:"کالیمبا"}, {id:"vibes", name:"ویبرافون"}, {id:"crystal", name:"کریستال"},
+    {id:"windchime", name:"باد و زنگوله"}
+  ];
   function playChimeType(type){
     try{
       const ctx = getCtx();
@@ -1175,7 +1577,7 @@
           const osc=ctx.createOscillator(), gain=ctx.createGain();
           osc.type="sine"; osc.frequency.value=freq;
           gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.15, ctx.currentTime+0.02+i*0.18);
+          gain.gain.exponentialRampToValueAtTime(0.32, ctx.currentTime+0.02+i*0.18);
           gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.6+i*0.18);
           osc.connect(gain).connect(ctx.destination);
           osc.start(ctx.currentTime+i*0.18); osc.stop(ctx.currentTime+0.8+i*0.18);
@@ -1185,7 +1587,7 @@
           const osc=ctx.createOscillator(), gain=ctx.createGain();
           osc.type="triangle"; osc.frequency.value=freq;
           gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime+0.01+i*0.12);
+          gain.gain.exponentialRampToValueAtTime(0.4, ctx.currentTime+0.01+i*0.12);
           gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.4+i*0.12);
           osc.connect(gain).connect(ctx.destination);
           osc.start(ctx.currentTime+i*0.12); osc.stop(ctx.currentTime+0.5+i*0.12);
@@ -1195,28 +1597,226 @@
         osc.type="square";
         osc.frequency.setValueAtTime(300, ctx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime+0.25);
-        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.3);
         osc.connect(gain).connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+0.35);
       } else if(type === "soft"){
         const osc=ctx.createOscillator(), gain=ctx.createGain();
         osc.type="sine"; osc.frequency.value=660;
         gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime+0.3);
+        gain.gain.exponentialRampToValueAtTime(0.26, ctx.currentTime+0.3);
         gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+1.4);
         osc.connect(gain).connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+1.5);
+      } else if(type === "dingdong"){
+        [988,740].forEach((freq,i)=>{
+          const osc=ctx.createOscillator(), gain=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=freq;
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.36, ctx.currentTime+0.02+i*0.32);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.9+i*0.32);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(ctx.currentTime+i*0.32); osc.stop(ctx.currentTime+1.1+i*0.32);
+        });
+      } else if(type === "digital"){
+        [1200,1200].forEach((freq,i)=>{
+          const osc=ctx.createOscillator(), gain=ctx.createGain();
+          osc.type="square"; osc.frequency.value=freq;
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime+0.01+i*0.15);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.1+i*0.15);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(ctx.currentTime+i*0.15); osc.stop(ctx.currentTime+0.12+i*0.15);
+        });
+      } else if(type === "harp"){
+        [523,659,784,1046,1318].forEach((freq,i)=>{
+          const osc=ctx.createOscillator(), gain=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=freq;
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.28, ctx.currentTime+0.01+i*0.08);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.5+i*0.08);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(ctx.currentTime+i*0.08); osc.stop(ctx.currentTime+0.6+i*0.08);
+        });
+      } else if(type === "glass"){
+        [1568,2093].forEach((freq,i)=>{
+          const osc=ctx.createOscillator(), gain=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=freq;
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime+0.01+i*0.14);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.7+i*0.14);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(ctx.currentTime+i*0.14); osc.stop(ctx.currentTime+0.8+i*0.14);
+        });
+      } else if(type === "xylo"){
+        [880,1174,1480].forEach((freq,i)=>{
+          const osc=ctx.createOscillator(), gain=ctx.createGain();
+          osc.type="triangle"; osc.frequency.value=freq;
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.28, ctx.currentTime+0.01+i*0.1);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.35+i*0.1);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(ctx.currentTime+i*0.1); osc.stop(ctx.currentTime+0.4+i*0.1);
+        });
+      } else if(type === "pluck"){
+        const osc=ctx.createOscillator(), gain=ctx.createGain();
+        osc.type="sawtooth"; osc.frequency.setValueAtTime(440, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(220, ctx.currentTime+0.4);
+        gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.14, ctx.currentTime+0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.5);
+        osc.connect(gain).connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+0.55);
+      } else if(type === "chime3"){
+        [1318,1046,1568,1318].forEach((freq,i)=>{
+          const osc=ctx.createOscillator(), gain=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=freq;
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime+0.01+i*0.11);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.5+i*0.11);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(ctx.currentTime+i*0.11); osc.stop(ctx.currentTime+0.6+i*0.11);
+        });
+      } else if(type === "bubble"){
+        const osc=ctx.createOscillator(), gain=ctx.createGain();
+        osc.type="sine"; osc.frequency.setValueAtTime(300, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime+0.18);
+        gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime+0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.25);
+        osc.connect(gain).connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+0.3);
+      } else if(type === "tick"){
+        [0,0.16].forEach((t0,i)=>{
+          const osc=ctx.createOscillator(), gain=ctx.createGain();
+          osc.type="square"; osc.frequency.value = i===0 ? 1500 : 1100;
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime+t0);
+          gain.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime+t0+0.005);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+t0+0.05);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(ctx.currentTime+t0); osc.stop(ctx.currentTime+t0+0.06);
+        });
+      } else if(type === "pop"){
+        const osc=ctx.createOscillator(), gain=ctx.createGain();
+        osc.type="sine"; osc.frequency.setValueAtTime(700, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(160, ctx.currentTime+0.12);
+        gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.3, ctx.currentTime+0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.15);
+        osc.connect(gain).connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+0.2);
+      } else if(type === "sparkle"){
+        [2093,2637,3136,2637,3520].forEach((freq,i)=>{
+          const osc=ctx.createOscillator(), gain=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=freq;
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime+0.01+i*0.07);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.25+i*0.07);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(ctx.currentTime+i*0.07); osc.stop(ctx.currentTime+0.3+i*0.07);
+        });
+      } else if(type === "piano"){
+        [523.25,659.25,783.99].forEach((f,i)=>{
+          [1,2,3].forEach((h,j)=>{
+            const osc=ctx.createOscillator(), g=ctx.createGain();
+            osc.type="sine"; osc.frequency.value=f*h;
+            const t0=ctx.currentTime+i*0.13, amp=[0.22,0.07,0.025][j];
+            g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(amp,t0+0.005);
+            g.gain.exponentialRampToValueAtTime(0.0001,t0+1.1);
+            osc.connect(g).connect(ctx.destination); osc.start(t0); osc.stop(t0+1.2);
+          });
+        });
+      } else if(type === "celesta"){
+        [2093,2794,3136].forEach((f,i)=>{
+          const osc=ctx.createOscillator(), g=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=f;
+          const t0=ctx.currentTime+i*0.09;
+          g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(0.16,t0+0.005);
+          g.gain.exponentialRampToValueAtTime(0.0001,t0+0.7);
+          osc.connect(g).connect(ctx.destination); osc.start(t0); osc.stop(t0+0.8);
+        });
+      } else if(type === "kalimba"){
+        [880,1174,1318,1760].forEach((f,i)=>{
+          const osc=ctx.createOscillator(), g=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=f;
+          const t0=ctx.currentTime+i*0.1;
+          g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(0.25,t0+0.004);
+          g.gain.exponentialRampToValueAtTime(0.0001,t0+0.45);
+          osc.connect(g).connect(ctx.destination); osc.start(t0); osc.stop(t0+0.5);
+        });
+      } else if(type === "vibes"){
+        [523.25,783.99,1046.5].forEach((f,i)=>{
+          const osc=ctx.createOscillator(), g=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=f;
+          const t0=ctx.currentTime+i*0.12;
+          g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(0.2,t0+0.01);
+          g.gain.exponentialRampToValueAtTime(0.0001,t0+1.6);
+          osc.connect(g).connect(ctx.destination); osc.start(t0); osc.stop(t0+1.7);
+        });
+      } else if(type === "crystal"){
+        [1568,2093,2637,3136].forEach((f,i)=>{
+          const osc=ctx.createOscillator(), g=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=f;
+          const t0=ctx.currentTime+i*0.05;
+          g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(0.13,t0+0.006);
+          g.gain.exponentialRampToValueAtTime(0.0001,t0+1.3);
+          osc.connect(g).connect(ctx.destination); osc.start(t0); osc.stop(t0+1.4);
+        });
+      } else if(type === "windchime"){
+        const scale=[1046.5,1174.7,1318.5,1568,1760,2093];
+        [0,0.2,0.38,0.66,0.9].forEach((dt,i)=>{
+          const f=scale[Math.floor(Math.random()*scale.length)];
+          const osc=ctx.createOscillator(), g=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=f;
+          const t0=ctx.currentTime+dt;
+          g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(0.18,t0+0.005);
+          g.gain.exponentialRampToValueAtTime(0.0001,t0+1.0);
+          osc.connect(g).connect(ctx.destination); osc.start(t0); osc.stop(t0+1.1);
+        });
+      } else if(type === "church"){
+        [220,440.5,554.4,663,880].forEach((f,i)=>{
+          const osc=ctx.createOscillator(), g=ctx.createGain();
+          osc.type="sine"; osc.frequency.value=f;
+          const amp=[0.3,0.12,0.08,0.05,0.03][i];
+          g.gain.setValueAtTime(0.0001,ctx.currentTime); g.gain.exponentialRampToValueAtTime(amp,ctx.currentTime+0.01);
+          g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+3.2);
+          osc.connect(g).connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+3.3);
+        });
+      } else if(type === "drum"){
+        const k=ctx.createOscillator(), kg=ctx.createGain();
+        k.type="sine"; k.frequency.setValueAtTime(120,ctx.currentTime); k.frequency.exponentialRampToValueAtTime(40,ctx.currentTime+0.25);
+        kg.gain.setValueAtTime(0.5,ctx.currentTime); kg.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.3);
+        k.connect(kg).connect(ctx.destination); k.start(); k.stop(ctx.currentTime+0.32);
+        const nb=makeNoiseBuffer(ctx,0.2), n=ctx.createBufferSource(); n.buffer=nb;
+        const nf=ctx.createBiquadFilter(); nf.type="highpass"; nf.frequency.value=1800;
+        const ng=ctx.createGain(); ng.gain.setValueAtTime(0.18,ctx.currentTime+0.15); ng.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.35);
+        n.connect(nf).connect(ng).connect(ctx.destination); n.start(ctx.currentTime+0.15); n.stop(ctx.currentTime+0.4);
+      } else if(type === "whoosh"){
+        const nb=makeNoiseBuffer(ctx,1.2), n=ctx.createBufferSource(); n.buffer=nb;
+        const bp=ctx.createBiquadFilter(); bp.type="bandpass"; bp.Q.value=1.2;
+        bp.frequency.setValueAtTime(300,ctx.currentTime); bp.frequency.exponentialRampToValueAtTime(2600,ctx.currentTime+0.9);
+        const g=ctx.createGain(); g.gain.setValueAtTime(0.0001,ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.35,ctx.currentTime+0.35); g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+1.0);
+        n.connect(bp).connect(g).connect(ctx.destination); n.start(); n.stop(ctx.currentTime+1.1);
+      } else if(type === "gong"){
+        const osc=ctx.createOscillator(), gain=ctx.createGain();
+        osc.type="sine"; osc.frequency.setValueAtTime(420, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime+1.8);
+        gain.gain.setValueAtTime(0.001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.45, ctx.currentTime+0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+2.2);
+        osc.connect(gain).connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime+2.3);
       }
       if(navigator.vibrate) navigator.vibrate([80,40,80]);
     }catch(e){}
   }
-  function playAlert(){ playChimeType(DATA.settings.chime); }
+  function playAlert(kind){
+    const id = kind === "break" ? DATA.settings.chimeBreak : DATA.settings.chime;
+    playChimeType(CHIME_DEFS.some(x=>x.id===id) ? id : "bell");
+  }
 
   /* ================= SETTINGS SHEET ================= */
   document.getElementById("openSettingsBtn").addEventListener("click", openSettingsSheet);
   document.getElementById("settingsClose").addEventListener("click", ()=>{ document.getElementById("settingsOverlay").classList.remove("active"); });
   function openSettingsSheet(){
     document.querySelectorAll("#themeModeSeg button").forEach(b=>b.classList.toggle("active", b.dataset.themeMode===DATA.settings.themeMode));
-    renderAccentRow(); renderChimeRow();
+    renderAccentRow(); renderPauseColorRow(); renderChimeRow("chimeRow","chime","chimeRadioFocus"); renderChimeRow("chimeRowBreak","chimeBreak","chimeRadioBreak");
     document.getElementById("settingsOverlay").classList.add("active");
   }
   document.querySelectorAll("#themeModeSeg button").forEach(b=>{
@@ -1240,14 +1840,28 @@
       row.appendChild(dot);
     });
   }
-  function renderChimeRow(){
-    const row = document.getElementById("chimeRow"); row.innerHTML = "";
+  function renderPauseColorRow(){
+    const row = document.getElementById("pauseColorRow"); row.innerHTML = "";
+    PAUSE_COLOR_OPTIONS.forEach(p=>{
+      const dot = document.createElement("button");
+      dot.className = "accent-dot" + (p.id===DATA.settings.pauseColor ? " selected" : "");
+      dot.style.background = p.color;
+      dot.addEventListener("click", ()=>{
+        DATA.settings.pauseColor = p.id; persist(); applyTheme();
+        row.querySelectorAll(".accent-dot").forEach(d=>d.classList.remove("selected"));
+        dot.classList.add("selected");
+      });
+      row.appendChild(dot);
+    });
+  }
+  function renderChimeRow(containerId, settingsKey, radioGroupName){
+    const row = document.getElementById(containerId); row.innerHTML = "";
     CHIME_DEFS.forEach(c=>{
       const opt = document.createElement("div");
-      opt.className = "chime-option" + (c.id===DATA.settings.chime ? " selected" : "");
-      opt.innerHTML = `<label><input type="radio" name="chimeRadio" ${c.id===DATA.settings.chime?"checked":""} style="accent-color:var(--accent);"> ${c.name}</label><button class="chime-play" data-play="${c.id}"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>`;
+      opt.className = "chime-option" + (c.id===DATA.settings[settingsKey] ? " selected" : "");
+      opt.innerHTML = `<label><input type="radio" name="${radioGroupName}" ${c.id===DATA.settings[settingsKey]?"checked":""} style="accent-color:var(--accent);"> ${c.name}</label><button class="chime-play" data-play="${c.id}"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>`;
       opt.querySelector("input").addEventListener("change", ()=>{
-        DATA.settings.chime = c.id; persist();
+        DATA.settings[settingsKey] = c.id; persist();
         row.querySelectorAll(".chime-option").forEach(o=>o.classList.remove("selected"));
         opt.classList.add("selected");
       });
@@ -1273,14 +1887,97 @@
     const nowMinutes = now.getHours()*60+now.getMinutes();
     const wakeMinutes = wh*60+wm;
     if(Math.abs(nowMinutes-wakeMinutes) <= 30){
-      const msg = `دیروز ساعت ${yLog.wakeTime} بیدار بودی — الان هم بیداری؟ 😉`;
-      if("Notification" in window && Notification.permission === "granted"){
-        try{ new Notification("StudyFlow", {body: msg}); }catch(e){ toast(msg); }
-      } else { toast(msg); }
+      sendAppNotification("☀️ صبح بخیر", `دیروز ساعت ${yLog.wakeTime} بیدار بودی — الان هم بیداری؟ 😉`);
+    }
+  }
+
+  /* ================= TIME-OF-DAY NOTIFICATIONS ================= */
+  function sendAppNotification(title, body){
+    if("Notification" in window && Notification.permission === "granted"){
+      try{ new Notification(title, {body: body}); }catch(e){ toast(body, true); }
+    } else { toast(body, true); }
+  }
+  function yesterdayHourText(){
+    const y = toDateStr(dateNDaysAgo(1));
+    const secs = DATA.sessions.filter(s=>s.date===y).reduce((a,s)=>a+s.seconds,0);
+    if(secs < 300) return null;
+    const h = Math.floor(secs/3600), m = Math.round((secs%3600)/60);
+    return h>0 ? `${h} ساعت ${m>0?m+" دقیقه ":""}` : `${m} دقیقه `;
+  }
+  const MORNING_MESSAGES = [
+    {title:"☀️ صبح بخیر", body:"امروز چقدر می‌خوای بخونی؟ بزن بریم."},
+    {title:"🌱 روز خوبی برای ادامه دادنه", body:"یه شروع کوچیک همین حالا کافیه."},
+    {title:"💪 بیدار شدی؟", body:"بریم یه شروع خوب داشته باشیم امروز."},
+    {title:"📖 قبل از شلوغی روز", body:"یه ربع مطالعه، حالت امروزتو می‌سازه."},
+    {title:"🌤️ روز جدید، فرصت جدید", body:"امروز رو یه‌جوری بساز که فردا بهش افتخار کنی."},
+    {title:"🐣 صبحت بخیر", body:"ادمک منتظره، بیا با هم شروع کنیم."},
+    {title:"🌸 سلام قهرمان", body:"امروز هم می‌تونی یه قدم بزرگ برداری."},
+    {title:"☕ یه صبح انرژی‌دار", body:"یه چای بخور و یه جلسه شروع کن."},
+    {title:"🚀 آماده‌ی پرواز؟", body:"هدف امروزت منتظرته."}
+  ];
+  const NOON_MESSAGES = [
+    {title:"📖 وقفه‌ی ظهر", body:"یه ربع مطالعه‌ی ظهرگاهی، حالتو عوض می‌کنه."},
+    {title:"✨ نصف روز گذشت", body:"امروز چیزی خوندی؟ هنوز وقت هست."},
+    {title:"🌿 یه نفس بکش", body:"یه صفحه بخون، حالت بهتر می‌شه."},
+    {title:"🎯 هنوز وقت هست", body:"امروز رو خوب کنی، همین الان شروع کن."},
+    {title:"🍉 ظهر بخیر", body:"بعد از ناهار، یه جلسه‌ی سبک چطوره؟"},
+    {title:"🐥 ادمک گرسنه‌ست", body:"ولی بیشتر منتظره که باهات درس بخونه."},
+    {title:"⚡ شارژ ظهر", body:"یه جلسه‌ی کوتاه، انرژی بقیه‌ی روزو می‌سازه."},
+    {title:"🧠 مغزت آماده‌ست", body:"الان وقت خوبیه برای مرور."}
+  ];
+  const EVENING_MESSAGES = [
+    {title:"✨ روز رو قوی تمومش کن", body:"هدفت یه جلسه‌ی دیگه نزدیک‌تره. بزن بریم!"},
+    {title:"🌙 شب بخیر", body:"امروز خوب پیش رفتی؟ یه نگاه به آمارت بنداز."},
+    {title:"💬 امروز خوندی؟", body:"فردا راحت‌تری. یه جلسه‌ی کوتاه چطوره؟"},
+    {title:"📊 قبل خواب", body:"یه نگاه به آمار امروزت بنداز، جالبه."},
+    {title:"🎯 آخرین فرصت امروز", body:"یه نگاه به هدف امروزت بنداز، شاید نزدیک باشی."},
+    {title:"🌠 ستاره‌های امشب", body:"یه جلسه‌ی دیگه بخون و با خیال راحت بخواب."},
+    {title:"🛌 ادمک خوابش میاد", body:"ولی اول بیا یه جلسه‌ی آخر بخونیم."},
+    {title:"🏁 خط پایان امروز", body:"یه تلاش دیگه و امروزو می‌بری."},
+    {title:"🌃 شب خوبیه", body:"آروم و بی‌سروصدا، یه جلسه بخون."}
+  ];
+  function checkTimeOfDayNotifications(){
+    const now = new Date();
+    const h = now.getHours();
+    const ds = todayStr();
+    if(!DATA.notified || DATA.notified.date !== ds){ DATA.notified = {date: ds}; }
+    if(h>=8 && h<10 && !DATA.notified.morning){
+      DATA.notified.morning = true; persist();
+      const yh = yesterdayHourText();
+      if(yh) sendAppNotification("☀️ صبح بخیر", `دیروز این ساعت ${yh}درس می‌خوندی 👏 امروز هم بریم؟`);
+      else { const m = MORNING_MESSAGES[Math.floor(Math.random()*MORNING_MESSAGES.length)]; sendAppNotification(m.title, m.body); }
+    } else if(h>=13 && h<15 && !DATA.notified.noon){
+      DATA.notified.noon = true; persist();
+      const m = NOON_MESSAGES[Math.floor(Math.random()*NOON_MESSAGES.length)]; sendAppNotification(m.title, m.body);
+    } else if(h>=20 && h<22 && !DATA.notified.evening){
+      DATA.notified.evening = true; persist();
+      const m = EVENING_MESSAGES[Math.floor(Math.random()*EVENING_MESSAGES.length)]; sendAppNotification(m.title, m.body);
     }
   }
 
   /* ================= MANUAL ENTRY ================= */
+  /* ---- note sheet + type chips wiring ---- */
+  const noteOverlay = document.getElementById("noteOverlay");
+  let notePrev = "";
+  function refreshNoteBtn(){
+    const v = (document.getElementById("sessionNoteInput").value || "").trim();
+    const short = v.length>18 ? v.slice(0,18)+"…" : v;
+    document.getElementById("noteOpenBtn").textContent = "🏷️ نوع جلسه" + (v ? "  · 📝 " + short : "");
+  }
+  document.getElementById("noteOpenBtn").addEventListener("click", ()=>{
+    notePrev = document.getElementById("sessionNoteInput").value;
+    noteOverlay.classList.add("active");
+    setTimeout(()=>document.getElementById("sessionNoteInput").focus(), 60);
+  });
+  document.getElementById("noteSave").addEventListener("click", ()=>{ noteOverlay.classList.remove("active"); refreshNoteBtn(); });
+  document.getElementById("noteCancel").addEventListener("click", ()=>{
+    document.getElementById("sessionNoteInput").value = notePrev;
+    noteOverlay.classList.remove("active");
+  });
+  renderTypeChips("sessionTypeRow", ()=>currentSessionType, t=>{ currentSessionType = t; refreshNoteBtn(); });
+  renderTypeChips("manualTypeRow", ()=>manualSessionType, t=>{ manualSessionType = t; });
+  refreshNoteBtn();
+
   const manualOverlay = document.getElementById("manualOverlay");
   document.getElementById("openManualBtn").addEventListener("click", ()=>{
     manualSelectedSubject = DATA.selectedSubject;
@@ -1312,8 +2009,10 @@
     const dateVal = document.getElementById("manualDate").value || todayStr();
     const startTime = document.getElementById("manualStartTime").value || null;
     const endTime = document.getElementById("manualEndTime").value || null;
-    DATA.sessions.push({ id:"sess_"+Date.now()+Math.random().toString(36).slice(2,6), subjectId:manualSelectedSubject, seconds:totalSec, date:dateVal, mode:"manual", startTime, endTime, ts:Date.now() });
+    const note = (document.getElementById("manualNote").value || "").trim();
+    DATA.sessions.push({ id:"sess_"+Date.now()+Math.random().toString(36).slice(2,6), subjectId:manualSelectedSubject, seconds:totalSec, date:dateVal, mode:"manual", startTime, endTime, note, sessionType:manualSessionType, ts:Date.now() });
     persist();
+    document.getElementById("manualNote").value = "";
     manualOverlay.classList.remove("active");
     toast("زمان ثبت شد");
     renderLog(); renderGoalBanner(); renderLevelCard(); renderStreak();
@@ -1365,7 +2064,7 @@
     const unanswered = parseInt(document.getElementById("testUnanswered").value)||0;
     if(correct+wrong+unanswered === 0){ toast("حداقل یک عدد را وارد کن"); return; }
     const dateVal = document.getElementById("testDate").value || todayStr();
-    DATA.testEntries.push({ id:"test_"+Date.now()+Math.random().toString(36).slice(2,6), date:dateVal, subjectId:testSelectedSubject, correct, wrong, unanswered, ts:Date.now() });
+    DATA.testEntries.push({ id:"test_"+Date.now()+Math.random().toString(36).slice(2,6), date:dateVal, subjectId:testSelectedSubject, correct, wrong, unanswered, analyzed: document.getElementById("testAnalyzed").checked, ts:Date.now() });
     persist();
     document.getElementById("testCorrect").value = 0;
     document.getElementById("testWrong").value = 0;
@@ -1381,11 +2080,31 @@
       toast(celebrate() + " به هدف تستت رسیدی", true);
     }
   }
+  function isHolidayToday(){
+    const day = new Date().getDay(); // 0=Sun..6=Sat; Thu=4, Fri=5 are holidays per our weekly calendar
+    return day === 4 || day === 5;
+  }
+  const REWARD_QUOTES = [
+    "🏆 هدف امروزت رو زدی! این یعنی تو قوی‌تر از هر بهانه‌ای هستی.",
+    "🔥 به هدفت رسیدی. فردا یه قدم دیگه، همین‌طور تا آخر.",
+    "🌱 هر روزی که به هدف می‌رسی، یه ریشه‌ی محکم‌تر توی آیندت می‌کاری.",
+    "✨ امروز یه چیز بزرگ ساختی. خودتو تشویق کن، حقشه!",
+    "💪 هدف امروز تموم شد. تو همون کسی هستی که قبلاً فکر می‌کردی نیستی.",
+    "🚀 قله‌ها با قدم‌های روزانه فتح می‌شن. امروز یکی از همون قدم‌ها رو برداشتی.",
+    "🌟 یه روز دیگه، یه پیروزی دیگه. جایزه‌ت اینه که خودتو باور کردی.",
+    "🎯 به هدف رسیدی و این یعنی ثبات داری. قربونت برم، عالی بودی 🤍"
+  ];
   function checkStudyCelebration(){
     const done = todaySeconds();
     if(done >= DATA.dailyGoalSeconds && DATA.celebrated.studyDate !== todayStr()){
       DATA.celebrated.studyDate = todayStr(); persist();
-      toast(celebrate() + " به هدف مطالعه‌ت رسیدی", true);
+      toast(REWARD_QUOTES[Math.floor(Math.random()*REWARD_QUOTES.length)], true);
+    }
+    const bigThreshold = isHolidayToday() ? 8*3600 : 5*3600;
+    if(done >= bigThreshold && DATA.celebrated.bigDayDate !== todayStr()){
+      DATA.celebrated.bigDayDate = todayStr(); persist();
+      const msg = FOUR_HOUR_QUOTES[Math.floor(Math.random()*FOUR_HOUR_QUOTES.length)];
+      setTimeout(()=>toast(msg, true), 1800);
     }
   }
 
@@ -1409,7 +2128,7 @@
     list.innerHTML = "";
     items.forEach(b=>{
       const row = document.createElement("div"); row.className = "log-item";
-      row.innerHTML = `<div class="log-main"><div class="log-subject">${b.title}</div><div class="log-date">${b.date}</div></div><div class="log-dur">${b.pages} صفحه</div><button class="log-del">✕</button>`;
+      row.innerHTML = `<div class="log-main"><div class="log-subject">${b.title}</div><div class="log-date">${toJalaliDateStr(b.date)}</div></div><div class="log-dur">${b.pages} صفحه</div><button class="log-del">✕</button>`;
       row.querySelector(".log-del").addEventListener("click", ()=>{ DATA.books = DATA.books.filter(x=>x.id!==b.id); persist(); renderBookList(); });
       list.appendChild(row);
     });
@@ -1436,7 +2155,7 @@
         const h = Math.floor(sess.seconds/3600), m = Math.round((sess.seconds%3600)/60);
         const durStr = h>0 ? `${h}س ${m}د` : `${m} دقیقه`;
         const timeRange = sess.startTime && sess.endTime ? ` · ${sess.startTime}–${sess.endTime}` : "";
-        row.innerHTML = `<span class="log-dot" style="background:${sub.color}"></span><div class="log-main"><div class="log-subject">${sub.name}</div><div class="log-date">${sess.date}${timeRange}</div></div><div class="log-dur">${durStr}</div><button class="log-del">✕</button>`;
+        row.innerHTML = `<span class="log-dot" style="background:${sub.color}"></span><div class="log-main"><div class="log-subject">${sub.name}</div><div class="log-date">${toJalaliDateStr(sess.date)}${timeRange}</div>${sess.sessionType ? `<span class="log-type-tag">${sess.sessionType}</span>` : ""}${sess.note ? `<div class="log-note">📝 ${sess.note}</div>` : ""}</div><div class="log-dur">${durStr}</div><button class="log-del">✕</button>`;
         row.querySelector(".log-del").addEventListener("click", ()=>{ DATA.sessions = DATA.sessions.filter(s=>s.id!==sess.id); persist(); renderLog(); });
         list.appendChild(row);
       });
@@ -1447,7 +2166,7 @@
       items.forEach(t=>{
         const sub = subjectById(t.subjectId); const total = t.correct+t.wrong+t.unanswered;
         const row = document.createElement("div"); row.className = "log-item";
-        row.innerHTML = `<span class="log-dot" style="background:${sub.color}"></span><div class="log-main"><div class="log-subject">${sub.name} · ${total} سوال</div><div class="log-date">${t.date} · ✅${t.correct} ❌${t.wrong} ⬜${t.unanswered}</div></div><button class="log-del">✕</button>`;
+        row.innerHTML = `<span class="log-dot" style="background:${sub.color}"></span><div class="log-main"><div class="log-subject">${sub.name} · ${total} سوال</div><div class="log-date">${toJalaliDateStr(t.date)} · ✅${t.correct} ❌${t.wrong} ⬜${t.unanswered}</div></div><button class="log-del">✕</button>`;
         row.querySelector(".log-del").addEventListener("click", ()=>{ DATA.testEntries = DATA.testEntries.filter(x=>x.id!==t.id); persist(); renderLog(); });
         list.appendChild(row);
       });
@@ -1457,7 +2176,7 @@
       list.innerHTML = "";
       items.forEach(b=>{
         const row = document.createElement("div"); row.className = "log-item";
-        row.innerHTML = `<div class="log-main"><div class="log-subject">${b.title}</div><div class="log-date">${b.date}</div></div><div class="log-dur">${b.pages} صفحه</div><button class="log-del">✕</button>`;
+        row.innerHTML = `<div class="log-main"><div class="log-subject">${b.title}</div><div class="log-date">${toJalaliDateStr(b.date)}</div></div><div class="log-dur">${b.pages} صفحه</div><button class="log-del">✕</button>`;
         row.querySelector(".log-del").addEventListener("click", ()=>{ DATA.books = DATA.books.filter(x=>x.id!==b.id); persist(); renderLog(); });
         list.appendChild(row);
       });
@@ -1465,19 +2184,40 @@
   }
 
   /* ================= CHART HELPERS ================= */
-  function drawLineChart(svg, bucketDays, values, color){
-    const W=320,H=140,padL=28,padR=10,padT=12,padB=22, plotW=W-padL-padR, plotH=H-padT-padB;
+  function niceMaxFromSteps(dataMax, steps){
+    for(const s of steps){ if(dataMax <= s) return s; }
+    return Math.ceil(dataMax / steps[steps.length-1]) * steps[steps.length-1];
+  }
+  function drawLineChart(svg, bucketDays, values, color, opts){
+    opts = opts || {};
+    const W=320,H=140,padL=34,padR=10,padT=12,padB=22, plotW=W-padL-padR, plotH=H-padT-padB;
     if(bucketDays.length===0){ svg.innerHTML = `<text x="160" y="70" text-anchor="middle" font-size="12" fill="var(--ink-faint)">داده‌ای برای نمایش نیست</text>`; return; }
-    const maxVal = Math.max(1, ...values);
+    const dataMax = Math.max(0, ...values.filter(v=>v!==null));
+    const maxVal = opts.fixedMax || niceMaxFromSteps(dataMax, opts.steps || [4,5,6,7,8,10,12,16,20,24]);
+    const suffix = opts.suffix !== undefined ? opts.suffix : "h";
     const stepX = plotW/Math.max(1,bucketDays.length-1);
-    let points = values.map((v,i)=>[padL+i*stepX, padT+plotH-(v/maxVal)*plotH]);
-    let path = "M " + points.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L ");
-    let areaPath = path + ` L ${points[points.length-1][0].toFixed(1)},${(padT+plotH).toFixed(1)} L ${points[0][0].toFixed(1)},${(padT+plotH).toFixed(1)} Z`;
-    let grid=""; for(let i=0;i<=2;i++){ const y=padT+(plotH/2)*i; grid+=`<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--line)" stroke-width="1"/>`; }
+    let points = values.map((v,i)=> v===null ? null : [padL+i*stepX, padT+plotH-(v/maxVal)*plotH]);
+    // split into continuous runs (null = future day, line stops)
+    const runs = []; let cur = [];
+    points.forEach(p=>{ if(p){ cur.push(p); } else if(cur.length){ runs.push(cur); cur=[]; } });
+    if(cur.length) runs.push(cur);
+    const baseY = (padT+plotH).toFixed(1);
+    let path = runs.map(r=>"M " + r.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L ")).join(" ");
+    let areaPath = runs.map(r=>"M " + r.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L ") + ` L ${r[r.length-1][0].toFixed(1)},${baseY} L ${r[0][0].toFixed(1)},${baseY} Z`).join(" ");
+    let grid=""; let yLabels="";
+    let tickStep = 1;
+    if(maxVal > 8) tickStep = 2;
+    if(maxVal > 16) tickStep = 4;
+    if(suffix === "") tickStep = maxVal/5; // percentage-style charts (growth score)
+    for(let val=0; val<=maxVal+0.001; val+=tickStep){
+      const y = padT + plotH - (val/maxVal)*plotH;
+      grid+=`<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--line)" stroke-width="1"/>`;
+      yLabels += `<text x="${(padL-6).toFixed(1)}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="8.5" fill="var(--ink-faint)">${Math.round(val)}${suffix}</text>`;
+    }
     let labels=""; const labelEvery=Math.ceil(bucketDays.length/5);
-    bucketDays.forEach((d,i)=>{ if(i%labelEvery===0 || i===bucketDays.length-1){ const x=padL+i*stepX; const dt=new Date(d); labels+=`<text x="${x.toFixed(1)}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--ink-faint)">${dt.getMonth()+1}/${dt.getDate()}</text>`; } });
-    let dots = points.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.5" fill="${color}"/>`).join("");
-    svg.innerHTML = `${grid}<path d="${areaPath}" fill="${color}" opacity="0.12" stroke="none"/><path d="${path}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>${dots}${labels}`;
+    bucketDays.forEach((d,i)=>{ if(i%labelEvery===0 || i===bucketDays.length-1){ const x=padL+i*stepX; const dt=new Date(d); labels+=`<text x="${x.toFixed(1)}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--ink-faint)">${jalaliShort(d)}</text>`; } });
+    let dots = points.filter(p=>p).map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${bucketDays.length>20?1.8:2.5}" fill="${color}"/>`).join("");
+    svg.innerHTML = `${grid}${yLabels}<path d="${areaPath}" fill="${color}" opacity="0.12" stroke="none"/><path d="${path}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>${dots}${labels}`;
   }
   function drawBarChart(svg, bucketDays, values, color){
     const W=320,H=140,padL=24,padR=10,padT=12,padB=22, plotW=W-padL-padR, plotH=H-padT-padB;
@@ -1505,7 +2245,7 @@
       if(u>0){ yCursor -= uH; bars += `<rect x="${x.toFixed(1)}" y="${yCursor.toFixed(1)}" width="${barW.toFixed(1)}" height="${uH.toFixed(1)}" fill="var(--ink-faint)" opacity="0.5"/>`; }
     });
     let labels=""; const labelEvery=Math.ceil(bucketDays.length/5);
-    bucketDays.forEach((d,i)=>{ if(i%labelEvery===0 || i===bucketDays.length-1){ const x=padL+i*step+step/2; const dt=new Date(d); labels+=`<text x="${x.toFixed(1)}" y="${H-16}" text-anchor="middle" font-size="9" fill="var(--ink-faint)">${dt.getMonth()+1}/${dt.getDate()}</text>`; } });
+    bucketDays.forEach((d,i)=>{ if(i%labelEvery===0 || i===bucketDays.length-1){ const x=padL+i*step+step/2; const dt=new Date(d); labels+=`<text x="${x.toFixed(1)}" y="${H-16}" text-anchor="middle" font-size="9" fill="var(--ink-faint)">${jalaliShort(d)}</text>`; } });
     const legend = `
       <g font-size="9.5" fill="var(--ink-soft)">
         <rect x="20" y="${H-10}" width="8" height="8" fill="var(--brightgreen)"/><text x="31" y="${H-3}">درست</text>
@@ -1519,40 +2259,138 @@
 
   /* ================= STATS SCREEN ================= */
   let statsRange = "week";
+  let hoursChartMode = "line";
+  let periodOffset = 0;
+  /* ---- calendar-aligned periods (Saturday-based week, Jalali month) ---- */
+  function weekStartSaturday(offsetWeeks){
+    const t = new Date(); t.setHours(12,0,0,0);
+    const since = (t.getDay()-6+7)%7;
+    const s = new Date(t); s.setDate(t.getDate()-since-offsetWeeks*7);
+    return s;
+  }
+  function jalaliMonthStartDate(offsetMonths){
+    const t = new Date(); t.setHours(12,0,0,0);
+    const j = gregorianToJalali(t.getFullYear(), t.getMonth()+1, t.getDate());
+    let start = new Date(t); start.setDate(start.getDate()-(j.jd-1));
+    for(let i=0;i<offsetMonths;i++){
+      const prev = new Date(start); prev.setDate(prev.getDate()-1);
+      const pj = gregorianToJalali(prev.getFullYear(), prev.getMonth()+1, prev.getDate());
+      start = new Date(prev); start.setDate(start.getDate()-(pj.jd-1));
+    }
+    return start;
+  }
+  function jalaliMonthLength(startDate){
+    const sj = gregorianToJalali(startDate.getFullYear(), startDate.getMonth()+1, startDate.getDate());
+    let n = 0; const d = new Date(startDate);
+    while(n < 32){
+      const j = gregorianToJalali(d.getFullYear(), d.getMonth()+1, d.getDate());
+      if(j.jm !== sj.jm) break;
+      n++; d.setDate(d.getDate()+1);
+    }
+    return n;
+  }
+  function calendarBucketDays(){
+    const arr = [];
+    if(statsRange === "week"){
+      const s = weekStartSaturday(periodOffset);
+      for(let i=0;i<7;i++){ const d=new Date(s); d.setDate(s.getDate()+i); arr.push(toDateStr(d)); }
+    } else if(statsRange === "month"){
+      const s = jalaliMonthStartDate(periodOffset);
+      const n = jalaliMonthLength(s);
+      for(let i=0;i<n;i++){ const d=new Date(s); d.setDate(s.getDate()+i); arr.push(toDateStr(d)); }
+    }
+    return arr;
+  }
+  function jalaliShort(dateStr){
+    const [gy,gm,gd] = dateStr.split("-").map(Number);
+    const j = gregorianToJalali(gy,gm,gd);
+    return j.jm + "/" + j.jd;
+  }
   document.querySelectorAll(".range-btn").forEach(btn=>{
     btn.addEventListener("click", ()=>{
       document.querySelectorAll(".range-btn").forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active"); statsRange = btn.dataset.range; renderStats();
+      btn.classList.add("active"); statsRange = btn.dataset.range; periodOffset = 0; renderStats();
     });
   });
+  document.getElementById("periodPrevBtn").addEventListener("click", ()=>{ periodOffset++; renderStats(); });
+  document.getElementById("periodNextBtn").addEventListener("click", ()=>{ if(periodOffset>0){ periodOffset--; renderStats(); } });
+  function updatePeriodNav(bucketDays){
+    const nav = document.getElementById("periodNav");
+    const label = document.getElementById("periodLabel");
+    if(statsRange === "all" || bucketDays.length===0){ nav.style.display = "none"; return; }
+    nav.style.display = "flex";
+    document.getElementById("periodNextBtn").disabled = periodOffset === 0;
+    document.getElementById("periodNextBtn").style.opacity = periodOffset===0 ? 0.4 : 1;
+    if(statsRange === "month"){
+      const [gy,gm,gd] = bucketDays[0].split("-").map(Number);
+      const j = gregorianToJalali(gy,gm,gd);
+      label.textContent = `${JALALI_MONTHS[j.jm-1]} ${j.jy}  (${toJalaliDateStr(bucketDays[0])} تا ${toJalaliDateStr(bucketDays[bucketDays.length-1])})`;
+    } else if(periodOffset === 0){ label.textContent = "این هفته (شنبه تا جمعه)"; }
+    else { label.textContent = `${toJalaliDateStr(bucketDays[0])} تا ${toJalaliDateStr(bucketDays[bucketDays.length-1])}`; }
+  }
+  function renderTotalsSummary(){
+    const card = document.getElementById("totalsSummaryCard");
+    if(!card) return;
+    const weekCutoff = toDateStr(weekStartSaturday(0));
+    const monthCutoff = toDateStr(jalaliMonthStartDate(0));
+    const weekSecs = DATA.sessions.filter(s=>s.date>=weekCutoff).reduce((a,s)=>a+s.seconds,0);
+    const monthSecs = DATA.sessions.filter(s=>s.date>=monthCutoff).reduce((a,s)=>a+s.seconds,0);
+    const allSecs = DATA.sessions.reduce((a,s)=>a+s.seconds,0);
+    card.innerHTML = `
+      <div class="totals-row">
+        <div><div class="t-num">${(weekSecs/3600).toFixed(1)}</div><div class="t-lbl">این هفته</div></div>
+        <div><div class="t-num">${(monthSecs/3600).toFixed(1)}</div><div class="t-lbl">این ماه</div></div>
+        <div><div class="t-num">${(allSecs/3600).toFixed(1)}</div><div class="t-lbl">از ابتدا تا حالا</div></div>
+      </div>`;
+  }
+  document.getElementById("chartToggleBtn").addEventListener("click", ()=>{
+    hoursChartMode = hoursChartMode==="line" ? "bar" : "line";
+    document.getElementById("chartToggleBtn").textContent = hoursChartMode==="line" ? "📊 نمایش ستونی" : "📈 نمایش خطی";
+    renderStats();
+  });
   function renderStats(){
+    renderTotalsSummary();
     let days = 7;
     if(statsRange === "month") days = 30;
     if(statsRange === "all") days = null;
-    let filtered = DATA.sessions;
-    if(days){ const cutoffStr = toDateStr(dateNDaysAgo(days-1)); filtered = DATA.sessions.filter(s=>s.date >= cutoffStr); }
+
+    let filtered, bucketDays;
+    if(days){
+      bucketDays = calendarBucketDays();
+      const startCutoff = bucketDays[0], endCutoff = bucketDays[bucketDays.length-1];
+      filtered = DATA.sessions.filter(s=>s.date >= startCutoff && s.date <= endCutoff);
+    } else {
+      filtered = DATA.sessions;
+      const dates = [...new Set(filtered.map(s=>s.date))].sort();
+      bucketDays = dates.length===0 ? [] : (function(){
+        const span = Math.min(30, Math.max(1, Math.round((new Date()-new Date(dates[0]))/86400000)+1));
+        return buildBucketDays(span);
+      })();
+    }
+    updatePeriodNav(bucketDays);
+
     const totalSeconds = filtered.reduce((a,s)=>a+s.seconds,0);
     const totalHours = totalSeconds/3600;
-    const dayCount = days || (function(){ if(filtered.length===0) return 1; const dates=filtered.map(s=>s.date).sort(); return Math.max(1, Math.round((new Date()-new Date(dates[0]))/86400000)+1); })();
+    const dayCount = days ? Math.max(1, bucketDays.filter(d=>d<=todayStr()).length) : Math.max(1, bucketDays.length);
     document.getElementById("statTotal").textContent = totalHours.toFixed(1);
     document.getElementById("statAvg").textContent = (totalHours/dayCount).toFixed(1);
     document.getElementById("statSessions").textContent = filtered.length;
 
-    let bucketDays = days ? buildBucketDays(days) : (function(){
-      const dates = [...new Set(filtered.map(s=>s.date))].sort();
-      if(dates.length===0) return [];
-      const span = Math.min(30, Math.max(1, Math.round((new Date()-new Date(dates[0]))/86400000)+1));
-      return buildBucketDays(span);
-    })();
     const hoursPerDay = {}; bucketDays.forEach(d=>hoursPerDay[d]=0);
     filtered.forEach(s=>{ if(hoursPerDay.hasOwnProperty(s.date)) hoursPerDay[s.date]+=s.seconds; });
-    drawLineChart(document.getElementById("lineChart"), bucketDays, bucketDays.map(d=>hoursPerDay[d]/3600), "var(--accent)");
+    if(hoursChartMode==="bar"){
+      drawBarChart(document.getElementById("lineChart"), bucketDays, bucketDays.map(d=> d>todayStr() ? 0 : hoursPerDay[d]/3600), "var(--accent)");
+    } else {
+      drawLineChart(document.getElementById("lineChart"), bucketDays, bucketDays.map(d=> d>todayStr() ? null : hoursPerDay[d]/3600), "var(--accent)", {suffix:"h", steps:[4,5,6,7,8,10,12,16,20,24]});
+    }
 
     renderSubjectBars(filtered, totalSeconds);
     renderSubjectDonut(filtered, totalSeconds);
     renderReflectionHistory();
     renderWeekCal();
-    renderTestStats(days);
+    renderTestStats(bucketDays, new Set(bucketDays));
+    renderTestSubjectStats(new Set(bucketDays));
+    renderDayTimeline();
     renderGrowth(bucketDays);
   }
   function renderSubjectDonut(filtered, totalSeconds){
@@ -1592,9 +2430,44 @@
       container.appendChild(row);
     });
   }
-  function renderTestStats(days){
-    let filtered = DATA.testEntries;
-    if(days){ const cutoffStr = toDateStr(dateNDaysAgo(days-1)); filtered = DATA.testEntries.filter(t=>t.date >= cutoffStr); }
+  function renderDayTimeline(){
+    const svg = document.getElementById("dayTimeline"); const list = document.getElementById("dayTimelineList");
+    if(!svg) return;
+    const today = todayStr();
+    const sess = DATA.sessions.filter(s=>s.date===today && s.startTime && s.endTime);
+    const R = 80, C = 2*Math.PI*R;
+    let arcs = `<circle cx="100" cy="100" r="${R}" fill="none" stroke="var(--line)" stroke-width="16"/>`;
+    const parse = t => { const [h,m]=t.split(":").map(Number); return h*60+m; };
+    sess.forEach(s=>{
+      let a = parse(s.startTime), b = parse(s.endTime); if(b<=a) b += 1440;
+      const len = Math.min(C, (b-a)/1440*C), off = a/1440*C;
+      const col = (subjectById(s.subjectId)||{}).color || "var(--accent)";
+      arcs += `<circle cx="100" cy="100" r="${R}" fill="none" stroke="${col}" stroke-width="16" stroke-linecap="butt" stroke-dasharray="${len.toFixed(2)} ${(C-len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 100 100)"/>`;
+    });
+    const labels = [0,6,12,18].map((h,i)=>{ const ang=(h/24)*2*Math.PI-Math.PI/2; return `<text x="${(100+96*Math.cos(ang)).toFixed(1)}" y="${(100+96*Math.sin(ang)+3).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--ink-faint)">${h}</text>`; }).join("");
+    const total = sess.reduce((a,s)=>{ let x=0; const pa=(t)=>{const [h,m]=t.split(":").map(Number);return h*60+m;}; x=pa(s.endTime)-pa(s.startTime); if(x<=0) x+=1440; return a+x; },0);
+    svg.innerHTML = arcs + labels + `<text x="100" y="98" text-anchor="middle" font-family="Georgia,serif" font-size="20" fill="var(--ink)">${(total/60).toFixed(1)}</text><text x="100" y="116" text-anchor="middle" font-size="10" fill="var(--ink-faint)">ساعت امروز</text>`;
+    if(list){
+      list.innerHTML = sess.length ? sess.map(s=>`<div style="display:flex;align-items:center;gap:8px;font-size:12px;padding:5px 0;border-bottom:1px solid var(--line);"><span style="width:9px;height:9px;border-radius:50%;background:${(subjectById(s.subjectId)||{}).color||"var(--accent)"}"></span><span>${(subjectById(s.subjectId)||{}).name||""}</span><span style="margin-right:auto;color:var(--ink-faint);">${s.startTime}–${s.endTime}</span></div>`).join("")
+        : '<div class="empty-state" style="padding:10px 0;">امروز جلسه‌ای با ساعت شروع و پایان نداری</div>';
+    }
+  }
+  function renderTestSubjectStats(dateSet){
+    const list = DATA.testEntries.filter(t=>dateSet.has(t.date));
+    const box = document.getElementById("subjectTestPct"); const an = document.getElementById("testAnalysisStat");
+    if(!box || !an) return;
+    const by = {};
+    list.forEach(t=>{ const k=t.subjectId; by[k]=by[k]||{c:0,w:0,u:0}; by[k].c+=t.correct; by[k].w+=t.wrong; by[k].u+=t.unanswered; });
+    const keys = Object.keys(by);
+    box.innerHTML = keys.length ? keys.map(k=>{
+      const s=by[k], tot=s.c+s.w+s.u, pct=tot ? Math.round(s.c/tot*100) : 0, sub=subjectById(k);
+      return `<div class="subject-bar-row"><div class="subject-bar-top"><span>${sub.name}</span><span>${pct}٪ درست · ${tot} سوال</span></div><div class="subject-bar-track"><div class="subject-bar-fill" style="width:${pct}%; background:${sub.color}"></div></div></div>`;
+    }).join("") : '<div class="empty-state" style="padding:12px 0;">آزمونی ثبت نشده</div>';
+    const analyzed = list.filter(t=>t.analyzed).length;
+    an.innerHTML = list.length ? `<div class="empty-state" style="padding:4px 0;">${analyzed} از ${list.length} آزمون تحلیل شده (${Math.round(analyzed/list.length*100)}٪)</div>` : '<div class="empty-state" style="padding:4px 0;">هنوز آزمونی نیست</div>';
+  }
+  function renderTestStats(bucketDays, dateSet){
+    let filtered = DATA.testEntries.filter(t=>dateSet.has(t.date));
     const totalCorrect = filtered.reduce((a,t)=>a+t.correct,0);
     const totalWrong = filtered.reduce((a,t)=>a+t.wrong,0);
     const totalUnanswered = filtered.reduce((a,t)=>a+t.unanswered,0);
@@ -1602,7 +2475,6 @@
     document.getElementById("statTestTotal").textContent = total;
     document.getElementById("statTestCorrectPct").textContent = total>0 ? Math.round((totalCorrect/total)*100)+"٪" : "۰٪";
     document.getElementById("statTestUnansweredPct").textContent = total>0 ? Math.round((totalUnanswered/total)*100)+"٪" : "۰٪";
-    const bucketDays = buildBucketDays(days || 14);
     const perDayCorrect = {}, perDayWrong = {}, perDayUnanswered = {};
     bucketDays.forEach(dd=>{ perDayCorrect[dd]=0; perDayWrong[dd]=0; perDayUnanswered[dd]=0; });
     filtered.forEach(t=>{
@@ -1619,13 +2491,19 @@
     const names = ["ش","ی","د","س","چ","پ","ج"]; const holidayIdx = [5,6];
     const todayDateStr = todayStr();
     container.innerHTML = "";
+    const monthLabel = document.getElementById("weekCalMonthLabel");
+    if(monthLabel){
+      const {jy,jm} = gregorianToJalali(today.getFullYear(), today.getMonth()+1, today.getDate());
+      monthLabel.textContent = `${JALALI_MONTHS[jm-1]} ${jy}`;
+    }
     for(let i=0;i<7;i++){
       const d = new Date(weekStart); d.setDate(weekStart.getDate()+i);
       const dStr = toDateStr(d);
       const secs = DATA.sessions.filter(s=>s.date===dStr).reduce((a,s)=>a+s.seconds,0);
+      const {jd} = gregorianToJalali(d.getFullYear(), d.getMonth()+1, d.getDate());
       const cell = document.createElement("div");
       cell.className = "week-day" + (holidayIdx.includes(i)?" holiday":"") + (dStr===todayDateStr?" today":"");
-      cell.innerHTML = `<div class="wd-name">${names[i]}</div><div class="wd-num">${d.getDate()}</div><div class="wd-hrs">${(secs/3600).toFixed(1)}</div>`;
+      cell.innerHTML = `<div class="wd-name">${names[i]}</div><div class="wd-num">${jd}</div><div class="wd-hrs">${(secs/3600).toFixed(1)}</div>`;
       container.appendChild(cell);
     }
   }
@@ -1633,21 +2511,25 @@
     const secs = DATA.sessions.filter(s=>s.date===dateStr).reduce((a,s)=>a+s.seconds,0);
     const goalFrac = DATA.dailyGoalSeconds>0 ? Math.min(1, secs/DATA.dailyGoalSeconds) : 0;
     const refl = DATA.reflections[dateStr];
-    const parts = [goalFrac];
-    if(refl){ parts.push(refl.satisfaction/5); parts.push(refl.productivity/5); }
-    parts.push(DATA.sleepLogs[dateStr] ? 1 : 0);
-    return Math.round((parts.reduce((a,b)=>a+b,0)/parts.length)*100);
+    let score = goalFrac*70;
+    if(refl){ score += ((refl.satisfaction+refl.productivity)/10)*20; }
+    if(DATA.sleepLogs[dateStr]) score += 10;
+    return Math.round(Math.min(100, score));
   }
   function renderGrowth(bucketDays){
     const hero = document.getElementById("growthHero");
     const rangeDays = bucketDays.length ? bucketDays : buildBucketDays(7);
-    const scores = rangeDays.map(d=>progressScoreForDate(d));
+    const today = todayStr();
+    const elapsed = rangeDays.filter(d=>d<=today);       // only days that have already happened
+    const base = elapsed.length ? elapsed : rangeDays;
+    const scores = base.map(d=>progressScoreForDate(d));
     const avgScore = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : 0;
-    const goalHits = rangeDays.filter(d=>{ const secs = DATA.sessions.filter(s=>s.date===d).reduce((a,s)=>a+s.seconds,0); return DATA.dailyGoalSeconds>0 && secs>=DATA.dailyGoalSeconds; }).length;
-    const sleepLogged = rangeDays.filter(d=>DATA.sleepLogs[d]).length;
-    const reflected = rangeDays.filter(d=>DATA.reflections[d]).length;
-    hero.innerHTML = `<div class="gh-num">${avgScore}</div><div class="gh-lbl">امتیاز رشد کلی (۰ تا ۱۰۰)</div><div class="growth-breakdown"><div class="growth-chip">🎯 هدف در ${goalHits} از ${rangeDays.length} روز</div><div class="growth-chip">🌙 خواب ثبت‌شده در ${sleepLogged} از ${rangeDays.length} روز</div><div class="growth-chip">📝 بازخورد در ${reflected} از ${rangeDays.length} روز</div></div>`;
-    drawLineChart(document.getElementById("growthChart"), rangeDays, scores, "var(--accent)");
+    const goalHits = base.filter(d=>{ const secs = DATA.sessions.filter(s=>s.date===d).reduce((a,s)=>a+s.seconds,0); return DATA.dailyGoalSeconds>0 && secs>=DATA.dailyGoalSeconds; }).length;
+    const sleepLogged = base.filter(d=>DATA.sleepLogs[d]).length;
+    const reflected = base.filter(d=>DATA.reflections[d]).length;
+    hero.innerHTML = `<div class="gh-num">${avgScore}</div><div class="gh-lbl">امتیاز رشد کلی (۰ تا ۱۰۰)</div><div class="growth-breakdown"><div class="growth-chip">🎯 هدف در ${goalHits} از ${base.length} روز</div><div class="growth-chip">🌙 خواب ثبت‌شده در ${sleepLogged} از ${base.length} روز</div><div class="growth-chip">📝 بازخورد در ${reflected} از ${base.length} روز</div></div>`;
+    const chartValues = rangeDays.map(d=> d>today ? null : progressScoreForDate(d));
+    drawLineChart(document.getElementById("growthChart"), rangeDays, chartValues, "var(--accent)", {fixedMax:100, suffix:""});
   }
 
   /* ================= GOAL BANNER / SLEEP / REFLECTION ================= */
@@ -1743,14 +2625,22 @@
     container.innerHTML = "";
     entries.forEach(([date, r])=>{
       const row = document.createElement("div"); row.className = "reflection-history-item";
-      row.innerHTML = `<div class="reflection-history-top"><span class="rh-date">${date}</span><span class="reflection-history-scores">رضایت ${r.satisfaction}/۵ · مفید بودن ${r.productivity}/۵</span></div>${r.note ? `<div class="reflection-history-note">${r.note}</div>` : ""}`;
+      row.innerHTML = `<div class="reflection-history-top"><span class="rh-date">${toJalaliDateStr(date)}</span><span class="reflection-history-scores">رضایت ${r.satisfaction}/۵ · مفید بودن ${r.productivity}/۵</span></div>${r.note ? `<div class="reflection-history-note">${r.note}</div>` : ""}`;
       container.appendChild(row);
     });
   }
 
   /* ================= AMBIENT SOUNDS ================= */
   const SOUND_DEFS = [
-    {id:"rain", name:"باران", desc:"صدای نرم بارش پیوسته"},
+    {id:"rain", name:"باران ملایم", desc:"صدای نرم بارش پیوسته"},
+    {id:"rainmedium", name:"باران متوسط", desc:"بارش با شدت معمولی"},
+    {id:"rainheavy", name:"باران شدید", desc:"بارش تند و پرصدا"},
+    {id:"rainwindow", name:"باران پشت پنجره", desc:"صدای ریز باران روی شیشه"},
+    {id:"rainroof", name:"باران روی سقف", desc:"ضرب آرام باران روی سقف حلبی"},
+    {id:"raintent", name:"باران روی چادر", desc:"صدای نرم باران روی چادر کمپ"},
+    {id:"raindrizzle", name:"نم‌نم باران", desc:"باران خیلی ریز و آروم"},
+    {id:"rainsoft", name:"باران آرام و نامنظم", desc:"باران نرم با شدت‌های متغیر و طبیعی"},
+    {id:"rainforest", name:"باران جنگل", desc:"باران میان برگ‌های درخت"},
     {id:"thunder", name:"رعد و برق", desc:"باران همراه با غرش رعد"},
     {id:"forest", name:"جنگل", desc:"باد ملایم میان درختان"},
     {id:"birds", name:"پرنده‌ها", desc:"صدای پرنده‌ها در طبیعت"},
@@ -1786,11 +2676,73 @@
     const vol = DATA.soundVolumes[id] ?? 0.5;
     if(id === "lofi"){ startLofi(ctx, vol); return; }
 
-    const noiseBuf = makeNoiseBuffer(ctx, 4);
+    const noiseBuf = id === "brownnoise" ? makeBrownNoiseBuffer(ctx, 4) : makeNoiseBuffer(ctx, 4);
     const src = ctx.createBufferSource(); src.buffer=noiseBuf; src.loop=true;
     const filter = ctx.createBiquadFilter(); const gain = ctx.createGain();
 
     if(id === "rain"){ filter.type="highpass"; filter.frequency.value=1200; gain.gain.value=vol*0.25; }
+    else if(id === "rainmedium"){ filter.type="highpass"; filter.frequency.value=900; gain.gain.value=vol*0.32; }
+    else if(id === "rainheavy"){
+      filter.type="highpass"; filter.frequency.value=600; gain.gain.value=vol*0.4;
+      const lfo=ctx.createOscillator(); lfo.frequency.value=0.3; const lfoGain=ctx.createGain(); lfoGain.gain.value=vol*0.06;
+      lfo.connect(lfoGain).connect(gain.gain); lfo.start(); soundNodes[id+"_lfo"]=lfo;
+    }
+    else if(id === "rainroof"){
+      filter.type="bandpass"; filter.frequency.value=900; filter.Q.value=0.8; gain.gain.value=vol*0.22;
+      const flag = {stopped:false};
+      scheduleRandomBursts(0.05, 0.18, ()=>{
+        const t = ctx.currentTime;
+        const buf = makeNoiseBuffer(ctx, 0.04); const tap = ctx.createBufferSource(); tap.buffer=buf;
+        const tf = ctx.createBiquadFilter(); tf.type="bandpass"; tf.frequency.value=1800; tf.Q.value=3;
+        const tg = ctx.createGain(); tg.gain.setValueAtTime(vol*0.12, t); tg.gain.exponentialRampToValueAtTime(0.001, t+0.06);
+        tap.connect(tf).connect(tg).connect(ctx.destination); tap.start(t); tap.stop(t+0.07);
+      }, flag);
+      soundNodes[id+"_burst"] = flag;
+    }
+    else if(id === "rainsoft"){
+      // layered, slowly-varying rain: base hiss + irregular swells + sparse soft drops
+      filter.type="lowpass"; filter.frequency.value=3000; gain.gain.value=vol*0.2;
+      // gentle high-pass before the low-pass: removes rumble, keeps the soft hiss
+      const hp = ctx.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=400;
+      src.connect(hp).connect(filter).connect(gain).connect(ctx.destination);
+      src._customRouted = true; // tell the generic router below not to connect src again
+      const swellLfo = ctx.createOscillator(); swellLfo.frequency.value=0.07;
+      const swellDepth = ctx.createGain(); swellDepth.gain.value=vol*0.09;
+      const swellLfo2 = ctx.createOscillator(); swellLfo2.frequency.value=0.031;
+      const swellDepth2 = ctx.createGain(); swellDepth2.gain.value=vol*0.05;
+      swellLfo.connect(swellDepth).connect(gain.gain);
+      swellLfo2.connect(swellDepth2).connect(gain.gain);
+      swellLfo.start(); swellLfo2.start();
+      soundNodes[id+"_lfo"]=swellLfo; soundNodes[id+"_lfo2"]=swellLfo2;
+      const flag = {stopped:false};
+      scheduleRandomBursts(0.35, 1.6, ()=>{
+        const t = ctx.currentTime + Math.random()*0.2;
+        const buf = makeNoiseBuffer(ctx, 0.05); const d = ctx.createBufferSource(); d.buffer=buf;
+        const df = ctx.createBiquadFilter(); df.type="bandpass"; df.frequency.value=1200+Math.random()*2200; df.Q.value=1.5;
+        const dg = ctx.createGain(); dg.gain.setValueAtTime(vol*(0.04+Math.random()*0.08), t); dg.gain.exponentialRampToValueAtTime(0.001, t+0.07);
+        d.connect(df).connect(dg).connect(ctx.destination); d.start(t); d.stop(t+0.08);
+      }, flag);
+      soundNodes[id+"_burst"] = flag;
+    }
+    else if(id === "raintent"){ filter.type="lowpass"; filter.frequency.value=2200; gain.gain.value=vol*0.3; }
+    else if(id === "raindrizzle"){ filter.type="highpass"; filter.frequency.value=2000; gain.gain.value=vol*0.18; }
+    else if(id === "rainforest"){
+      filter.type="bandpass"; filter.frequency.value=1500; filter.Q.value=0.5; gain.gain.value=vol*0.2;
+      const lfo=ctx.createOscillator(); lfo.frequency.value=0.12; const lfoGain=ctx.createGain(); lfoGain.gain.value=vol*0.06;
+      lfo.connect(lfoGain).connect(gain.gain); lfo.start(); soundNodes[id+"_lfo"]=lfo;
+    }
+    else if(id === "rainwindow"){
+      filter.type="bandpass"; filter.frequency.value=2400; filter.Q.value=0.7; gain.gain.value=vol*0.16;
+      const flag = {stopped:false};
+      scheduleRandomBursts(0.08, 0.25, ()=>{
+        const t = ctx.currentTime;
+        const buf = makeNoiseBuffer(ctx, 0.03); const drop = ctx.createBufferSource(); drop.buffer=buf;
+        const df = ctx.createBiquadFilter(); df.type="bandpass"; df.frequency.value=3200; df.Q.value=2;
+        const dg = ctx.createGain(); dg.gain.setValueAtTime(vol*0.18, t); dg.gain.exponentialRampToValueAtTime(0.001, t+0.05);
+        drop.connect(df).connect(dg).connect(ctx.destination); drop.start(t); drop.stop(t+0.06);
+      }, flag);
+      soundNodes[id+"_burst"] = flag;
+    }
     else if(id === "thunder"){
       filter.type="highpass"; filter.frequency.value=1000; gain.gain.value=vol*0.22;
       const flag = {stopped:false};
@@ -1853,8 +2805,6 @@
     else if(id === "fan"){ filter.type="lowpass"; filter.frequency.value=1800; gain.gain.value=vol*0.2; }
     else if(id === "whitenoise"){ filter.type="allpass"; gain.gain.value=vol*0.16; }
     else if(id === "brownnoise"){
-      const brownBuf = makeBrownNoiseBuffer(ctx, 4);
-      src.buffer = brownBuf;
       filter.type="lowpass"; filter.frequency.value=500; gain.gain.value=vol*0.35;
     }
     else if(id === "crickets"){
@@ -1876,7 +2826,8 @@
       soundNodes[id+"_burst"] = flag;
     }
 
-    src.connect(filter).connect(gain).connect(ctx.destination); src.start();
+    if(!src._customRouted) src.connect(filter).connect(gain).connect(ctx.destination);
+    src.start();
     soundNodes[id] = {src, gain, filter};
   }
   function startLofi(ctx, vol){
@@ -1917,7 +2868,7 @@
     const lfo = soundNodes[id+"_lfo"]; if(lfo){ try{lfo.stop();}catch(e){} delete soundNodes[id+"_lfo"]; }
     const burst = soundNodes[id+"_burst"]; if(burst){ burst.stopped = true; clearTimeout(burst.timeout); delete soundNodes[id+"_burst"]; }
   }
-  const SOUND_BASE_VOL = {rain:0.25, thunder:0.22, forest:0.18, birds:0.06, ocean:0.3, creek:0.14, fireplace:0.12, fan:0.2, whitenoise:0.16, brownnoise:0.35, crickets:0.04};
+  const SOUND_BASE_VOL = {rain:0.25, rainmedium:0.32, rainheavy:0.4, rainwindow:0.16, rainroof:0.22, raintent:0.3, raindrizzle:0.18, rainforest:0.2, rainsoft:0.2, thunder:0.22, forest:0.18, birds:0.06, ocean:0.3, creek:0.14, fireplace:0.12, fan:0.2, whitenoise:0.16, brownnoise:0.35, crickets:0.04};
   function setSoundVolume(id, vol){
     DATA.soundVolumes[id] = vol; persist();
     const node = soundNodes[id];
@@ -1942,19 +2893,62 @@
     list.querySelectorAll("input[data-vol]").forEach(inp=>{ inp.addEventListener("input", ()=>{ setSoundVolume(inp.dataset.vol, parseFloat(inp.value)); }); });
   }
 
+  /* ================= TAP THE MASCOT ================= */
+  const MASCOT_LINES = [
+    "😂 یکی پرسید چرا این‌قدر می‌خونی؟ گفتم می‌خوام از کتاب‌ها بیشتر بدونم، نه از کتاب‌فروش 📚",
+    "🤣 امتحان سخته؟ نه بابا! امتحان از تو می‌ترسه، چون تو خیلی خوبی 💪",
+    "😆 من حفظ نمی‌شم، ولی تو خیلی خوب حفظ می‌کنی 😉",
+    "🙃 قهوه‌ام سرد شد، ولی انگیزه‌ام گرم! بزن بریم 🔥",
+    "😜 دیروز خوابیدی و امروز بیدار شدی؟ یعنی تو یه قهرمانی 🦸",
+    "🤭 اگه تو نخونی، کی بخونه؟ منم که کتاب ندارم 😅",
+    "😄 به‌جای اینکه تو از درس بترسی، درس باید از تو بترسه!",
+    "🐣 من اینجام که باهات درس بخونم. البته فقط با یه بغل مجازی 🤗",
+    "🌟 امروز قرار نیست فقط یه ساعت بخونی؛ داری یه قدم به آیندت نزدیک‌تر می‌شی.",
+    "🏔️ قله‌ها با قدم‌های کوچیک فتح می‌شن. تو داری قدم برمی‌داری.",
+    "💎 فشار الماس می‌سازه. تو هم داری با تمرین ساخته می‌شی.",
+    "🔑 کلید موفقیت ساده‌ست: ادامه دادن، حتی وقتی سخته.",
+    "🌅 هر صبح یه شروع جدیده، و تو هر بار شروع می‌کنی.",
+    "🎯 هدفتو یادت نره؛ اون پشت همین جلسه‌ها منتظرته.",
+    "🧗 بالا رفتن سخته، ولی نگاه کردن از بالا ارزشش رو داره.",
+    "🌈 بعد از هر سختی یه روز بهتر میاد. ادامه بده.",
+    "🚀 یه جلسه‌ی کوچیک هم حساب می‌شه. بزن بریم!",
+    "🔥 هر چی امروز بیشتر تلاش کنی، فردا راحت‌تر می‌شه.",
+    "🤗 اگه امروز خسته‌ای، کنارتم. یه جلسه‌ی کوچیک بخون، نه بزرگ.",
+    "🥹 هیچ‌کس نمی‌بینه چقدر تلاش کردی، ولی من می‌بینم. قربونت برم.",
+    "😌 خودتو سرزنش نکن. امروز نشد؟ فردا دوباره.",
+    "🫂 یه نفس عمیق بکش. تو لایقی که بهترین باشی.",
+    "💛 تو از اون چیزی که فکر می‌کنی قوی‌تری.",
+    "🌙 استراحت هم بخشی از موفقیته؛ ولی دور نشو، همین نزدیکی بمون.",
+    "🍀 شانس به کسی کمک می‌کنه که شروع کنه. تو شروع کردی!",
+    "🤍 امروز هرچی خوندی، ارزشش رو داره.",
+    "🌸 بعضی روزها فقط نگه داشتن خودت کافیه. تو داری نگه می‌داری.",
+    "💧 آب بخور! مغز تشنه کارایی‌ش میاد پایین.",
+    "👀 هر ۲۰ دقیقه یه نگاه به دور دست بنداز، چشمات استراحت می‌کنن.",
+    "🧘 یه کش‌وقوس کوتاه بده؛ بدن خسته، ذهن رو هم خسته می‌کنه."
+  ];
+  document.getElementById("mascotInline").addEventListener("click", ()=>{
+    toast(MASCOT_LINES[Math.floor(Math.random()*MASCOT_LINES.length)], true);
+  });
+
   /* ================= WELCOME SCREEN ================= */
   document.getElementById("welcomeStartBtn").addEventListener("click", ()=>{ document.getElementById("welcomeOverlay").style.display = "none"; });
 
   /* ================= INIT ================= */
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  }
   applyTheme();
   refreshAllSubjectRows();
   renderSounds();
   resetTimerState();
+  document.getElementById("mascotSleepToggle").textContent = DATA.mascotSleeping ? "☀️ بیدار شدم" : "🌙 می‌رم بخوابم";
   renderGoalBanner();
   renderLevelCard();
   renderStreak();
-  document.getElementById("quoteBar").textContent = "💬 " + quoteOfDay();
+  document.getElementById("quoteBar").textContent = "✍🏻 " + quoteOfDay();
   setTimeout(maybeShowWakeCheckIn, 1500);
+  setTimeout(checkTimeOfDayNotifications, 2000);
+  setInterval(checkTimeOfDayNotifications, 5*60*1000);
 
 })();
 </script>
