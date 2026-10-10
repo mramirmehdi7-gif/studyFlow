@@ -423,6 +423,7 @@
     </div>
 
     <div class="timer-controls">
+      <button class="circle-btn" id="pauseBtn" title="مکث / ادامه" style="display:none;">⏸</button>
       <button class="btn btn-primary" id="startStopBtn">شروع</button>
       <button class="circle-btn" id="expandBtn" title="تمام‌صفحه">
         <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg>
@@ -470,16 +471,7 @@
   </section>
 
   <!-- ============ LOG SCREEN ============ -->
-  <section class="screen" id="screen-log">
-    <h1 class="page-title">تاریخچه</h1>
-    <p class="page-sub">همه‌ی چیزهایی که ثبت کردی</p>
-    <div class="log-tabs">
-      <button class="log-tab-btn active" data-logtab="study">مطالعه</button>
-      <button class="log-tab-btn" data-logtab="test">تست‌ها</button>
-      <button class="log-tab-btn" data-logtab="book">کتاب‌ها</button>
-    </div>
-    <div id="logList"></div>
-  </section>
+  <div id="logList" style="display:none;"></div>
 
   <!-- ============ STATS SCREEN ============ -->
   <section class="screen" id="screen-stats">
@@ -487,6 +479,7 @@
     <p class="page-sub">روند و پیشرفتت</p>
     <div class="level-card" id="levelCard"></div>
     <div class="growth-hero" id="growthHero"></div>
+    <div class="chart-card" id="todayCardPanel"><h3>امروز</h3><div id="todayPanel"></div></div>
     <div class="chart-card" id="totalsSummaryCard" style="padding:14px 14px;"></div>
 
     <div class="range-switch">
@@ -540,7 +533,6 @@
   <nav id="tabbar">
     <button class="tab active" data-screen="timer"><span class="tab-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>تایمر</button>
     <button class="tab" data-screen="practice"><span class="tab-icon-wrap"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>تمرین</button>
-    <button class="tab" data-screen="log"><span class="tab-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>تاریخچه</button>
     <button class="tab" data-screen="stats"><span class="tab-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 20V10M12 20V4M20 20v-7"/></svg></span>آمار</button>
     <button class="tab" data-screen="sounds"><span class="tab-icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 10v4h4l5 5V5l-5 5H3z"/><path d="M16 8a5 5 0 010 8"/></svg></span>صداها</button>
   </nav>
@@ -575,6 +567,13 @@
     <div class="manage-subjects-wrap" style="margin:0 0 18px;"><button class="mini-btn" id="manageSubjectsBtn">مدیریت درس‌ها ✎</button></div>
     <div class="field-label">اعلان‌ها</div>
     <button class="btn btn-secondary btn-full" id="enableNotifBtn">فعال‌سازی اعلان‌ها</button>
+    <button class="btn btn-secondary btn-full" id="testNotifBtn" style="margin-top:8px;">تست اعلان</button>
+    <div class="field-label">پشتیبان اطلاعات</div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-secondary btn-full" id="exportBtn">ذخیره پشتیبان</button>
+      <button class="btn btn-secondary btn-full" id="importBtn">بازگردانی</button>
+    </div>
+    <input type="file" id="importFile" accept="application/json,.json" style="display:none;">
     <p style="font-size:11px; color:var(--ink-faint); margin-top:8px; line-height:1.7;">
       نکته: چون این اپ یه فایل ساده‌ست بدون سرور، یادآوری‌ها فقط وقتی اپ بازه کار می‌کنن، نه واقعاً در پس‌زمینه.
     </p>
@@ -797,10 +796,14 @@
     {id:"neongreen2", color:"#7DFFAE"}, {id:"neonpink2", color:"#FF8AD8"}, {id:"neoncyan2", color:"#7FF8EE"}
   ];
 
-  function toast(msg, celebrate){
+  let toastTimer = null;
+  function hideToast(){ const t = document.getElementById("toast"); t.classList.remove("show"); t.style.pointerEvents = "none"; }
+  function toast(msg, celebrate, dur){
     const t = document.getElementById("toast");
     t.textContent = msg; t.className = "toast show" + (celebrate ? " celebrate" : "");
-    setTimeout(()=>t.classList.remove("show"), celebrate ? 4600 : 1800);
+    t.style.pointerEvents = "auto"; t.onclick = hideToast;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, dur || (celebrate ? 4600 : 1800));
   }
   const CELEBRATIONS = ["آفرین! 🎉","عالی بود! 👏","دمت گرم، امروز رو بردی! 🔥","فوق‌العاده بودی امروز! ⭐","همینه! ادامه بده 💪"];
   const FOUR_HOUR_QUOTES = [
@@ -1144,7 +1147,15 @@
     DATA.subjects.forEach(sub=>{
       const row = document.createElement("div");
       row.className = "manage-subject-item";
-      row.innerHTML = `<span class="dot" style="background:${sub.color}"></span><span class="name">${sub.name}</span><button class="manage-subject-del">حذف</button>`;
+      row.innerHTML = `<span class="dot" style="background:${sub.color}"></span><span class="name">${sub.name}</span><button class="mini-btn" data-up style="padding:4px 9px;">▲</button> <button class="mini-btn" data-down style="padding:4px 9px;">▼</button> <button class="manage-subject-del">حذف</button>`;
+      row.querySelector("[data-up]").addEventListener("click", ()=>{
+        const i = DATA.subjects.indexOf(sub);
+        if(i > 0){ [DATA.subjects[i-1], DATA.subjects[i]] = [DATA.subjects[i], DATA.subjects[i-1]]; persist(); refreshAllSubjectRows(); renderManageSubjectsList(); }
+      });
+      row.querySelector("[data-down]").addEventListener("click", ()=>{
+        const i = DATA.subjects.indexOf(sub);
+        if(i < DATA.subjects.length-1){ [DATA.subjects[i+1], DATA.subjects[i]] = [DATA.subjects[i], DATA.subjects[i+1]]; persist(); refreshAllSubjectRows(); renderManageSubjectsList(); }
+      });
       row.querySelector(".manage-subject-del").addEventListener("click", ()=>{
         if(DATA.subjects.length <= 1){ toast("حداقل باید یه درس بمونه"); return; }
         DATA.subjects = DATA.subjects.filter(s=>s.id !== sub.id);
@@ -1247,9 +1258,27 @@
       <text class="zzz z3" x="105" y="12" font-size="19" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">Z</text>
     </svg>`;
   }
+  function mascotPausedSVG(){
+    return `<svg viewBox="0 0 120 120" fill="none">
+      ${mascotHeadHairSVG()}
+      <path d="M52 58q4 2.5 8 0" stroke="var(--ink)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="52" cy="47" r="2.2" fill="var(--ink)"/><circle cx="68" cy="47" r="2.2" fill="var(--ink)"/>
+      <ellipse cx="47" cy="55" rx="3.5" ry="2.4" fill="var(--accent)" opacity="0.3"/>
+      <ellipse cx="73" cy="55" rx="3.5" ry="2.4" fill="var(--accent)" opacity="0.3"/>
+      <path d="M42 100c0-14 8-24 18-24s18 10 18 24" fill="var(--accent)"/>
+      <rect x="40" y="86" width="26" height="14" rx="2.5" fill="#fff" stroke="var(--ink)" stroke-width="1.8"/>
+      <line x1="40" y1="93" x2="66" y2="93" stroke="var(--ink)" stroke-width="1.8"/>
+      <g>
+        <path d="M64 58h13v12a4 4 0 0 1-4 4h-5a4 4 0 0 1-4-4z" fill="#fff" stroke="var(--ink)" stroke-width="1.8"/>
+        <path d="M70 58q-1.5-2.5 0-5M74 58q-1.5-2.5 0-5" stroke="var(--ink-faint)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M77 62h2.5a3 3 0 0 1 0 6h-2.5" stroke="var(--ink)" stroke-width="1.6" fill="none"/>
+      </g>
+    </svg>`;
+  }
   function mascotState(){
     if(DATA.mascotSleeping) return "sleeping";
     if(running) return "studying";
+    if(sessionActive) return "paused";
     return "idle";
   }
   function renderMascotState(){
@@ -1259,6 +1288,7 @@
     el.className = "mascot-inline state-" + state;
     if(state === "sleeping") el.innerHTML = mascotSleepingSVG();
     else if(state === "studying") el.innerHTML = mascotStudyingSVG(subjectSymbol((subjectById(DATA.selectedSubject)||{}).name));
+    else if(state === "paused") el.innerHTML = mascotPausedSVG();
     else el.innerHTML = mascotIdleSVG();
   }
   document.getElementById("mascotSleepToggle").addEventListener("click", ()=>{
@@ -1290,7 +1320,7 @@
   });
 
   function resetTimerState(){
-    running = false; elapsedBeforePause = 0; pomoPhase="focus"; pomoCount=0;
+    running = false; sessionActive = false; elapsedBeforePause = 0; pomoPhase="focus"; pomoCount=0;
     readPomoConfig(); pomoPhaseSeconds = pomoConfig.focus; updatePomoLabel();
     startStopBtn.textContent = "شروع"; startStopBtn.classList.remove("running");
     resetBtnWrap.style.display = "none";
@@ -1299,6 +1329,7 @@
     timerEnd.style.display = "none";
     ringProgress.classList.remove("indeterminate");
     ringProgress.style.strokeDashoffset = 0;
+    updateControls();
     renderMascotState();
   }
   function readCountdownInputs(){
@@ -1328,26 +1359,24 @@
     const now = Date.now();
     const elapsedSec = (now-startEpoch)/1000 + elapsedBeforePause;
     if(timerMode === "stopwatch"){
-      renderTimerDisplay(elapsedSec);
+      renderTimerDisplay(Math.floor(elapsedSec));
       setRingRemaining((elapsedSec % 3600) / 3600);
       const hoursSoFar = Math.floor(elapsedSec / 3600);
       if(hoursSoFar > lastHourNotified){
         lastHourNotified = hoursSoFar;
         const msg = HOUR_ENCOURAGEMENTS[Math.floor(Math.random()*HOUR_ENCOURAGEMENTS.length)].replace("{h}", hoursSoFar);
-        if("Notification" in window && Notification.permission === "granted"){
-          try{ new Notification("StudyFlow", {body: msg}); }catch(e){ toast(msg, true); }
-        } else { toast(msg, true); }
+        sendAppNotification("⏱ " + hoursSoFar + " ساعت مطالعه", msg);
       }
     } else if(timerMode === "countdown"){
       const remaining = countdownTotalSeconds - elapsedSec;
       if(remaining <= 0){ renderTimerDisplay(0); finishCountdown(); return; }
-      renderTimerDisplay(remaining);
+      renderTimerDisplay(Math.ceil(remaining));
       setRingRemaining(remaining/countdownTotalSeconds);
       timerEnd.textContent = "پایان: " + fmtClock(new Date(now + remaining*1000));
     } else if(timerMode === "pomodoro"){
       const remaining = pomoPhaseSeconds - elapsedSec;
       if(remaining <= 0){ renderTimerDisplay(0); advancePomoPhase(); return; }
-      renderTimerDisplay(remaining);
+      renderTimerDisplay(Math.ceil(remaining));
       setRingRemaining(remaining/pomoPhaseSeconds);
       timerEnd.textContent = "پایان: " + fmtClock(new Date(now + remaining*1000));
     }
@@ -1380,15 +1409,15 @@
     {title:"🎧 استراحت تموم", body:"حالا با تمرکز کامل برگرد."}
   ];
   function finishCountdown(){
-    running = false;
+    running = false; sessionActive = false; elapsedBeforePause = 0;
     logSession(countdownTotalSeconds, "countdown");
     playAlert("focus");
     const m = TIMER_DONE_MESSAGES[Math.floor(Math.random()*TIMER_DONE_MESSAGES.length)];
     sendAppNotification(m.title, m.body);
     timerSub.textContent = "پایان زمان — جلسه ثبت شد ✓";
     startStopBtn.textContent = "شروع"; startStopBtn.classList.remove("running");
-    resetBtnWrap.style.display = "none"; timerEnd.style.display="none";
-    elapsedBeforePause = 0;
+    timerEnd.style.display = "none";
+    updateControls();
   }
   function advancePomoPhase(){
     if(pomoPhase === "focus"){
@@ -1410,34 +1439,76 @@
     renderTimerDisplay(pomoPhaseSeconds);
     rafId = requestAnimationFrame(tick);
   }
-  startStopBtn.addEventListener("click", ()=>{
-    if(!running){
-      if(timerMode === "countdown") readCountdownInputs();
-      if(timerMode === "pomodoro" && elapsedBeforePause===0 && pomoCount===0 && pomoPhase==="focus"){ readPomoConfig(); pomoPhaseSeconds=pomoConfig.focus; updatePomoLabel(); }
-      running = true; startEpoch = Date.now();
-      if(elapsedBeforePause === 0) sessionWallStart = new Date();
-      startStopBtn.textContent = "توقف"; startStopBtn.classList.add("running");
-      resetBtnWrap.style.display = timerMode === "stopwatch" ? "block" : "none";
-      timerSub.textContent = timerMode === "stopwatch" ? "در حال شمارش..." : "در حال مطالعه...";
-      if(timerMode === "stopwatch"){ ringProgress.classList.add("indeterminate"); timerEnd.style.display="none"; }
-      else{ timerEnd.style.display="block"; }
-      renderMascotState();
-      lastHourNotified = 0;
-      rafId = requestAnimationFrame(tick);
-    } else {
-      running = false; cancelAnimationFrame(rafId);
-      elapsedBeforePause += (Date.now()-startEpoch)/1000;
-      startStopBtn.textContent = "ادامه"; startStopBtn.classList.remove("running");
-      timerSub.textContent = "متوقف شد";
-      ringProgress.classList.remove("indeterminate");
-      resetBtnWrap.style.display = "block";
-      renderMascotState();
-      if(timerMode === "stopwatch"){
-        if(elapsedBeforePause >= 1){ logSession(elapsedBeforePause, "stopwatch"); timerSub.textContent = "جلسه ثبت شد ✓ (" + fmtHMS(elapsedBeforePause) + ")"; }
-        elapsedBeforePause = 0; startStopBtn.textContent = "شروع";
-        resetBtnWrap.style.display = "block";
-      }
-    }
+  /* ---- session control: start / مکث (pause, no log) / توقف (finish = log + آفرین + reset) ---- */
+  let sessionActive = false;
+  function updateControls(){
+    const pb = document.getElementById("pauseBtn");
+    if(pb){ pb.style.display = sessionActive ? "flex" : "none"; pb.textContent = running ? "⏸" : "▶"; }
+    resetBtnWrap.style.display = (sessionActive && !running) ? "block" : "none";
+    keepAwake(sessionActive && running);
+  }
+  function resumeTimer(){
+    running = true; startEpoch = Date.now();
+    startStopBtn.textContent = "توقف"; startStopBtn.classList.add("running");
+    timerSub.textContent = timerMode === "stopwatch" ? "در حال شمارش..." : "در حال مطالعه...";
+    if(timerMode === "stopwatch"){ ringProgress.classList.add("indeterminate"); timerEnd.style.display = "none"; }
+    else { timerEnd.style.display = "block"; }
+    updateControls(); renderMascotState();
+    rafId = requestAnimationFrame(tick);
+  }
+  function pauseTimer(){
+    if(!running) return;
+    running = false; cancelAnimationFrame(rafId);
+    elapsedBeforePause += (Date.now() - startEpoch)/1000;
+    ringProgress.classList.remove("indeterminate");
+    timerSub.textContent = "مکث — برای ادامه ▶ را بزن";
+    updateControls(); renderMascotState();
+  }
+  function startSession(){
+    if("Notification" in window && Notification.permission === "default"){ Notification.requestPermission(); }
+    if(timerMode === "countdown") readCountdownInputs();
+    if(timerMode === "pomodoro" && pomoCount === 0 && pomoPhase === "focus" && elapsedBeforePause === 0){ readPomoConfig(); pomoPhaseSeconds = pomoConfig.focus; updatePomoLabel(); }
+    sessionActive = true;
+    sessionWallStart = new Date();
+    resumeTimer();
+  }
+  function finishSession(){
+    if(running){ elapsedBeforePause += (Date.now() - startEpoch)/1000; running = false; cancelAnimationFrame(rafId); }
+    const total = Math.max(0, elapsedBeforePause);
+    const countable = timerMode === "pomodoro" ? (pomoPhase === "focus" && total >= 60) : total >= 60;
+    let logged = false;
+    if(countable){ logSession(total, timerMode); logged = true; }
+    sessionActive = false; elapsedBeforePause = 0;
+    ringProgress.classList.remove("indeterminate");
+    resetTimerState();
+    timerSub.textContent = logged ? "جلسه ثبت شد ✓" : "آماده برای شروع";
+    if(logged) toast(celebrate(), true);
+    else if(total > 0) toast("کمتر از ۱ دقیقه بود و ثبت نشد");
+    updateControls();
+  }
+  let wakeLock = null;
+  async function keepAwake(on){
+    try{
+      if(on && "wakeLock" in navigator && !wakeLock){
+        wakeLock = await navigator.wakeLock.request("screen");
+        wakeLock.addEventListener("release", ()=>{ wakeLock = null; });
+      } else if(!on && wakeLock){ await wakeLock.release(); wakeLock = null; }
+    }catch(e){}
+  }
+  function checkExpired(){
+    if(!sessionActive || !running) return;
+    const el = (Date.now() - startEpoch)/1000 + elapsedBeforePause;
+    if(timerMode === "countdown" && el >= countdownTotalSeconds){ finishCountdown(); }
+    else if(timerMode === "pomodoro" && el >= pomoPhaseSeconds){ cancelAnimationFrame(rafId); advancePomoPhase(); }
+  }
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden) return;
+    checkExpired(); updateControls();
+  });
+  startStopBtn.addEventListener("click", ()=>{ if(!sessionActive) startSession(); else finishSession(); });
+  document.getElementById("pauseBtn").addEventListener("click", ()=>{
+    if(!sessionActive) return;
+    if(running) pauseTimer(); else resumeTimer();
   });
   resetBtn.addEventListener("click", ()=>{ cancelAnimationFrame(rafId); resetTimerState(); });
 
@@ -1483,8 +1554,8 @@
   });
   document.getElementById("subMinuteBtn").addEventListener("click", ()=>{
     if(timerMode === "stopwatch"){
-      elapsedBeforePause = Math.max(0, elapsedBeforePause - 60);
-      if(!running) renderTimerDisplay(elapsedBeforePause);
+      if(running){ elapsedBeforePause -= 60; }
+      else { elapsedBeforePause = Math.max(0, elapsedBeforePause - 60); renderTimerDisplay(elapsedBeforePause); }
     } else if(timerMode === "countdown"){
       if(running){ countdownTotalSeconds = Math.max(60, countdownTotalSeconds - 60); }
       else{ document.getElementById("cdMinutes").value = Math.max(0, (parseInt(document.getElementById("cdMinutes").value)||0) - 1); }
@@ -1510,6 +1581,7 @@
     });
   }
   function logSession(seconds, mode){
+    if(seconds < 60) return;
     const isFirstToday = DATA.sessions.filter(s=>s.date===todayStr()).length === 0;
     const endDate = new Date();
     const startDate = sessionWallStart || new Date(endDate.getTime()-seconds*1000);
@@ -1869,6 +1941,43 @@
       row.appendChild(opt);
     });
   }
+  document.getElementById("exportBtn").addEventListener("click", ()=>{
+    const blob = new Blob([JSON.stringify(DATA)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = "studyflow-backup-" + todayStr() + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 4000);
+    toast("پشتیبان ساخته شد؛ فایلش توی Downloads هست", false, 5000);
+  });
+  document.getElementById("importBtn").addEventListener("click", ()=>document.getElementById("importFile").click());
+  document.getElementById("importFile").addEventListener("change", async (e)=>{
+    const f = e.target.files[0]; if(!f) return;
+    try{
+      const obj = JSON.parse(await f.text());
+      if(!obj || !Array.isArray(obj.sessions) || !Array.isArray(obj.subjects)) throw new Error("invalid");
+      if(!confirm("اطلاعات فعلی با این پشتیبان جایگزین می‌شن. ادامه بدم؟")) return;
+      localStorage.setItem(STORE_KEY, JSON.stringify(Object.assign(defaultData(), obj)));
+      location.reload();
+    }catch(err){ toast("این فایل پشتیبان معتبر نیست", false, 5000); }
+  });
+  document.getElementById("testNotifBtn").addEventListener("click", async ()=>{
+    if(!("Notification" in window)){ toast("این مرورگر اعلان رو پشتیبانی نمی‌کنه", false, 6000); return; }
+    let perm = Notification.permission;
+    if(perm === "denied"){ toast("اعلان‌ها بسته شدن. توی تنظیمات گوشی برای StudyFlow (یا Chrome) اعلان رو روشن کن", false, 9000); return; }
+    if(perm !== "granted"){ perm = await Notification.requestPermission(); }
+    if(perm !== "granted"){ toast("اجازه‌ی اعلان داده نشد", false, 5000); return; }
+    let reg = null;
+    if("serviceWorker" in navigator){
+      try{ reg = await Promise.race([navigator.serviceWorker.ready, new Promise((_,rej)=>setTimeout(()=>rej(new Error("timeout")),3000))]); }catch(e){ reg = null; }
+    }
+    const opts = {body:"اگه این رو دیدی، اعلان‌ها کار می‌کنن ✅", icon:"./icon-192.png", badge:"./icon-192.png", vibrate:[120,60,120], tag:"studyflow-test"};
+    if(reg && reg.showNotification){
+      try{ await reg.showNotification("🔔 تست اعلان", opts); toast("اعلان فرستاده شد ✅", false, 3000); return; }catch(e){}
+    }
+    try{ new Notification("🔔 تست اعلان", opts); toast("اعلان فرستاده شد ✅", false, 3000); }
+    catch(e){ toast("این گوشی اعلان رو اجرا نکرد. اپ رو کامل ببند و دوباره از آیکون باز کن", false, 8000); }
+  });
   document.getElementById("enableNotifBtn").addEventListener("click", ()=>{
     if(!("Notification" in window)){ toast("اعلان‌ها توی این مرورگر پشتیبانی نمی‌شن"); return; }
     Notification.requestPermission().then(perm=>{
@@ -1893,9 +2002,13 @@
 
   /* ================= TIME-OF-DAY NOTIFICATIONS ================= */
   function sendAppNotification(title, body){
-    if("Notification" in window && Notification.permission === "granted"){
-      try{ new Notification(title, {body: body}); }catch(e){ toast(body, true); }
-    } else { toast(body, true); }
+    const canNotify = "Notification" in window && Notification.permission === "granted";
+    if(canNotify && "serviceWorker" in navigator){
+      navigator.serviceWorker.ready.then(reg => reg.showNotification(title, {
+        body: body, icon: "./icon-192.png", badge: "./icon-192.png", vibrate: [120,60,120], tag: "studyflow"
+      })).catch(()=>{});
+    }
+    if(document.visibilityState === "visible") toast(title + " — " + body, true, 6000);
   }
   function yesterdayHourText(){
     const y = toDateStr(dateNDaysAgo(1));
@@ -2348,7 +2461,55 @@
     document.getElementById("chartToggleBtn").textContent = hoursChartMode==="line" ? "📊 نمایش ستونی" : "📈 نمایش خطی";
     renderStats();
   });
+  function renderTodayPanel(){
+    const box = document.getElementById("todayPanel"); if(!box) return;
+    const today = todayStr();
+    const sess = DATA.sessions.filter(s=>s.date===today && s.seconds>=60).sort((a,b)=>a.ts-b.ts);
+    const tests = DATA.testEntries.filter(t=>t.date===today).sort((a,b)=>a.ts-b.ts);
+    const books = DATA.books.filter(b=>b.date===today).sort((a,b)=>a.ts-b.ts);
+    const totalSec = sess.reduce((a,s)=>a+s.seconds,0);
+    const qCount = tests.reduce((a,t)=>a+t.correct+t.wrong+t.unanswered,0);
+    const label = t => `<div style="font-size:12px;color:var(--ink-faint);margin:12px 0 4px;">${t}</div>`;
+    let html = `<div class="stat-summary" style="margin-bottom:6px;">
+      <div class="stat-box"><div class="num">${(totalSec/3600).toFixed(1)}</div><div class="lbl">ساعت مطالعه</div></div>
+      <div class="stat-box"><div class="num">${sess.length}</div><div class="lbl">جلسه</div></div>
+      <div class="stat-box"><div class="num">${qCount}</div><div class="lbl">سوال تست</div></div></div>`;
+    if(sess.length){
+      html += label("جلسه‌ها");
+      sess.forEach(s=>{
+        const sub = subjectById(s.subjectId); const m = Math.round(s.seconds/60);
+        html += `<div class="log-item"><span class="log-dot" style="background:${sub.color}"></span><div class="log-main"><div class="log-subject">${sub.name}${s.sessionType?" · "+s.sessionType:""}</div><div class="log-date">${s.startTime&&s.endTime?s.startTime+"–"+s.endTime+" · ":""}${m} دقیقه</div>${s.note?`<div class="log-note">📝 ${s.note}</div>`:""}</div><button class="log-del" data-del-sess="${s.id}">✕</button></div>`;
+      });
+    }
+    if(tests.length){
+      html += label("تست‌ها");
+      tests.forEach(t=>{
+        const sub = subjectById(t.subjectId); const tot = t.correct+t.wrong+t.unanswered;
+        html += `<div class="log-item"><span class="log-dot" style="background:${sub.color}"></span><div class="log-main"><div class="log-subject">${sub.name} · ${tot} سوال${t.analyzed?" · تحلیل شد ✓":""}</div><div class="log-date">✅${t.correct} ❌${t.wrong} ⬜${t.unanswered}</div></div><button class="log-del" data-del-test="${t.id}">✕</button></div>`;
+      });
+    }
+    if(books.length){
+      html += label("کتاب");
+      books.forEach(b=>{
+        html += `<div class="log-item"><div class="log-main"><div class="log-subject">${b.title}</div><div class="log-date">${b.pages} صفحه</div></div><button class="log-del" data-del-book="${b.id}">✕</button></div>`;
+      });
+    }
+    if(!sess.length && !tests.length && !books.length){
+      html += '<div class="empty-state" style="padding:14px 0;">امروز هنوز چیزی ثبت نشده</div>';
+    }
+    box.innerHTML = html;
+    box.querySelectorAll("[data-del-sess]").forEach(b=>b.addEventListener("click", ()=>{
+      DATA.sessions = DATA.sessions.filter(x=>x.id!==b.dataset.delSess); persist(); renderStats(); renderGoalBanner(); renderLevelCard(); renderStreak();
+    }));
+    box.querySelectorAll("[data-del-test]").forEach(b=>b.addEventListener("click", ()=>{
+      DATA.testEntries = DATA.testEntries.filter(x=>x.id!==b.dataset.delTest); persist(); renderStats(); renderTestGoalBanner(); renderLevelCard();
+    }));
+    box.querySelectorAll("[data-del-book]").forEach(b=>b.addEventListener("click", ()=>{
+      DATA.books = DATA.books.filter(x=>x.id!==b.dataset.delBook); persist(); renderStats(); renderBookList();
+    }));
+  }
   function renderStats(){
+    renderTodayPanel();
     renderTotalsSummary();
     let days = 7;
     if(statsRange === "month") days = 30;
@@ -2924,10 +3085,35 @@
     "🌸 بعضی روزها فقط نگه داشتن خودت کافیه. تو داری نگه می‌داری.",
     "💧 آب بخور! مغز تشنه کارایی‌ش میاد پایین.",
     "👀 هر ۲۰ دقیقه یه نگاه به دور دست بنداز، چشمات استراحت می‌کنن.",
-    "🧘 یه کش‌وقوس کوتاه بده؛ بدن خسته، ذهن رو هم خسته می‌کنه."
+    "🧘 یه کش‌وقوس کوتاه بده؛ بدن خسته، ذهن رو هم خسته می‌کنه.",
+    "🤓 یه راز: هرچی بیشتر بخونی، کمتر ازش می‌ترسی 😉",
+    "😂 امتحان گفت: من کجام؟ تو گفتی: اینجا! 📝",
+    "🐢 آروم برو ولی وایسا نشو؛ لاک‌پشت هم به خط پایان رسید.",
+    "🍫 بعد از این جلسه یه شکلات حقته، مغز هم انرژی می‌خواد 😋",
+    "🫶 امروز هرچی خوندی، ارزشش رو داره و تو بهترینی.",
+    "🎧 یه موسیقی آروم بذار و بریم سراغ درس.",
+    "🤩 هر جلسه‌ای که بخونی ثبت می‌شه؛ هیچ‌کدوم هدر نمی‌ره.",
+    "🥇 لازم نیست مثل کسی باشی؛ فقط باید از خودت بهتر بشی.",
+    "😴 خسته‌ای؟ یه نفس عمیق، یه لیوان آب، و بعد دوباره بریم.",
+    "🧠 مغزت مثل ماهیچه‌ست؛ هرچی تمرین بدیش قوی‌تر می‌شه.",
+    "🎯 تمرکز یعنی: یه کار، یه لحظه، یه قدم.",
+    "🦁 تو شیرِ این درسی؛ نترس و جلو برو.",
+    "🫂 اگه امروز نشد، اشکالی نداره. فردا دوباره؛ من کنارتم.",
+    "🌟 یه جلسه‌ی ساده هم کافیه تا روزت رو نجات بدی.",
+    "📚 کتاب‌ها منتظرن که تو بیای و جوابشون رو بدی.",
+    "💡 هر ایده‌ی خوب از یه جلسه‌ی آروم شروع می‌شه.",
+    "😜 بقیه می‌گن درس سخته؟ تو ثابت کن که نیست!",
+    "🌙 امروز هرچی شد، همون کافیه؛ فردا یه صفحه‌ی تازه‌ست.",
+    "🤍 خودتو با کسی مقایسه نکن؛ تو مسیر خودتو داری می‌ری.",
+    "🎉 هر بار که بخونی، یه قدم به خودت جایزه دادی.",
+    "💪 بدنت آب می‌خواد، ذهنت تمرین، و دلت امید.",
+    "🧩 درس‌ها مثل پازل‌ان؛ هر روز یه تیکه‌شون رو سر جاش بذار.",
+    "🌸 امروز هم بهترین روز برای شروع کردنه.",
+    "🌧️ بیرون بارون می‌آد؟ پس بهترین وقت برای درس خوندنه ☕",
+    "🏆 هر صبح که بیدار می‌شی، یه پیروزی کوچیک داری."
   ];
   document.getElementById("mascotInline").addEventListener("click", ()=>{
-    toast(MASCOT_LINES[Math.floor(Math.random()*MASCOT_LINES.length)], true);
+    toast(MASCOT_LINES[Math.floor(Math.random()*MASCOT_LINES.length)], true, 15000);
   });
 
   /* ================= WELCOME SCREEN ================= */
