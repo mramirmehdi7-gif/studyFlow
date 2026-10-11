@@ -164,7 +164,7 @@
   @keyframes zzzFloat{ 0%{opacity:0; transform:translateY(0) scale(0.8);} 25%{opacity:1;} 100%{opacity:0; transform:translateY(-16px) scale(1.1);} }
   .mascot-toggle-row{ display:flex; justify-content:center; margin-bottom:4px; }
   .minute-adjust-row{ display:flex; justify-content:center; gap:10px; margin-bottom:10px; }
-  .mascot-toggle-row button{ background:var(--paper-raised); border:1.5px solid var(--line); border-radius:20px; padding:6px 14px; font-size:11.5px; color:var(--ink-soft); font-family:inherit; cursor:pointer; }
+  .mascot-toggle-row button{ background:linear-gradient(135deg, var(--accent), #8F86E6); color:#fff; border:none; border-radius:22px; padding:9px 22px; font-size:12.5px; font-weight:700; font-family:inherit; cursor:pointer; box-shadow:0 6px 16px rgba(90,90,156,0.28); }
   .timer-display{ font-family:Georgia,"Times New Roman",serif; font-variant-numeric:tabular-nums; letter-spacing:0.01em;
     line-height:1; color:var(--ink); font-size:46px; margin-top:2px; }
   .timer-sub{ margin-top:6px; font-size:12px; color:var(--ink-faint); letter-spacing:0.03em; }
@@ -246,6 +246,11 @@
   .empty-state{ text-align:center; padding:50px 20px; color:var(--ink-faint); font-size:14px; line-height:1.9; }
 
   .range-switch{ display:flex; gap:8px; margin-bottom:20px; }
+  .hidden-tab{ display:none !important; }
+  html{ -webkit-tap-highlight-color:transparent; }
+  button{ transition: transform .12s ease, background-color .2s ease, box-shadow .2s ease, opacity .2s ease, color .2s ease; }
+  button:active{ transform: scale(.96); }
+  .chart-card, .stat-box, .quote-bar, .goal-banner, .level-card{ transition: transform .25s ease, box-shadow .25s ease; }
   .period-nav{ display:flex; align-items:center; justify-content:space-between; margin:-10px 0 18px; font-size:12px; }
   .period-nav button{ background:var(--paper-raised); border:1.5px solid var(--line); border-radius:8px; padding:6px 12px; color:var(--ink-soft); font-family:inherit; font-size:12px; cursor:pointer; }
   .period-nav span{ color:var(--ink-faint); font-size:11.5px; }
@@ -415,8 +420,6 @@
       </div>
     </div>
 
-    <div class="mascot-toggle-row"><button id="mascotSleepToggle">🌙 می‌رم بخوابم</button></div>
-
     <div class="minute-adjust-row" id="minuteAdjustRow">
       <button class="mini-btn" id="subMinuteBtn">−۱ دقیقه</button>
       <button class="mini-btn" id="addMinuteBtn">+۱ دقیقه</button>
@@ -477,9 +480,11 @@
   <section class="screen" id="screen-stats">
     <h1 class="page-title">آمار</h1>
     <p class="page-sub">روند و پیشرفتت</p>
+    <div class="segmented" id="statsTopSeg"><button class="active" data-stab="today">امار امروز</button><button data-stab="all">امار کلی</button></div>
+    <div class="period-nav" id="dayNav"><button id="dayPrevBtn">‹ قبلی</button><span id="dayLabel"></span><button id="dayNextBtn">بعدی ›</button></div>
     <div class="level-card" id="levelCard"></div>
     <div class="growth-hero" id="growthHero"></div>
-    <div class="chart-card" id="todayCardPanel"><h3>امروز</h3><div id="todayPanel"></div></div>
+    <div class="chart-card today-part" id="todayCardPanel"><h3>امار امروز</h3><div class="mascot-toggle-row"><button id="mascotSleepToggle">🌙 می‌رم بخوابم</button></div><div id="todayPanel"></div></div>
     <div class="chart-card" id="totalsSummaryCard" style="padding:14px 14px;"></div>
 
     <div class="range-switch">
@@ -518,7 +523,7 @@
       </div>
     </div>
     <div class="chart-card"><h3>درصد درست هر درس</h3><div id="subjectTestPct"></div><h3 style="margin-top:14px;">تحلیل آزمون‌ها</h3><div id="testAnalysisStat"></div></div>
-    <div class="chart-card"><h3>تایم‌لاین امروز (۲۴ ساعته)</h3><div style="display:flex;justify-content:center;"><svg id="dayTimeline" viewBox="0 0 200 200" style="width:220px;height:220px;"></svg></div><div id="dayTimelineList"></div></div>
+    <div class="chart-card today-part"><h3>تایم‌لاین روز (۲۴ ساعته)</h3><div style="display:flex;justify-content:center;"><svg id="dayTimeline" viewBox="0 0 200 200" style="width:220px;height:220px;"></svg></div><div id="dayTimelineList"></div></div>
     <div class="chart-card"><h3>بازخورد روزانه اخیر</h3><div id="reflectionHistory"></div></div>
   </section>
 
@@ -825,6 +830,12 @@
   function fmtHMS(s){ s=Math.max(0,Math.round(s)); return `${pad(Math.floor(s/3600))}:${pad(Math.floor((s%3600)/60))}:${pad(s%60)}`; }
   function fmtClock(d){ return pad(d.getHours())+":"+pad(d.getMinutes()); }
   function todayStr(){ const d=new Date(); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+  function studyDayStr(){
+    const cal = todayStr();
+    if(!DATA.studyDay){ DATA.studyDay = cal; persist(); }
+    else if(DATA.studyDay !== cal && new Date().getHours() >= 5){ DATA.studyDay = cal; persist(); }
+    return DATA.studyDay;
+  }
 
   /* ================= JALALI (PERSIAN) CALENDAR ================= */
   const JALALI_MONTHS = ["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
@@ -1050,15 +1061,15 @@
   }
 
   /* ================= STREAK ================= */
-  function todaySeconds(){ return DATA.sessions.filter(s=>s.date===todayStr()).reduce((a,s)=>a+s.seconds,0); }
+  function todaySeconds(){ return DATA.sessions.filter(s=>s.date===studyDayStr()).reduce((a,s)=>a+s.seconds,0); }
+  function shiftDay(ds, n){ const [y,m,d] = ds.split("-").map(Number); return toDateStr(new Date(y, m-1, d-n)); }
   function currentStreak(){
-    let streak=0, i=1;
-    while(i<3650){
-      const ds = toDateStr(dateNDaysAgo(i));
-      const secs = DATA.sessions.filter(s=>s.date===ds).reduce((a,s)=>a+s.seconds,0);
-      if(DATA.dailyGoalSeconds>0 && secs>=DATA.dailyGoalSeconds){ streak++; i++; } else break;
-    }
-    if(DATA.dailyGoalSeconds>0 && todaySeconds()>=DATA.dailyGoalSeconds) streak++;
+    const goal = DATA.dailyGoalSeconds; if(!(goal > 0)) return 0;
+    const total = ds => DATA.sessions.filter(s=>s.date===ds).reduce((a,s)=>a+s.seconds,0);
+    const cur = studyDayStr();
+    let back = total(cur) >= goal ? 0 : 1, streak = 0;
+    while(back < 3650 && total(shiftDay(cur, back)) >= goal){ streak++; back++; }
+    if(total(cur) >= goal && back === 0) streak = 1 + streak;
     return streak;
   }
   function renderStreak(){ document.getElementById("streakNum").textContent = currentStreak(); }
@@ -1294,10 +1305,10 @@
   document.getElementById("mascotSleepToggle").addEventListener("click", ()=>{
     DATA.mascotSleeping = !DATA.mascotSleeping;
     const now = fmtClock(new Date());
-    const log = DATA.sleepLogs[todayStr()] || {};
+    const log = DATA.sleepLogs[studyDayStr()] || {};
     if(DATA.mascotSleeping){ log.sleepTime = now; }
-    else { log.wakeTime = now; }
-    DATA.sleepLogs[todayStr()] = log;
+    else { log.wakeTime = now; DATA.studyDay = todayStr(); persist(); }
+    DATA.sleepLogs[studyDayStr()] = log;
     persist();
     document.getElementById("mascotSleepToggle").textContent = DATA.mascotSleeping ? "☀️ بیدار شدم" : "🌙 می‌رم بخوابم";
     renderMascotState();
@@ -1321,6 +1332,7 @@
 
   function resetTimerState(){
     running = false; sessionActive = false; elapsedBeforePause = 0; pomoPhase="focus"; pomoCount=0;
+    cancelEndAlert();
     readPomoConfig(); pomoPhaseSeconds = pomoConfig.focus; updatePomoLabel();
     startStopBtn.textContent = "شروع"; startStopBtn.classList.remove("running");
     resetBtnWrap.style.display = "none";
@@ -1409,17 +1421,19 @@
     {title:"🎧 استراحت تموم", body:"حالا با تمرکز کامل برگرد."}
   ];
   function finishCountdown(){
+    cancelEndAlert();
     running = false; sessionActive = false; elapsedBeforePause = 0;
     logSession(countdownTotalSeconds, "countdown");
     playAlert("focus");
     const m = TIMER_DONE_MESSAGES[Math.floor(Math.random()*TIMER_DONE_MESSAGES.length)];
-    sendAppNotification(m.title, m.body);
+    if(!endAlertFired) sendAppNotification(m.title, m.body);
     timerSub.textContent = "پایان زمان — جلسه ثبت شد ✓";
     startStopBtn.textContent = "شروع"; startStopBtn.classList.remove("running");
     timerEnd.style.display = "none";
     updateControls();
   }
   function advancePomoPhase(){
+    cancelEndAlert();
     if(pomoPhase === "focus"){
       logSession(pomoConfig.focus, "pomodoro");
       pomoCount++;
@@ -1427,15 +1441,16 @@
       pomoPhaseSeconds = pomoConfig[pomoPhase === "long" ? "long" : "short"];
       playAlert("focus"); timerSub.textContent = "وقت استراحت است";
       const m1 = TIMER_DONE_MESSAGES[Math.floor(Math.random()*TIMER_DONE_MESSAGES.length)];
-      sendAppNotification(m1.title, m1.body);
+      if(!endAlertFired) sendAppNotification(m1.title, m1.body);
     } else {
       pomoPhase = "focus"; pomoPhaseSeconds = pomoConfig.focus;
       playAlert("break"); timerSub.textContent = "برگردیم به درس";
       const m2 = BREAK_DONE_MESSAGES[Math.floor(Math.random()*BREAK_DONE_MESSAGES.length)];
-      sendAppNotification(m2.title, m2.body);
+      if(!endAlertFired) sendAppNotification(m2.title, m2.body);
     }
     updatePomoLabel();
     elapsedBeforePause = 0; startEpoch = Date.now(); sessionWallStart = new Date();
+    scheduleEndAlert();
     renderTimerDisplay(pomoPhaseSeconds);
     rafId = requestAnimationFrame(tick);
   }
@@ -1449,6 +1464,7 @@
   }
   function resumeTimer(){
     running = true; startEpoch = Date.now();
+    scheduleEndAlert();
     startStopBtn.textContent = "توقف"; startStopBtn.classList.add("running");
     timerSub.textContent = timerMode === "stopwatch" ? "در حال شمارش..." : "در حال مطالعه...";
     if(timerMode === "stopwatch"){ ringProgress.classList.add("indeterminate"); timerEnd.style.display = "none"; }
@@ -1458,11 +1474,25 @@
   }
   function pauseTimer(){
     if(!running) return;
+    cancelEndAlert();
     running = false; cancelAnimationFrame(rafId);
     elapsedBeforePause += (Date.now() - startEpoch)/1000;
     ringProgress.classList.remove("indeterminate");
     timerSub.textContent = "مکث — برای ادامه ▶ را بزن";
     updateControls(); renderMascotState();
+  }
+  let endAlertTimer = null, endAlertFired = false;
+  function cancelEndAlert(){ clearTimeout(endAlertTimer); endAlertTimer = null; }
+  function scheduleEndAlert(){
+    cancelEndAlert(); endAlertFired = false;
+    if(!sessionActive || !running || timerMode === "stopwatch") return;
+    const left = (timerMode === "countdown" ? countdownTotalSeconds : pomoPhaseSeconds) - elapsedBeforePause;
+    if(left <= 0) return;
+    let title, body;
+    if(timerMode === "countdown"){ title = "⏰ زمانت تموم شد"; body = "جلسه‌ت تموم شد. بیا ثبتش کنیم 🎉"; }
+    else if(pomoPhase === "focus"){ title = "🎯 تمرکز تموم شد"; body = "وقت استراحته، یه نفس تازه کن ☕"; }
+    else { title = "📖 استراحت تموم شد"; body = "برگردیم سر درس 💪"; }
+    endAlertTimer = setTimeout(()=>{ endAlertTimer = null; endAlertFired = true; sendAppNotification(title, body); }, left*1000);
   }
   function startSession(){
     if("Notification" in window && Notification.permission === "default"){ Notification.requestPermission(); }
@@ -1473,6 +1503,7 @@
     resumeTimer();
   }
   function finishSession(){
+    cancelEndAlert();
     if(running){ elapsedBeforePause += (Date.now() - startEpoch)/1000; running = false; cancelAnimationFrame(rafId); }
     const total = Math.max(0, elapsedBeforePause);
     const countable = timerMode === "pomodoro" ? (pomoPhase === "focus" && total >= 60) : total >= 60;
@@ -1567,8 +1598,8 @@
   });
 
   const SESSION_TYPES = ["مرور","درسنامه","ویدیو","تست آموزشی","تست زمان‌دار","تحلیل سوال","خلاصه‌نویسی","ترکیبی"];
-  let currentSessionType = "مرور";
-  let manualSessionType = "مرور";
+  let currentSessionType = null;
+  let manualSessionType = null;
   function renderTypeChips(containerId, getCur, setCur){
     const row = document.getElementById(containerId); if(!row) return;
     row.innerHTML = "";
@@ -1582,13 +1613,14 @@
   }
   function logSession(seconds, mode){
     if(seconds < 60) return;
-    const isFirstToday = DATA.sessions.filter(s=>s.date===todayStr()).length === 0;
+    const isFirstToday = DATA.sessions.filter(s=>s.date===studyDayStr()).length === 0;
     const endDate = new Date();
     const startDate = sessionWallStart || new Date(endDate.getTime()-seconds*1000);
     const note = (document.getElementById("sessionNoteInput").value || "").trim();
-    DATA.sessions.push({ id:"sess_"+Date.now()+Math.random().toString(36).slice(2,6), subjectId:DATA.selectedSubject, seconds:Math.round(seconds), date:todayStr(), mode, startTime:fmtClock(startDate), endTime:fmtClock(endDate), note, sessionType:currentSessionType, ts:Date.now() });
+    DATA.sessions.push({ id:"sess_"+Date.now()+Math.random().toString(36).slice(2,6), subjectId:DATA.selectedSubject, seconds:Math.round(seconds), date:studyDayStr(), mode, startTime:fmtClock(startDate), endTime:fmtClock(endDate), note, sessionType:currentSessionType, ts:Date.now() });
     persist();
     document.getElementById("sessionNoteInput").value = "";
+    currentSessionType = null; document.querySelectorAll("#sessionTypeRow .type-chip").forEach(b=>b.classList.remove("selected"));
     refreshNoteBtn();
     renderGoalBanner(); renderLevelCard(); renderStreak();
     checkStudyCelebration();
@@ -1945,7 +1977,7 @@
     const blob = new Blob([JSON.stringify(DATA)], {type:"application/json"});
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = url; a.download = "studyflow-backup-" + todayStr() + ".json";
+    a.href = url; a.download = "studyflow-backup-" + studyDayStr() + ".json";
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(()=>URL.revokeObjectURL(url), 4000);
     toast("پشتیبان ساخته شد؛ فایلش توی Downloads هست", false, 5000);
@@ -2052,7 +2084,7 @@
   function checkTimeOfDayNotifications(){
     const now = new Date();
     const h = now.getHours();
-    const ds = todayStr();
+    const ds = studyDayStr();
     if(!DATA.notified || DATA.notified.date !== ds){ DATA.notified = {date: ds}; }
     if(h>=8 && h<10 && !DATA.notified.morning){
       DATA.notified.morning = true; persist();
@@ -2099,7 +2131,7 @@
     document.getElementById("manualMinutes").value = 0;
     document.getElementById("manualStartTime").value = "";
     document.getElementById("manualEndTime").value = "";
-    document.getElementById("manualDate").value = todayStr();
+    document.getElementById("manualDate").value = studyDayStr();
     manualOverlay.classList.add("active");
   });
   document.getElementById("manualCancel").addEventListener("click", ()=>{ manualOverlay.classList.remove("active"); });
@@ -2119,13 +2151,14 @@
     const m = parseInt(document.getElementById("manualMinutes").value)||0;
     const totalSec = h*3600+m*60;
     if(totalSec<=0){ toast("مدت زمان را وارد کنید"); return; }
-    const dateVal = document.getElementById("manualDate").value || todayStr();
+    const dateVal = document.getElementById("manualDate").value || studyDayStr();
     const startTime = document.getElementById("manualStartTime").value || null;
     const endTime = document.getElementById("manualEndTime").value || null;
     const note = (document.getElementById("manualNote").value || "").trim();
     DATA.sessions.push({ id:"sess_"+Date.now()+Math.random().toString(36).slice(2,6), subjectId:manualSelectedSubject, seconds:totalSec, date:dateVal, mode:"manual", startTime, endTime, note, sessionType:manualSessionType, ts:Date.now() });
     persist();
     document.getElementById("manualNote").value = "";
+    manualSessionType = null; document.querySelectorAll("#manualTypeRow .type-chip").forEach(b=>b.classList.remove("selected"));
     manualOverlay.classList.remove("active");
     toast("زمان ثبت شد");
     renderLog(); renderGoalBanner(); renderLevelCard(); renderStreak();
@@ -2143,10 +2176,10 @@
       if(mode === "book") renderBookList();
     });
   });
-  document.getElementById("testDate").value = todayStr();
-  document.getElementById("bookDate").value = todayStr();
+  document.getElementById("testDate").value = studyDayStr();
+  document.getElementById("bookDate").value = studyDayStr();
 
-  function todayTestTotal(){ return DATA.testEntries.filter(t=>t.date===todayStr()).reduce((a,t)=>a+t.correct+t.wrong+t.unanswered,0); }
+  function todayTestTotal(){ return DATA.testEntries.filter(t=>t.date===studyDayStr()).reduce((a,t)=>a+t.correct+t.wrong+t.unanswered,0); }
   function renderTestGoalBanner(){
     const el = document.getElementById("testGoalBanner"); if(!el) return;
     const total = todayTestTotal(); const goal = DATA.testGoalCount;
@@ -2176,7 +2209,7 @@
     const wrong = parseInt(document.getElementById("testWrong").value)||0;
     const unanswered = parseInt(document.getElementById("testUnanswered").value)||0;
     if(correct+wrong+unanswered === 0){ toast("حداقل یک عدد را وارد کن"); return; }
-    const dateVal = document.getElementById("testDate").value || todayStr();
+    const dateVal = document.getElementById("testDate").value || studyDayStr();
     DATA.testEntries.push({ id:"test_"+Date.now()+Math.random().toString(36).slice(2,6), date:dateVal, subjectId:testSelectedSubject, correct, wrong, unanswered, analyzed: document.getElementById("testAnalyzed").checked, ts:Date.now() });
     persist();
     document.getElementById("testCorrect").value = 0;
@@ -2188,8 +2221,8 @@
   });
   function checkTestCelebration(){
     const total = todayTestTotal();
-    if(total >= DATA.testGoalCount && DATA.celebrated.testDate !== todayStr()){
-      DATA.celebrated.testDate = todayStr(); persist();
+    if(total >= DATA.testGoalCount && DATA.celebrated.testDate !== studyDayStr()){
+      DATA.celebrated.testDate = studyDayStr(); persist();
       toast(celebrate() + " به هدف تستت رسیدی", true);
     }
   }
@@ -2209,13 +2242,13 @@
   ];
   function checkStudyCelebration(){
     const done = todaySeconds();
-    if(done >= DATA.dailyGoalSeconds && DATA.celebrated.studyDate !== todayStr()){
-      DATA.celebrated.studyDate = todayStr(); persist();
+    if(done >= DATA.dailyGoalSeconds && DATA.celebrated.studyDate !== studyDayStr()){
+      DATA.celebrated.studyDate = studyDayStr(); persist();
       toast(REWARD_QUOTES[Math.floor(Math.random()*REWARD_QUOTES.length)], true);
     }
     const bigThreshold = isHolidayToday() ? 8*3600 : 5*3600;
-    if(done >= bigThreshold && DATA.celebrated.bigDayDate !== todayStr()){
-      DATA.celebrated.bigDayDate = todayStr(); persist();
+    if(done >= bigThreshold && DATA.celebrated.bigDayDate !== studyDayStr()){
+      DATA.celebrated.bigDayDate = studyDayStr(); persist();
       const msg = FOUR_HOUR_QUOTES[Math.floor(Math.random()*FOUR_HOUR_QUOTES.length)];
       setTimeout(()=>toast(msg, true), 1800);
     }
@@ -2226,7 +2259,7 @@
     const title = document.getElementById("bookTitle").value.trim();
     const pages = parseInt(document.getElementById("bookPages").value)||0;
     if(!title || pages<=0){ toast("نام کتاب و تعداد صفحه را وارد کن"); return; }
-    const dateVal = document.getElementById("bookDate").value || todayStr();
+    const dateVal = document.getElementById("bookDate").value || studyDayStr();
     DATA.books.push({ id:"book_"+Date.now()+Math.random().toString(36).slice(2,6), title, pages, date:dateVal, ts:Date.now() });
     persist();
     document.getElementById("bookTitle").value = "";
@@ -2461,9 +2494,29 @@
     document.getElementById("chartToggleBtn").textContent = hoursChartMode==="line" ? "📊 نمایش ستونی" : "📈 نمایش خطی";
     renderStats();
   });
+  let statsTab = "today", dayOffset = 0;
+  function dayView(){ return shiftDay(studyDayStr(), dayOffset); }
+  function applyStatsTab(){
+    const screen = document.getElementById("screen-stats"); if(!screen) return;
+    const isToday = statsTab === "today";
+    Array.from(screen.children).forEach(el=>{
+      if(el.id === "statsTopSeg" || el.classList.contains("page-title") || el.classList.contains("page-sub")) return;
+      const belongsToday = el.classList.contains("today-part") || el.id === "dayNav";
+      el.classList.toggle("hidden-tab", belongsToday !== isToday);
+    });
+    const ds = dayView();
+    document.getElementById("dayLabel").textContent = toJalaliDateStr(ds) + (dayOffset===0 ? "  · امروز" : dayOffset===1 ? "  · دیروز" : "");
+  }
+  document.querySelectorAll("#statsTopSeg button").forEach(b=>b.addEventListener("click", ()=>{
+    statsTab = b.dataset.stab;
+    document.querySelectorAll("#statsTopSeg button").forEach(x=>x.classList.toggle("active", x===b));
+    renderStats();
+  }));
+  document.getElementById("dayPrevBtn").addEventListener("click", ()=>{ dayOffset++; renderStats(); });
+  document.getElementById("dayNextBtn").addEventListener("click", ()=>{ if(dayOffset>0){ dayOffset--; renderStats(); } });
   function renderTodayPanel(){
     const box = document.getElementById("todayPanel"); if(!box) return;
-    const today = todayStr();
+    const today = dayView();
     const sess = DATA.sessions.filter(s=>s.date===today && s.seconds>=60).sort((a,b)=>a.ts-b.ts);
     const tests = DATA.testEntries.filter(t=>t.date===today).sort((a,b)=>a.ts-b.ts);
     const books = DATA.books.filter(b=>b.date===today).sort((a,b)=>a.ts-b.ts);
@@ -2509,6 +2562,7 @@
     }));
   }
   function renderStats(){
+    applyStatsTab();
     renderTodayPanel();
     renderTotalsSummary();
     let days = 7;
@@ -2532,7 +2586,7 @@
 
     const totalSeconds = filtered.reduce((a,s)=>a+s.seconds,0);
     const totalHours = totalSeconds/3600;
-    const dayCount = days ? Math.max(1, bucketDays.filter(d=>d<=todayStr()).length) : Math.max(1, bucketDays.length);
+    const dayCount = days ? Math.max(1, bucketDays.filter(d=>d<=studyDayStr()).length) : Math.max(1, bucketDays.length);
     document.getElementById("statTotal").textContent = totalHours.toFixed(1);
     document.getElementById("statAvg").textContent = (totalHours/dayCount).toFixed(1);
     document.getElementById("statSessions").textContent = filtered.length;
@@ -2540,9 +2594,9 @@
     const hoursPerDay = {}; bucketDays.forEach(d=>hoursPerDay[d]=0);
     filtered.forEach(s=>{ if(hoursPerDay.hasOwnProperty(s.date)) hoursPerDay[s.date]+=s.seconds; });
     if(hoursChartMode==="bar"){
-      drawBarChart(document.getElementById("lineChart"), bucketDays, bucketDays.map(d=> d>todayStr() ? 0 : hoursPerDay[d]/3600), "var(--accent)");
+      drawBarChart(document.getElementById("lineChart"), bucketDays, bucketDays.map(d=> d>studyDayStr() ? 0 : hoursPerDay[d]/3600), "var(--accent)");
     } else {
-      drawLineChart(document.getElementById("lineChart"), bucketDays, bucketDays.map(d=> d>todayStr() ? null : hoursPerDay[d]/3600), "var(--accent)", {suffix:"h", steps:[4,5,6,7,8,10,12,16,20,24]});
+      drawLineChart(document.getElementById("lineChart"), bucketDays, bucketDays.map(d=> d>studyDayStr() ? null : hoursPerDay[d]/3600), "var(--accent)", {suffix:"h", steps:[4,5,6,7,8,10,12,16,20,24]});
     }
 
     renderSubjectBars(filtered, totalSeconds);
@@ -2594,7 +2648,7 @@
   function renderDayTimeline(){
     const svg = document.getElementById("dayTimeline"); const list = document.getElementById("dayTimelineList");
     if(!svg) return;
-    const today = todayStr();
+    const today = dayView();
     const sess = DATA.sessions.filter(s=>s.date===today && s.startTime && s.endTime);
     const R = 80, C = 2*Math.PI*R;
     let arcs = `<circle cx="100" cy="100" r="${R}" fill="none" stroke="var(--line)" stroke-width="16"/>`;
@@ -2650,7 +2704,7 @@
     const daysSinceSat = (dow-6+7)%7;
     const weekStart = new Date(today); weekStart.setDate(today.getDate()-daysSinceSat);
     const names = ["ش","ی","د","س","چ","پ","ج"]; const holidayIdx = [5,6];
-    const todayDateStr = todayStr();
+    const todayDateStr = studyDayStr();
     container.innerHTML = "";
     const monthLabel = document.getElementById("weekCalMonthLabel");
     if(monthLabel){
@@ -2672,15 +2726,16 @@
     const secs = DATA.sessions.filter(s=>s.date===dateStr).reduce((a,s)=>a+s.seconds,0);
     const goalFrac = DATA.dailyGoalSeconds>0 ? Math.min(1, secs/DATA.dailyGoalSeconds) : 0;
     const refl = DATA.reflections[dateStr];
-    let score = goalFrac*70;
-    if(refl){ score += ((refl.satisfaction+refl.productivity)/10)*20; }
-    if(DATA.sleepLogs[dateStr]) score += 10;
+    let score = goalFrac*60;                       // study: up to 60 points
+    if(goalFrac >= 1) score += 10;                 // reaching the goal: +10
+    if(refl) score += ((refl.satisfaction+refl.productivity)/10)*20; // self-review: up to 20
+    if(DATA.sleepLogs[dateStr]) score += 10;       // sleep logged: 10
     return Math.round(Math.min(100, score));
   }
   function renderGrowth(bucketDays){
     const hero = document.getElementById("growthHero");
     const rangeDays = bucketDays.length ? bucketDays : buildBucketDays(7);
-    const today = todayStr();
+    const today = studyDayStr();
     const elapsed = rangeDays.filter(d=>d<=today);       // only days that have already happened
     const base = elapsed.length ? elapsed : rangeDays;
     const scores = base.map(d=>progressScoreForDate(d));
@@ -2705,9 +2760,9 @@
     if(done===0) feedback = "هنوز چیزی برای امروز ثبت نشده.";
     else if(completed) feedback = "عالی بود! به هدفت رسیدی 🎉";
     else feedback = `${(Math.abs(diff)/3600).toFixed(1)} ساعت مونده به هدف.`;
-    const todayReflection = DATA.reflections[todayStr()];
+    const todayReflection = DATA.reflections[studyDayStr()];
     const reflectionBtnText = todayReflection ? "ویرایش بازخورد" : "چطور گذشت؟";
-    const sleepLog = DATA.sleepLogs[todayStr()];
+    const sleepLog = DATA.sleepLogs[studyDayStr()];
     const sleepText = sleepLog ? `🌙 ${sleepLog.sleepTime||"—"}   ☀️ ${sleepLog.wakeTime||"—"}` : "خواب ثبت نشده";
 
     el.className = "goal-banner" + (completed ? " completed" : "");
@@ -2737,14 +2792,14 @@
     toast("هدف روزانه ذخیره شد");
   });
   function openSleepSheet(){
-    const log = DATA.sleepLogs[todayStr()] || {};
+    const log = DATA.sleepLogs[studyDayStr()] || {};
     document.getElementById("sleepTimeInput").value = log.sleepTime || "";
     document.getElementById("wakeTimeInput").value = log.wakeTime || "";
     document.getElementById("sleepOverlay").classList.add("active");
   }
   document.getElementById("sleepCancel").addEventListener("click", ()=>{ document.getElementById("sleepOverlay").classList.remove("active"); });
   document.getElementById("sleepSave").addEventListener("click", ()=>{
-    DATA.sleepLogs[todayStr()] = { sleepTime: document.getElementById("sleepTimeInput").value, wakeTime: document.getElementById("wakeTimeInput").value };
+    DATA.sleepLogs[studyDayStr()] = { sleepTime: document.getElementById("sleepTimeInput").value, wakeTime: document.getElementById("wakeTimeInput").value };
     persist();
     document.getElementById("sleepOverlay").classList.remove("active");
     renderGoalBanner();
@@ -2762,7 +2817,7 @@
     }
   }
   function openReflectionSheet(){
-    const existing = DATA.reflections[todayStr()] || {};
+    const existing = DATA.reflections[studyDayStr()] || {};
     selectedSatisfaction = existing.satisfaction || 0;
     selectedProductivity = existing.productivity || 0;
     document.getElementById("reflectionNote").value = existing.note || "";
@@ -2773,7 +2828,7 @@
   document.getElementById("reflectionCancel").addEventListener("click", ()=>{ document.getElementById("reflectionOverlay").classList.remove("active"); });
   document.getElementById("reflectionSave").addEventListener("click", ()=>{
     if(selectedSatisfaction===0 || selectedProductivity===0){ toast("هر دو مورد را انتخاب کن"); return; }
-    DATA.reflections[todayStr()] = { satisfaction:selectedSatisfaction, productivity:selectedProductivity, note: document.getElementById("reflectionNote").value.trim(), ts:Date.now() };
+    DATA.reflections[studyDayStr()] = { satisfaction:selectedSatisfaction, productivity:selectedProductivity, note: document.getElementById("reflectionNote").value.trim(), ts:Date.now() };
     persist();
     document.getElementById("reflectionOverlay").classList.remove("active");
     renderGoalBanner(); renderLevelCard();
@@ -3110,7 +3165,35 @@
     "🧩 درس‌ها مثل پازل‌ان؛ هر روز یه تیکه‌شون رو سر جاش بذار.",
     "🌸 امروز هم بهترین روز برای شروع کردنه.",
     "🌧️ بیرون بارون می‌آد؟ پس بهترین وقت برای درس خوندنه ☕",
-    "🏆 هر صبح که بیدار می‌شی، یه پیروزی کوچیک داری."
+    "🏆 هر صبح که بیدار می‌شی، یه پیروزی کوچیک داری.",
+    "🎵 یه آهنگ آروم بذار، ذهنت یه کم استراحت کنه و بعد برو سراغ درس.",
+    "🧃 یه آب‌میوه‌ی طبیعی بخور، مغزت برای انرژی بی‌تابه.",
+    "🌿 ۱۰ ثانیه چشماتو ببند و نفس عمیق بکش. بعد دوباره شروع کن.",
+    "🥗 ناهار سبک بخور و با انرژی بیشتر برگرد!",
+    "🤸 بلند شو یه کش‌وقوس بده؛ خون دوباره جریان می‌گیره.",
+    "🫶 یه نگاه به امروزت بنداز؛ ببین چقدر پیشرفت کردی!",
+    "🌅 هرچی امروز خوندی، فردا از همین‌جا ادامه می‌دی.",
+    "🎈 امروز قهرمانی؛ یه بادکنک هم برای خودت بگیر!",
+    "🐥 منم دارم کنارت پیشرفت می‌کنم.",
+    "🧁 بعد از هدف یه کیک کوچیک، جایزه‌ی واقعیه.",
+    "🛁 بعد از درس یه دوش آروم، ذهن تازه می‌شه.",
+    "📝 یه نکته‌ی کوچیک بنویس؛ فردا خیلی کمکت می‌کنه.",
+    "🎯 هدف‌ها رو کوچیک کن و یکی‌یکی بزن‌شون.",
+    "🧭 مسیر روشنه؛ فقط قدم‌هاتو ادامه بده.",
+    "🪴 مثل گیاه، کم‌کم بزرگ می‌شی.",
+    "🌊 موج‌ها یک‌دفعه بزرگ نمی‌شن؛ آروم آروم می‌آن.",
+    "🎬 بعد از این جلسه یه فیلم کوتاه ببین. حقته.",
+    "🧠 یادگیری یعنی تکرار؛ و تو داری تکرار می‌کنی.",
+    "🪁 بادبادک‌ها خلاف باد پرواز می‌کنن. تو هم می‌تونی.",
+    "🕯️ یه شمع روشن کن و بریم.",
+    "🥰 امروز کنار تو بودن خوشحالم کرد.",
+    "😇 نگران نباش؛ همه‌چیز سر وقتش درست میشه.",
+    "🎹 مثل پیانو، هر کلید یه صدای جدیده. بزن!",
+    "🧩 امروز یه تیکه‌ی دیگه از پازل جور شد.",
+    "📅 هفته‌ها پشت‌سر هم میان و تو هر هفته بهتر شدی.",
+    "🐾 قدم‌های کوچیک هم رد می‌ذارن. داری رد می‌ذاری.",
+    "🫠 اگه حالت خرابه، بگو. یه جلسه‌ی ۱۵ دقیقه‌ای هم کافیه.",
+    "😋 قهوه‌ت سرد شد؟ مهم نیست؛ انرژیت گرمه!"
   ];
   document.getElementById("mascotInline").addEventListener("click", ()=>{
     toast(MASCOT_LINES[Math.floor(Math.random()*MASCOT_LINES.length)], true, 15000);
@@ -3134,6 +3217,16 @@
   document.getElementById("quoteBar").textContent = "✍🏻 " + quoteOfDay();
   setTimeout(maybeShowWakeCheckIn, 1500);
   setTimeout(checkTimeOfDayNotifications, 2000);
+  function greetDaily(){
+    const today = todayStr();
+    if(!DATA.firstOpen){ DATA.firstOpen = today; persist(); }
+    if(DATA.lastGreet === today) return;
+    DATA.lastGreet = today; persist();
+    const f = DATA.firstOpen.split("-").map(Number), n = today.split("-").map(Number);
+    const days = Math.round((new Date(n[0],n[1]-1,n[2]) - new Date(f[0],f[1]-1,f[2]))/86400000) + 1;
+    toast("🔥 " + currentStreak() + " روز متوالی  ·  روز " + days + " با StudyFlow", true, 6000);
+  }
+  setTimeout(greetDaily, 1800);
   setInterval(checkTimeOfDayNotifications, 5*60*1000);
 
 })();
