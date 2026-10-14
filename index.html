@@ -185,6 +185,15 @@
   .btn:active{transform:scale(0.97);}
   .btn-primary{background:var(--accent); color:#fff; flex:1;}
   .btn-primary.running{background:var(--pausecolor); color:var(--ink);}
+  #startStopBtn{ min-height:56px; font-size:16px; border-radius:20px; font-weight:700; }
+  #pauseBtn{ width:56px; height:56px; min-width:56px; font-size:23px; line-height:1; border-radius:50%; }
+  .steam{ animation: steamUp 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+  .steam.s2{ animation-delay: 1.3s; }
+  @keyframes steamUp{ 0%{opacity:0; transform:translateY(3px);} 50%{opacity:.9;} 100%{opacity:0; transform:translateY(-6px);} }
+  .chart-card, .quote-bar, .goal-banner, .level-card, .growth-hero{ animation: fadeUp .55s ease both; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
+  .mascot-toggle-row{ gap:10px; flex-wrap:wrap; }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
   .btn-secondary{background:var(--paper-raised); color:var(--ink-soft); border:1.5px solid var(--line);}
   .btn-full{width:100%;}
   .circle-btn{ width:54px; height:54px; border-radius:50%; border:1.5px solid var(--line); background:var(--paper-raised);
@@ -484,7 +493,7 @@
     <div class="period-nav" id="dayNav"><button id="dayPrevBtn">‹ قبلی</button><span id="dayLabel"></span><button id="dayNextBtn">بعدی ›</button></div>
     <div class="level-card" id="levelCard"></div>
     <div class="growth-hero" id="growthHero"></div>
-    <div class="chart-card today-part" id="todayCardPanel"><h3>امار امروز</h3><div class="mascot-toggle-row"><button id="mascotSleepToggle">🌙 می‌رم بخوابم</button></div><div id="todayPanel"></div></div>
+    <div class="chart-card today-part" id="todayCardPanel"><h3>امار امروز</h3><div class="mascot-toggle-row"><button id="mascotSleepToggle">🌙 می‌رم بخوابم</button><button id="napBtn">😴 خواب ظهر</button></div><div id="todayPanel"></div></div>
     <div class="chart-card" id="totalsSummaryCard" style="padding:14px 14px;"></div>
 
     <div class="range-switch">
@@ -734,6 +743,16 @@
   </div>
 </div>
 
+<div class="sheet-overlay" id="editSessOverlay">
+  <div class="sheet">
+    <h2>ویرایش جلسه</h2>
+    <div class="field-label">نوع جلسه</div>
+    <div class="type-chips" id="editTypeRow"></div>
+    <div class="field-label">یادداشت مبحث</div>
+    <input type="text" id="editNoteInput" placeholder="یادداشت مبحث">
+    <div class="sheet-actions"><button class="btn btn-secondary" id="editCancel">انصراف</button><button class="btn btn-primary" id="editSave">ذخیره</button></div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -767,6 +786,14 @@
 
   const SUBJECT_COLORS = ["var(--brightgreen)","var(--brightblue)","var(--brightorange)","var(--brightpink)","var(--brightyellow)","var(--brightpurple)","var(--brightteal)","var(--brightred)","var(--brightlime)","var(--brightcyan)","var(--brightcoral)","var(--brightlavender)","var(--brightmint)","var(--brightgold)","var(--brightsalmon)","var(--brightsky)","var(--clay)","var(--ochre)","var(--teal)","var(--plum)","var(--slate)","var(--rose)","var(--sky)","var(--moss)","var(--indigo)","var(--forestgreen)","var(--wine)","var(--denim)"];
   const ACCENT_OPTIONS = [
+    {id:"bsoft1", color:"#E3F6F8"},
+    {id:"bsoft2", color:"#C7EEF3"},
+    {id:"bsoft3", color:"#A9E4EC"},
+    {id:"bsoft4", color:"#8FDBE6"},
+    {id:"bsoft5", color:"#78CFE2"},
+    {id:"bsoft6", color:"#9ED4F2"},
+    {id:"bsoft7", color:"#82C4EE"},
+    {id:"bsoft8", color:"#66B5E6"},
     {id:"vivraspberry", color:"#D6336C"}, {id:"vivviolet", color:"#7E4AE0"}, {id:"vivemerald", color:"#12A37A"},
     {id:"vivcobalt", color:"#1C6FE0"}, {id:"vivtangerine", color:"#F07A1A"}, {id:"vivturq", color:"#10B5B0"},
     {id:"vivmagenta", color:"#C2287E"}, {id:"vivroyal", color:"#5B45D6"}, {id:"vivsunflower", color:"#E8B20C"},
@@ -778,7 +805,7 @@
     {id:"midteal", color:"#4D8E7B"}, {id:"midrust", color:"#B0683F"}, {id:"middenim", color:"#5577A3"},
     {id:"midsage", color:"#6E8B6B"}, {id:"midcocoa2", color:"#A0806A"}, {id:"midberry", color:"#8A5A7E"},
     {id:"softblue", color:"#6FA8DC"}, {id:"softmint", color:"#7CC4A8"}, {id:"softlilac", color:"#A89BD6"},
-    {id:"softpeach", color:"#E8A88C"}, {id:"softrose", color:"#D98BA6"}, {id:"softsky", color:"#8CC4E0"},
+    {id:"softpeach", color:"#E8A88C"}, {id:"softrose", color:"#D98BA6"}, {id:"softsky", color:"#7FA9C6"},
     {id:"softsage", color:"#9BB58F"}, {id:"softlemon", color:"#D9C46A"}, {id:"softteal", color:"#6BBFB8"},
     {id:"softcoral", color:"#E3998A"}, {id:"softindigo", color:"#7F86C9"}, {id:"softcocoa", color:"#B8917A"},
     {id:"neongreen", color:"#39FF88"}, {id:"neonpink", color:"#FF3EC9"}, {id:"neoncyan", color:"#2FF3E0"},
@@ -1254,19 +1281,10 @@
     </svg>`;
   }
   function mascotSleepingSVG(){
-    return `<svg viewBox="0 0 120 120" fill="none">
-      <rect x="16" y="54" width="34" height="26" rx="10" fill="#fff" stroke="var(--line)" stroke-width="2"/>
-      <rect x="70" y="54" width="34" height="26" rx="10" fill="#fff" stroke="var(--line)" stroke-width="2"/>
-      <circle cx="60" cy="56" r="26" fill="#fff" stroke="var(--ink)" stroke-width="2.4"/>
-      <path d="M46 54q5-5 9 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-      <path d="M65 54q5-5 9 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-      <path d="M50 65q10 7 20 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-      <ellipse cx="44" cy="62" rx="4" ry="2.6" fill="var(--accent)" opacity="0.3"/>
-      <ellipse cx="76" cy="62" rx="4" ry="2.6" fill="var(--accent)" opacity="0.3"/>
-      <path d="M12 104c0-20 21-32 48-32s48 12 48 32" fill="var(--accent)"/>
-      <text class="zzz z1" x="86" y="38" font-size="13" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">z</text>
-      <text class="zzz z2" x="95" y="26" font-size="16" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">Z</text>
-      <text class="zzz z3" x="105" y="12" font-size="19" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">Z</text>
+    return `<svg viewBox="0 0 120 120" fill="none">${windowSVG("moon")}${sleepBodySVG()}
+      <text class="zzz z1" x="30" y="46" font-size="11" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">z</text>
+      <text class="zzz z2" x="39" y="35" font-size="14" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">Z</text>
+      <text class="zzz z3" x="49" y="22" font-size="17" fill="var(--accent)" font-family="Georgia,serif" font-weight="700">Z</text>
     </svg>`;
   }
   function mascotPausedSVG(){
@@ -1280,14 +1298,40 @@
       <rect x="40" y="86" width="26" height="14" rx="2.5" fill="#fff" stroke="var(--ink)" stroke-width="1.8"/>
       <line x1="40" y1="93" x2="66" y2="93" stroke="var(--ink)" stroke-width="1.8"/>
       <g>
-        <path d="M64 58h13v12a4 4 0 0 1-4 4h-5a4 4 0 0 1-4-4z" fill="#fff" stroke="var(--ink)" stroke-width="1.8"/>
-        <path d="M70 58q-1.5-2.5 0-5M74 58q-1.5-2.5 0-5" stroke="var(--ink-faint)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <path d="M77 62h2.5a3 3 0 0 1 0 6h-2.5" stroke="var(--ink)" stroke-width="1.6" fill="none"/>
+        <ellipse cx="72" cy="78" rx="10" ry="2.5" fill="var(--line)"/>
+        <path d="M63 60h16v14a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6z" fill="#fff" stroke="var(--ink)" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M79 64h2.5a3.5 3.5 0 0 1 0 7H79" stroke="var(--ink)" stroke-width="1.8" fill="none"/>
+        <path d="M66 67h10v5a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3z" fill="var(--accent)" opacity="0.35"/>
+        <path class="steam s1" d="M67 56q-2-3 0-6" stroke="var(--ink-faint)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+        <path class="steam s2" d="M73 56q-2-3 0-6" stroke="var(--ink-faint)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
       </g>
     </svg>`;
   }
+  function sleepBodySVG(){
+    return `<g transform="translate(-6 28) scale(0.8)">
+      <rect x="16" y="54" width="34" height="26" rx="10" fill="#fff" stroke="var(--line)" stroke-width="2"/>
+      <rect x="70" y="54" width="34" height="26" rx="10" fill="#fff" stroke="var(--line)" stroke-width="2"/>
+      <circle cx="60" cy="56" r="26" fill="#fff" stroke="var(--ink)" stroke-width="2.4"/>
+      <path d="M46 54q5-5 9 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <path d="M65 54q5-5 9 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <path d="M50 65q10 7 20 0" stroke="var(--ink)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="44" cy="62" rx="4" ry="2.6" fill="var(--accent)" opacity="0.3"/>
+      <ellipse cx="76" cy="62" rx="4" ry="2.6" fill="var(--accent)" opacity="0.3"/>
+      <path d="M12 104c0-20 21-32 48-32s48 12 48 32" fill="var(--accent)"/>
+    </g>`;
+  }
+  function windowSVG(scene){
+    const glass = scene === "sun" ? "#DDF3FF" : "#2E3A5C";
+    const sun = `<circle cx="80" cy="24" r="7" fill="#FFC94D"/><g stroke="#FFC94D" stroke-width="1.8" stroke-linecap="round"><line x1="80" y1="12" x2="80" y2="14"/><line x1="80" y1="34" x2="80" y2="36"/><line x1="68" y1="24" x2="70" y2="24"/><line x1="90" y1="24" x2="92" y2="24"/></g>`;
+    const moon = `<path d="M76 14a9 9 0 1 0 9 12a7.5 7.5 0 0 1-9-12z" fill="#FFE58A"/><circle cx="92" cy="16" r="1.3" fill="#fff"/><circle cx="98" cy="30" r="1.1" fill="#fff"/><circle cx="68" cy="34" r="1.1" fill="#fff"/>`;
+    return `<rect x="64" y="6" width="48" height="40" rx="7" fill="${glass}" stroke="var(--ink)" stroke-width="2"/>${scene === "sun" ? sun : moon}<line x1="88" y1="6" x2="88" y2="46" stroke="var(--ink)" stroke-width="1.8"/><line x1="64" y1="26" x2="112" y2="26" stroke="var(--ink)" stroke-width="1.8"/>`;
+  }
+  function mascotNapSVG(){
+    return `<svg viewBox="0 0 120 120" fill="none">${windowSVG("sun")}${sleepBodySVG()}</svg>`;
+  }
   function mascotState(){
     if(DATA.mascotSleeping) return "sleeping";
+    if(DATA.napStartTs) return "nap";
     if(running) return "studying";
     if(sessionActive) return "paused";
     return "idle";
@@ -1300,20 +1344,25 @@
     if(state === "sleeping") el.innerHTML = mascotSleepingSVG();
     else if(state === "studying") el.innerHTML = mascotStudyingSVG(subjectSymbol((subjectById(DATA.selectedSubject)||{}).name));
     else if(state === "paused") el.innerHTML = mascotPausedSVG();
+    else if(state === "nap") el.innerHTML = mascotNapSVG();
     else el.innerHTML = mascotIdleSVG();
   }
+    function updateSleepBtn(){ const b = document.getElementById("mascotSleepToggle"); if(b) b.textContent = DATA.mascotSleeping ? "☀️ بیدار شدم" : "🌙 می‌رم بخوابم"; }
   document.getElementById("mascotSleepToggle").addEventListener("click", ()=>{
-    DATA.mascotSleeping = !DATA.mascotSleeping;
     const now = fmtClock(new Date());
-    const log = DATA.sleepLogs[studyDayStr()] || {};
-    if(DATA.mascotSleeping){ log.sleepTime = now; }
-    else { log.wakeTime = now; DATA.studyDay = todayStr(); persist(); }
-    DATA.sleepLogs[studyDayStr()] = log;
-    persist();
-    document.getElementById("mascotSleepToggle").textContent = DATA.mascotSleeping ? "☀️ بیدار شدم" : "🌙 می‌رم بخوابم";
-    renderMascotState();
-    renderGoalBanner();
-    toast(DATA.mascotSleeping ? "شب بخیر 🌙" : "صبح بخیر ☀️");
+    if(!DATA.mascotSleeping){
+      DATA.mascotSleeping = true;
+      DATA.pendingSleep = { time: now, day: studyDayStr() };
+      toast("شب بخیر 🌙 می‌خوابم");
+    } else {
+      DATA.mascotSleeping = false;
+      const sp = DATA.pendingSleep || null;
+      DATA.studyDay = todayStr();
+      DATA.sleepLogs[DATA.studyDay] = { sleepTime: sp ? sp.time : null, wakeTime: now };
+      DATA.pendingSleep = null;
+      toast("صبح بخیر ☀️ روز جدید شروع شد");
+    }
+    persist(); updateSleepBtn(); renderMascotState(); renderGoalBanner(); renderStats();
   });
 
   document.querySelectorAll('[data-timer-mode]').forEach(btn=>{
@@ -2494,6 +2543,34 @@
     document.getElementById("chartToggleBtn").textContent = hoursChartMode==="line" ? "📊 نمایش ستونی" : "📈 نمایش خطی";
     renderStats();
   });
+  function renderNapBtn(){ const b = document.getElementById("napBtn"); if(b) b.textContent = DATA.napStartTs ? "⏹ بیدار شدم از خواب ظهر" : "😴 خواب ظهر"; }
+  document.getElementById("napBtn").addEventListener("click", ()=>{
+    if(!DATA.napStartTs){ DATA.napStartTs = Date.now(); toast("خواب ظهرت شروع شد. آروم بخواب 😴"); }
+    else {
+      const start = new Date(DATA.napStartTs), end = new Date();
+      const min = Math.max(1, Math.round((end - start)/60000));
+      const d = studyDayStr(); DATA.naps = DATA.naps || {};
+      (DATA.naps[d] = DATA.naps[d] || []).push({ start: fmtClock(start), end: fmtClock(end), min });
+      DATA.napStartTs = null; toast("خواب ظهر ثبت شد: " + min + " دقیقه ✓");
+    }
+    persist(); renderNapBtn(); renderMascotState(); renderStats();
+  });
+  let editSessId = null, editType = null;
+  function openEditSession(id){
+    const s = DATA.sessions.find(x=>x.id===id); if(!s) return;
+    editSessId = id; editType = s.sessionType || null;
+    document.getElementById("editNoteInput").value = s.note || "";
+    renderTypeChips("editTypeRow", ()=>editType, t=>{ editType = t; });
+    document.getElementById("editSessOverlay").classList.add("active");
+  }
+  document.getElementById("editCancel").addEventListener("click", ()=>document.getElementById("editSessOverlay").classList.remove("active"));
+  document.getElementById("editSave").addEventListener("click", ()=>{
+    const s = DATA.sessions.find(x=>x.id===editSessId);
+    if(s){ s.sessionType = editType; s.note = (document.getElementById("editNoteInput").value || "").trim(); persist(); }
+    document.getElementById("editSessOverlay").classList.remove("active");
+    renderStats(); renderGoalBanner(); renderLevelCard();
+  });
+  renderNapBtn(); updateSleepBtn();
   let statsTab = "today", dayOffset = 0;
   function dayView(){ return shiftDay(studyDayStr(), dayOffset); }
   function applyStatsTab(){
@@ -2527,11 +2604,22 @@
       <div class="stat-box"><div class="num">${(totalSec/3600).toFixed(1)}</div><div class="lbl">ساعت مطالعه</div></div>
       <div class="stat-box"><div class="num">${sess.length}</div><div class="lbl">جلسه</div></div>
       <div class="stat-box"><div class="num">${qCount}</div><div class="lbl">سوال تست</div></div></div>`;
+    const night = DATA.sleepLogs[today] || {};
+    const toMin = t => { const q = t.split(":").map(Number); return q[0]*60 + q[1]; };
+    if(night.sleepTime && night.wakeTime){
+      let d = toMin(night.wakeTime) - toMin(night.sleepTime); if(d < 0) d += 1440;
+      html += `<div class="empty-state" style="padding:6px 0;">🌙 خواب ${night.sleepTime} ← ☀️ بیداری ${night.wakeTime} · ${Math.floor(d/60)} ساعت و ${d%60} دقیقه</div>`;
+    } else if(night.wakeTime){ html += `<div class="empty-state" style="padding:6px 0;">☀️ بیداری ${night.wakeTime}</div>`; }
+    const naps = (DATA.naps || {})[today] || [];
+    if(naps.length){
+      html += label("خواب ظهر");
+      naps.forEach(n=>{ html += `<div class="log-item"><div class="log-main"><div class="log-subject">😴 ${n.start} – ${n.end}</div><div class="log-date">${n.min} دقیقه</div></div></div>`; });
+    }
     if(sess.length){
       html += label("جلسه‌ها");
       sess.forEach(s=>{
         const sub = subjectById(s.subjectId); const m = Math.round(s.seconds/60);
-        html += `<div class="log-item"><span class="log-dot" style="background:${sub.color}"></span><div class="log-main"><div class="log-subject">${sub.name}${s.sessionType?" · "+s.sessionType:""}</div><div class="log-date">${s.startTime&&s.endTime?s.startTime+"–"+s.endTime+" · ":""}${m} دقیقه</div>${s.note?`<div class="log-note">📝 ${s.note}</div>`:""}</div><button class="log-del" data-del-sess="${s.id}">✕</button></div>`;
+        html += `<div class="log-item"><span class="log-dot" style="background:${sub.color}"></span><div class="log-main"><div class="log-subject">${sub.name}${s.sessionType?" · "+s.sessionType:""}</div><div class="log-date">${s.startTime&&s.endTime?s.startTime+"–"+s.endTime+" · ":""}${m} دقیقه</div>${s.note?`<div class="log-note">📝 ${s.note}</div>`:""}</div><button class="log-del" data-edit-sess="${s.id}">✎</button><button class="log-del" data-del-sess="${s.id}">✕</button></div>`;
       });
     }
     if(tests.length){
@@ -2551,6 +2639,7 @@
       html += '<div class="empty-state" style="padding:14px 0;">امروز هنوز چیزی ثبت نشده</div>';
     }
     box.innerHTML = html;
+    box.querySelectorAll("[data-edit-sess]").forEach(b=>b.addEventListener("click", ()=>openEditSession(b.dataset.editSess)));
     box.querySelectorAll("[data-del-sess]").forEach(b=>b.addEventListener("click", ()=>{
       DATA.sessions = DATA.sessions.filter(x=>x.id!==b.dataset.delSess); persist(); renderStats(); renderGoalBanner(); renderLevelCard(); renderStreak();
     }));
@@ -2863,7 +2952,6 @@
     {id:"ocean", name:"اقیانوس", desc:"موج‌های آرام دریا"},
     {id:"creek", name:"نهر آب", desc:"جریان آرام آب روی سنگ‌ها"},
     {id:"fireplace", name:"شومینه", desc:"صدای ترق‌تروق آتیش"},
-    {id:"fan", name:"پنکه", desc:"صدای یکنواخت پنکه"},
     {id:"whitenoise", name:"نویز سفید", desc:"نویز یکنواخت برای تمرکز"},
     {id:"brownnoise", name:"نویز قهوه‌ای", desc:"نویز عمیق‌تر و آرام‌تر"},
     {id:"crickets", name:"جیرجیرک", desc:"صدای شب و جیرجیرک‌ها"},
@@ -3193,7 +3281,91 @@
     "📅 هفته‌ها پشت‌سر هم میان و تو هر هفته بهتر شدی.",
     "🐾 قدم‌های کوچیک هم رد می‌ذارن. داری رد می‌ذاری.",
     "🫠 اگه حالت خرابه، بگو. یه جلسه‌ی ۱۵ دقیقه‌ای هم کافیه.",
-    "😋 قهوه‌ت سرد شد؟ مهم نیست؛ انرژیت گرمه!"
+    "😋 قهوه‌ت سرد شد؟ مهم نیست؛ انرژیت گرمه!",
+    "😄 یه جوک: چرا کتاب آروم بود؟ چون همه‌چیزش توی صفحاتش بود!",
+    "🤣 چرا ریاضی‌دان به کافه رفت؟ چون می‌خواست یه مسئله‌ی گرم حل کنه ☕",
+    "😂 میدونی بهترین ورزش برای درس خوندن چیه؟ بلند شدن از صندلی بعد از هر جلسه!",
+    "🤭 من هیچ‌وقت خسته نمی‌شم، فقط یه کم گرسنه می‌شم 🍪",
+    "😆 درس خوندن مثل سلفیه: هرچی بیشتر تمرین کنی، بهتر از آب درمیاد 📸",
+    "🙈 اگه صفحه‌ی کتاب بهت خیره شده، برگردون و بهش بگو بیا جلو!",
+    "😜 یه دونه رازِ درس‌خون‌ها: جلسه‌ی کوتاه هم جلسه‌ست 😉",
+    "🤓 اگه فراموش کردی، بیا با هم یادآوری کنیم؛ من خوب یادم می‌مونه!",
+    "🥳 امروز یه جشن کوچیک بگیر؛ هر جلسه یه کیک مجازی حساب کن 🎂",
+    "😸 گربه‌ها هم می‌خوابن ولی تو باید بیدار بمونی و بخونی. بزن بریم!",
+    "🦉 جغدها شب‌ها بیدارن و تو هم می‌تونی مثل اون‌ها باهوش باشی 🌙",
+    "🐼 پاندا هم زیاد استراحت می‌کنه، ولی هر وقت درس می‌خونه کامل می‌خونه!",
+    "🐳 یه نهنگ هم وقتی شیرجه می‌زنه، عمیق می‌ره. تو هم عمیق برو توی درس.",
+    "🌻 آفتاب‌گردون همیشه سمت خورشید می‌چرخه؛ تو هم سمت هدفت بچرخ.",
+    "🍀 چهارتا برگ شبدر؟ نه، تو خودت یه شانس بزرگی برای موفقیتی.",
+    "🧃 یه آب بخور، یه نفس بکش، بعد اون فصل رو باز کن.",
+    "🎯 قدم اول سخت‌ترینه؛ تو امروز اون رو برداشتی.",
+    "🏃 مسیر بلنده؟ اشکال نداره، قدم‌های کوچیک هم به مقصد می‌رسن.",
+    "🌈 بعد از باران، رنگین‌کمون میاد. بعد از سختی هم یه نتیجه‌ی خوب میاد.",
+    "⛰️ کوه‌ها هم یه‌شبه ساخته نشدن؛ تو هم کم‌کم بزرگ می‌شی.",
+    "🌱 دونه‌ی کوچیک امروز، درخت فردا میشه.",
+    "🪄 تو نیازی به جادو نداری؛ همین تکرار کافیه.",
+    "🧠 مغز مثل اسفنجه؛ هرچی بیشتر خیس کنی (یعنی تمرین کنی)، بیشتر جذب می‌کنه.",
+    "💪 خسته‌ای؟ خوبه؛ یعنی داری کار می‌کنی.",
+    "🥹 یادت باشه که امروز هم دیدیمت و خیلی برامون ارزش داری.",
+    "🫂 اگه دلت گرفته، یه جلسه‌ی آروم بزن؛ کمی بهتر میشی.",
+    "🤗 من کنارتم، هرچقدر هم سخت باشه، تنها نیستی.",
+    "💖 قدر خودتو بدون؛ تو همین که هستی خیلی خوبی.",
+    "🌟 هر تلاشی که امروز کردی، یه ستاره‌ی کوچیک توی آسمون آیندته.",
+    "🎶 یه ریتم آروم بگیر و با هم جلو بریم.",
+    "🎨 زندگی مثل نقاشیه؛ هر جلسه یه رنگ جدید بهش اضافه می‌کنه.",
+    "📖 هر صفحه یه پله‌ی جدیده؛ داری بالا می‌ری.",
+    "🔬 مثل دانشمندها، سوال بپرس و جواب پیدا کن.",
+    "🧪 هر آزمایش ممکنه شکست بخوره، ولی هر شکست یه درس تازه‌ست.",
+    "🗺️ نقشه‌ت مشخصه؛ فقط مسیر رو ادامه بده.",
+    "⏳ زمان مثل شنه؛ امروز رو با یه جلسه‌ی خوب پر کن.",
+    "🎁 هر جلسه یه هدیه‌ی کوچیکه که به خودت میدی.",
+    "🧩 کم‌کم همه‌ی تیکه‌های پازل سر جاشون میان.",
+    "🪜 هر پله‌ای که بالا می‌ری، دیدت بهتر میشه.",
+    "🔥 آتیشت خاموش نشه؛ هرکدوم از جلسه‌ها یه هیزم جدیده.",
+    "🌊 امواج یکی‌یکی میان؛ تو هم یکی‌یکی جلو برو.",
+    "🚲 دوچرخه تعادلش رو با حرکت پیدا می‌کنه؛ تو هم با حرکت بهتر میشی.",
+    "🎒 کیف‌تو آماده کن، امروز یه روز پر از یادگیریه.",
+    "🧭 هر وقت گم شدی، برگرد به هدفت؛ مسیرت هنوز اونجاست.",
+    "📚 کتاب‌ها مثل دوست‌های قدیمی‌ان؛ هر روز بهشون سر بزن.",
+    "✏️ با مداد نوشتن هم یادگیریه؛ بنویس، پاک کن، دوباره بنویس.",
+    "📐 هندسه‌ی زندگی هم مثل درس‌ها، با تمرین درست میشه.",
+    "🧮 یه عدد کوچیک امروز، یه جواب بزرگ فردا.",
+    "🔭 نگاهت رو بلند کن؛ آینده‌ی خوبی منتظرته.",
+    "🎓 روزی که دانشگاه‌ت رو تموم کنی، یادت میاد امروز شروع کردی.",
+    "🌠 هر ستاره‌ای که توی شب می‌بینی، یه داستان داره؛ داستان تو هم داره شکل می‌گیره.",
+    "🕊️ آروم باش، آروم حرکت کن، ولی حرکت کن.",
+    "🌼 امروز یه گل کوچیک کاشتی؛ فردا بوی خوشش رو حس می‌کنی.",
+    "🍵 یه چای گرم بخور و بعد بریم سراغ جلسه‌ی بعدی.",
+    "🥐 صبحانه یادت نره! انرژی برای درس خوندن لازمه.",
+    "🍎 یه سیب بخور، مغزت ازت تشکر می‌کنه.",
+    "🥤 آب کافیه؛ آب کافیه تا ذهنت روشن بمونه.",
+    "🛏️ اگه خوابت میاد، یه چرت کوتاه بزن و بعد برگرد.",
+    "🌤️ هوای امروز هرچی باشه، تو می‌تونی روشنش کنی.",
+    "🌧️ بارون نه، شادی هم بخواه؛ امروز بهترین روز برای درس خوندنه.",
+    "❄️ زمستون هم بگذره، بهار میاد؛ تو هم در حال شکوفه‌زدنی.",
+    "🌺 کسی که امروز تلاش کرد، فردا لبخند می‌زنه.",
+    "🎈 امروز یه بادکنک آرزو بساز و بفرست تو آسمون.",
+    "🎉 هر بار که به هدف نزدیک می‌شی، یه جشن کوچیک حقته.",
+    "🙌 افتخار کن به کاری که امروز کردی، واقعاً کار سختی بود.",
+    "🫡 آماده‌ای؟ بریم که قهرمان امروز تویی.",
+    "🤩 باورت نمیشه چقدر پیشرفت کردی؛ اگه یه بار به عقب نگاه کنی می‌بینی.",
+    "😌 آروم باش؛ هر چی درسته، کم‌کم جا می‌افته.",
+    "🙂 یه لبخند بزن و بگو: امروز هم شروع کردم!",
+    "😇 من فکر می‌کنم تو از اونی که خودت فکر می‌کنی بهتری.",
+    "🥰 دوستت دارم؛ ولی از همه بیشتر خودت باید خودتو دوست داشته باشی.",
+    "🫶 مرسی که امروز اینجایی و تلاش می‌کنی.",
+    "💫 انرژیت رو امروز بده به درست؛ بعد اون بهت برمی‌گردونه.",
+    "🌞 صبح‌ها انرژی بیشتری داری؛ یکی از جلسه‌ها رو صبح بذار.",
+    "🌙 شب‌ها هم اگه آروم باشی، مرور کردن بهترین کاره.",
+    "🛑 اگه خسته‌ای، ایستادن هم اشکال نداره؛ فقط دوباره شروع کن.",
+    "🔁 تکرار، مادر یادگیریه. امروز یه بار دیگه مرور کن.",
+    "🪞 توی آینه ببین، یه دانشجوی جدی و خوشحال می‌بینی.",
+    "🧘 یه لحظه مکث کن، نفس بکش و بعد ادامه بده.",
+    "🌿 کم‌حرفی و تمرکز، جفت خوبی‌ن؛ مثل تو.",
+    "🫠 امروز سخت بود؟ ولی تو تا آخرش موندی. این یعنی قوی‌ای.",
+    "🤏 یه تیکه‌ی کوچیک از درس، یه تیکه‌ی بزرگ از موفقیته.",
+    "🎵 مثل آهنگ، هر بار که تمرین می‌کنی بهتر و روون‌تر میشی.",
+    "🥁 ضرب‌آهنگ زندگیت رو خودت انتخاب می‌کنی؛ امروز یه ضرب خوب بزن."
   ];
   document.getElementById("mascotInline").addEventListener("click", ()=>{
     toast(MASCOT_LINES[Math.floor(Math.random()*MASCOT_LINES.length)], true, 15000);
@@ -3222,7 +3394,8 @@
     if(!DATA.firstOpen){ DATA.firstOpen = today; persist(); }
     if(DATA.lastGreet === today) return;
     DATA.lastGreet = today; persist();
-    const f = DATA.firstOpen.split("-").map(Number), n = today.split("-").map(Number);
+    const earliest = [DATA.firstOpen].concat(DATA.sessions.map(s=>s.date)).sort()[0];
+    const f = earliest.split("-").map(Number), n = today.split("-").map(Number);
     const days = Math.round((new Date(n[0],n[1]-1,n[2]) - new Date(f[0],f[1]-1,f[2]))/86400000) + 1;
     toast("🔥 " + currentStreak() + " روز متوالی  ·  روز " + days + " با StudyFlow", true, 6000);
   }
